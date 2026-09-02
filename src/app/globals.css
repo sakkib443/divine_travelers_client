@@ -1,0 +1,1061 @@
+@import "tailwindcss";
+
+/* =====================================================
+   DARK MODE: class-based only — device/browser theme is IGNORED.
+   Tailwind v4-এর dark: variant ডিফল্টে prefers-color-scheme (ডিভাইস থিম)
+   অনুসরণ করে। নিচের লাইনটা সেটাকে .dark class-ভিত্তিক করে দেয়, ফলে
+   ড্যাশবোর্ডসহ পুরো সাইট সবসময় লাইট থিমে থাকে যতক্ষণ না কেউ
+   ইচ্ছাকৃতভাবে .dark class বসায়।
+   ===================================================== */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ব্রাউজারের নিজস্ব UI (ফর্ম কন্ট্রোল, স্ক্রলবার) ও সবসময় লাইট */
+html {
+  color-scheme: light;
+}
+
+/* =====================================================
+   DIVINE TRAVELERS - DYNAMIC DESIGN SYSTEM
+   Colors: Orange (#E64266) + Blue (#0F3C53)
+   Fonts: Cabinet Grotesk (Heading) + Syne (Eyebrow) + Rubik (Body)
+   ===================================================== */
+
+/* =====================================================
+   CSS VARIABLES - Divine Travelers Brand Theme
+   ===================================================== */
+:root {
+  /* Fonts */
+  --font-primary-en: var(--next-font-rubik), var(--next-font-hind), sans-serif;
+  --font-heading-en: var(--next-font-josefin), var(--next-font-teko), var(--next-font-hind), sans-serif;
+  --font-eyebrow: var(--next-font-syne), var(--next-font-hind), sans-serif;
+  
+  --font-primary-bn: var(--next-font-hind), sans-serif;
+  --font-heading-bn: var(--next-font-hind), sans-serif;
+
+  --font-primary: var(--font-primary-en);
+  --font-heading: var(--font-heading-en);
+  /* Primary Colors (Divine Travelers Orange -> Now Pink-Red) */
+  --color-primary: #E64266;
+  --color-primary-dark: #C43454;
+  --color-primary-light: #F26785;
+  --color-primary-10: rgba(230, 66, 102, 0.1);
+  --color-primary-20: rgba(230, 66, 102, 0.2);
+  --color-primary-30: rgba(230, 66, 102, 0.3);
+
+  /* Secondary Colors (Divine Travelers Blue -> Now Deep Teal) */
+  --color-secondary: #0F3C53;
+  --color-secondary-dark: #0A2B3C;
+  --color-secondary-light: #175B7C;
+  --color-secondary-10: rgba(15, 60, 83, 0.1);
+  --color-secondary-20: rgba(15, 60, 83, 0.2);
+  --color-secondary-30: rgba(15, 60, 83, 0.3);
+
+  /* Accent Color (Use primary as accent) */
+  --color-accent: #E64266;
+  --color-accent-10: rgba(230, 66, 102, 0.1);
+
+  /* Neutral Colors */
+  --color-gray-950: #0a0f1a;
+  --color-gray-900: #111827;
+  --color-gray-800: #1f2937;
+  --color-gray-700: #374151;
+  --color-gray-600: #4b5563;
+  --color-gray-500: #6b7280;
+  --color-gray-400: #9ca3af;
+  --color-gray-300: #d1d5db;
+  --color-gray-200: #e5e7eb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-50: #f9fafb;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* Map legacy font variables to the new bilingual system */
+  --font-body: var(--font-primary);
+
+  /* Spacing */
+  --container-max: 1280px;
+  --section-padding: 5rem;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Dashboard Design Standards */
+  --dashboard-radius: 0.5rem;
+  --dashboard-border: #e5e7eb;
+  --dashboard-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-primary: 0 10px 30px -5px rgba(230, 66, 102, 0.3);
+  --shadow-secondary: 0 10px 30px -5px rgba(15, 60, 83, 0.3);
+}
+
+:root[lang="bn"] {
+  --font-primary: var(--font-primary-bn);
+  --font-heading: var(--font-heading-bn);
+}
+
+/* =====================================================
+   BASE TYPOGRAPHY
+   ===================================================== */
+
+body {
+  font-family: var(--font-primary);
+  color: var(--color-gray-800);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  cursor: default;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading) !important;
+}
+
+/* Universal font inheritance */
+*,
+*::before,
+*::after {
+  font-family: inherit;
+}
+
+/* Precise Cursor Management */
+p,
+span,
+li,
+blockquote {
+  cursor: text;
+}
+
+a,
+button,
+[role="button"],
+[role="tab"],
+select,
+summary,
+label[for],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+input[type="file"],
+input[type="range"],
+.clickable,
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+/* Everything INSIDE a clickable element must show the hand cursor too —
+   otherwise a <span>/<p>/heading label inside a button or link falls back
+   to the text cursor from the rules above. */
+a *:not(input):not(textarea):not(select),
+button *:not(input):not(textarea):not(select),
+[role="button"] *:not(input):not(textarea):not(select),
+[role="tab"] *:not(input):not(textarea):not(select),
+summary *:not(input):not(textarea):not(select),
+label[for] *:not(input):not(textarea):not(select),
+.clickable *:not(input):not(textarea):not(select),
+.cursor-pointer *:not(input):not(textarea):not(select) {
+  cursor: pointer !important;
+}
+
+/* Disabled controls: no hand cursor */
+button:disabled,
+button:disabled *,
+input:disabled,
+select:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed !important;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  cursor: text;
+}
+
+/* Prevent Caret on non-editable elements */
+*:not(input):not(textarea):not([contenteditable="true"]) {
+  caret-color: transparent;
+}
+
+input,
+textarea,
+[contenteditable="true"] {
+  caret-color: var(--color-primary);
+}
+
+/* Headings use Cabinet Grotesk (Heading Font) */
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-gray-900);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  cursor: text;
+}
+
+/* Heading sizes removed — controlled by Tailwind utility classes per component */
+
+/* Body text uses Poppins */
+p {
+  font-family: var(--font-body);
+  line-height: 1.7;
+}
+
+/* =====================================================
+   LANGUAGE-SPECIFIC FONTS
+   Bangla = Hind Siliguri (automatic)
+   English = Teko/Rubik (Syne for eyebrows)
+   ===================================================== */
+
+html[lang="bn"] body,
+html[lang="bn"] h1,
+html[lang="bn"] h2,
+html[lang="bn"] h3,
+html[lang="bn"] h4,
+html[lang="bn"] h5,
+html[lang="bn"] h6,
+html[lang="bn"] p,
+html[lang="bn"] span,
+html[lang="bn"] a,
+html[lang="bn"] button,
+html[lang="bn"] input,
+html[lang="bn"] textarea,
+html[lang="bn"] label,
+html[lang="bn"] .font-heading {
+  font-family: var(--next-font-hind), 'Hind Siliguri', sans-serif !important;
+}
+
+html[lang="bn"] {
+  font-size: 108%; /* বাংলা বডি টেক্সট একটু বড় দেখানোর জন্য Base size 8% বাড়ানো হলো */
+}
+
+html[lang="bn"] body {
+  line-height: 1.8;
+}
+
+html[lang="bn"] h1,
+html[lang="bn"] h2,
+html[lang="bn"] h3,
+html[lang="bn"] h4,
+html[lang="bn"] h5,
+html[lang="bn"] h6,
+html[lang="bn"] .font-heading {
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 0.92em; /* Base size 8% বাড়ায় হেডিংগুলো যাতে অতিরিক্ত বড় না হয় তাই কম্পেনসেশন */
+}
+
+/* Font utility classes */
+.font-heading {
+  font-family: var(--font-heading), sans-serif !important;
+}
+
+/* Eyebrow labels — প্রতিটা সেকশনের উপরের ছোট ট্যাগ টেক্সট (Syne) */
+.font-eyebrow {
+  font-family: var(--font-eyebrow), sans-serif !important;
+  letter-spacing: 0.15em;
+}
+
+.font-body {
+  font-family: var(--font-body), sans-serif !important;
+}
+
+.font-sans {
+  font-family: var(--font-body), sans-serif !important;
+}
+
+.font-bangla {
+  font-family: var(--next-font-hind), 'Hind Siliguri', sans-serif !important;
+}
+
+/* =====================================================
+   DYNAMIC COLOR UTILITIES
+   ===================================================== */
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-primary-dark {
+  color: var(--color-primary-dark);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.text-secondary-dark {
+  color: var(--color-secondary-dark);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-primary-10 {
+  background-color: var(--color-primary-10);
+}
+
+.bg-primary-20 {
+  background-color: var(--color-primary-20);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-secondary-10 {
+  background-color: var(--color-secondary-10);
+}
+
+.bg-secondary-20 {
+  background-color: var(--color-secondary-20);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
+}
+
+.bg-accent-10 {
+  background-color: var(--color-accent-10);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.border-secondary {
+  border-color: var(--color-secondary);
+}
+
+.ring-primary {
+  --tw-ring-color: var(--color-primary);
+}
+
+.ring-secondary {
+  --tw-ring-color: var(--color-secondary);
+}
+
+/* Hover States */
+.hover\:bg-primary:hover {
+  background-color: var(--color-primary);
+}
+
+.hover\:bg-primary-dark:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.hover\:bg-secondary:hover {
+  background-color: var(--color-secondary);
+}
+
+.hover\:bg-secondary-dark:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.hover\:text-primary:hover {
+  color: var(--color-primary);
+}
+
+.hover\:text-secondary:hover {
+  color: var(--color-secondary);
+}
+
+/* =====================================================
+   GRADIENTS
+   ===================================================== */
+
+.gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+}
+
+.gradient-mixed {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+}
+
+.gradient-hero {
+  background: linear-gradient(135deg,
+      var(--color-secondary-dark) 0%,
+      var(--color-secondary) 40%,
+      var(--color-primary) 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-reverse {
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-secondary);
+}
+
+.btn-pill {
+  border-radius: 9999px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.btn-dark {
+  background-color: var(--color-gray-900);
+  color: var(--color-white);
+}
+
+.btn-dark:hover {
+  background-color: var(--color-black);
+  transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-outline-primary:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-outline-secondary {
+  background: transparent;
+  border: 2px solid var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--color-secondary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-secondary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-gray-700);
+}
+
+.btn-ghost:hover {
+  background: var(--color-gray-100);
+}
+
+/* Size Variants */
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+.btn-xl {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.125rem;
+}
+
+/* =====================================================
+   CARDS
+   ===================================================== */
+
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-100);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-flat {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--dashboard-border);
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.card-flat:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+/* =====================================================
+   INPUTS
+   ===================================================== */
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.input:focus,
+input:not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #1D4ED8;
+  box-shadow: 0 0 0 3px rgba(29,78,216,0.18);
+}
+
+.input::placeholder {
+  color: var(--color-gray-400);
+}
+
+/* Remove the browser autofill blue/yellow wash (keeps autofill working) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--color-gray-800);
+  box-shadow: 0 0 0 1000px var(--color-white) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* =====================================================
+   DARK MODE (optional)
+   ===================================================== */
+
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background: var(--color-gray-900);
+  color: var(--color-gray-200);
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: var(--color-white);
+}
+
+.dark .card {
+  background: var(--color-gray-800);
+  border-color: var(--color-gray-700);
+}
+
+.dark .input {
+  background: var(--color-gray-800);
+  border-color: var(--color-gray-600);
+  color: var(--color-gray-100);
+}
+
+.dark .input:focus {
+  border-color: var(--color-secondary);
+}
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--color-primary-20);
+  }
+
+  50% {
+    box-shadow: 0 0 40px var(--color-primary-30);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.6s ease-out;
+}
+
+.animate-slide-left {
+  animation: slideLeft 0.6s ease-out;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* =====================================================
+   UTILITIES
+   ===================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+.section {
+  padding: var(--section-padding) 0;
+}
+
+/* Section with blue background pattern */
+.section-blue {
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  color: var(--color-white);
+}
+
+/* Section with orange accent */
+.section-orange {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-white);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-primary-20);
+  color: var(--color-primary-dark);
+}
+
+@keyframes toastSlideInRight { 
+  from { transform: translateX(120%); opacity: 0 } 
+  to { transform: translateX(0); opacity: 1 } 
+}
+@keyframes toastSlideOutRight { 
+  from { transform: translateX(0); opacity: 1 } 
+  to { transform: translateX(120%); opacity: 0 } 
+}
+@keyframes progressShrink { 
+  from { width: 100% } 
+  to { width: 0% } 
+}
+
+.animate-slide-in-right { 
+  animation: toastSlideInRight 350ms cubic-bezier(0.22, 1, 0.36, 1) both; 
+}
+.animate-slide-out-right { 
+  animation: toastSlideOutRight 300ms cubic-bezier(0.4, 0, 1, 1) both; 
+}
+.animate-progress-shrink { 
+  animation: progressShrink linear both; 
+}
+
+/* Focus Ring */
+*:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-gray-800);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-gray-600);
+}
+
+/* =====================================================
+   MODAL / FLOATING-PANEL SCROLLBAR
+   Any scroll area inside a fixed overlay (modals, drawers)
+   or an absolute panel (dropdowns) gets a thin orange
+   line-style scrollbar that stays INSIDE the rounded card
+   instead of the fat default bar.
+   ===================================================== */
+.fixed .overflow-y-auto::-webkit-scrollbar,
+.fixed.overflow-y-auto::-webkit-scrollbar,
+.fixed .overflow-x-auto::-webkit-scrollbar,
+.fixed .overflow-auto::-webkit-scrollbar,
+.absolute .overflow-y-auto::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.fixed .overflow-y-auto::-webkit-scrollbar-track,
+.fixed.overflow-y-auto::-webkit-scrollbar-track,
+.fixed .overflow-x-auto::-webkit-scrollbar-track,
+.fixed .overflow-auto::-webkit-scrollbar-track,
+.absolute .overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+  /* keep the thumb away from the card's rounded corners */
+  margin: 14px;
+  border-radius: 999px;
+}
+
+.fixed .overflow-y-auto::-webkit-scrollbar-thumb,
+.fixed.overflow-y-auto::-webkit-scrollbar-thumb,
+.fixed .overflow-x-auto::-webkit-scrollbar-thumb,
+.fixed .overflow-auto::-webkit-scrollbar-thumb,
+.absolute .overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #E64266;
+  border-radius: 999px;
+}
+
+.fixed .overflow-y-auto::-webkit-scrollbar-thumb:hover,
+.fixed.overflow-y-auto::-webkit-scrollbar-thumb:hover,
+.fixed .overflow-x-auto::-webkit-scrollbar-thumb:hover,
+.fixed .overflow-auto::-webkit-scrollbar-thumb:hover,
+.absolute .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: #d97a1e;
+}
+
+/* Firefox (standard scrollbar properties — Firefox only, so the
+   webkit styling above keeps working in Chrome/Edge/Safari) */
+@supports (-moz-appearance: none) {
+  .fixed .overflow-y-auto,
+  .fixed.overflow-y-auto,
+  .fixed .overflow-x-auto,
+  .fixed .overflow-auto,
+  .absolute .overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #E64266 transparent;
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent layout shift.
+   Kept inside @layer base so Tailwind height utilities (h-12, h-24, …)
+   can still override it — otherwise this unlayered rule wins over every
+   layered utility and forces every <img> to its natural height. */
+@layer base {
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* =====================================================
+   SKELETON LOADING
+   ===================================================== */
+
+.skeleton {
+  background: linear-gradient(90deg,
+      var(--color-gray-200) 25%,
+      var(--color-gray-100) 50%,
+      var(--color-gray-200) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg,
+      var(--color-gray-700) 25%,
+      var(--color-gray-600) 50%,
+      var(--color-gray-700) 75%);
+  background-size: 200% 100%;
+}
+
+/* =====================================================
+   DIVINE TRAVELERS SPECIFIC UTILITIES
+   ===================================================== */
+
+/* Visa Card Accent Bar */
+.accent-bar-primary {
+  position: relative;
+}
+
+.accent-bar-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 4px 0 0 4px;
+}
+
+.accent-bar-secondary {
+  position: relative;
+}
+
+.accent-bar-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--color-secondary);
+  border-radius: 4px 0 0 4px;
+}
+
+/* Decorative circle backgrounds */
+.bg-circle-primary {
+  background: radial-gradient(circle at center, var(--color-primary-10) 0%, transparent 70%);
+}
+
+.bg-circle-secondary {
+  background: radial-gradient(circle at center, var(--color-secondary-10) 0%, transparent 70%);
+}
+
+/* Custom Skeleton & Animations */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, 
+    var(--color-gray-100) 25%, 
+    var(--color-gray-50) 50%, 
+    var(--color-gray-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@theme {
+  --animate-marquee: marquee 35s linear infinite;
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+}
+
