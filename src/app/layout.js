@@ -1,6 +1,6 @@
 import "./globals.css";
 import ClientProviders from "@/components/ClientProviders";
-import { Rubik, Teko, Syne, Hind_Siliguri, Josefin_Sans } from "next/font/google";
+import { Rubik, Teko, Syne, Hind_Siliguri, Josefin_Sans, Poppins, Bungee_Hairline } from "next/font/google";
 
 const rubik = Rubik({ 
   subsets: ["latin"], 
@@ -26,6 +26,18 @@ const hindSiliguri = Hind_Siliguri({
 const josefinSans = Josefin_Sans({
   subsets: ["latin"],
   variable: "--next-font-josefin"
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--next-font-poppins"
+});
+
+const bungee = Bungee_Hairline({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--next-font-bungee"
 });
 
 export const metadata = {
@@ -59,7 +71,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${rubik.variable} ${teko.variable} ${syne.variable} ${hindSiliguri.variable} ${josefinSans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${rubik.variable} ${teko.variable} ${syne.variable} ${hindSiliguri.variable} ${josefinSans.variable} ${poppins.variable} ${bungee.variable}`} suppressHydrationWarning>
       <head>
       </head>
       <body className="antialiased min-h-screen" suppressHydrationWarning>

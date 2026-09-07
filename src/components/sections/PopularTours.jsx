@@ -73,6 +73,7 @@ export default function PopularTours() {
                         breakpoints={{
                             640: { slidesPerView: 2 },
                             1024: { slidesPerView: 3 },
+                            1280: { slidesPerView: 4 },
                         }}
                         className="!pb-14"
                     >
@@ -80,7 +81,7 @@ export default function PopularTours() {
                             <SwiperSlide key={tour._id}>
                                 <div className="bg-white rounded-[20px] overflow-hidden h-full flex flex-col group/card shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] border border-gray-50 transition-all duration-300">
                                     {/* Image Container */}
-                                    <div className="relative h-[240px] overflow-hidden">
+                                    <div className="relative h-[220px] overflow-hidden">
                                         <img 
                                             src={tour.image} 
                                             alt={isBn ? (tour.titleBn || tour.title) : tour.title}
@@ -88,15 +89,15 @@ export default function PopularTours() {
                                         />
                                         
                                         {/* Badge */}
-                                        <div className="absolute bottom-4 left-4 bg-black rounded-lg px-3 py-1.5 text-white text-xs font-semibold tracking-wider">
+                                        <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur-sm rounded-lg px-3 py-1.5 text-white text-[11px] font-semibold tracking-widest uppercase">
                                             {isBn ? "জনপ্রিয় ট্যুর" : "Popular Tour"}
                                         </div>
                                     </div>
                                     
                                     {/* Content Container */}
-                                    <div className="p-6 flex-1 flex flex-col">
+                                    <div className="p-5 flex-1 flex flex-col">
                                         {/* Rating & Reviews */}
-                                        <div className="flex items-center gap-2 mb-3">
+                                        <div className="flex items-center gap-1.5 mb-2.5">
                                             <div className="flex text-black gap-0.5">
                                                 {[...Array(5)].map((_, i) => (
                                                     <LuStar 
@@ -105,40 +106,42 @@ export default function PopularTours() {
                                                     />
                                                 ))}
                                             </div>
-                                            <span className="text-gray-400 text-xs mt-0.5" style={{ fontFamily: "var(--font-primary)" }}>
-                                                ({tour.reviewsCount || 0} {isBn ? "রিভিউ" : "Review"}{(tour.reviewsCount !== 1 && !isBn) ? "s" : ""})
+                                            <span className="text-gray-400 text-[11px] mt-0.5 font-medium tracking-wide" style={{ fontFamily: "var(--font-primary)" }}>
+                                                ({tour.reviewsCount || 0} {isBn ? "রিভিউ" : "Reviews"})
                                             </span>
                                         </div>
 
                                         {/* Title */}
                                         <h3 
-                                            className="text-[20px] font-bold text-gray-900 mb-4 line-clamp-2 leading-snug group-hover/card:text-[#E64266] transition-colors"
+                                            className="text-[17px] font-bold text-gray-900 mb-3 line-clamp-2 leading-snug group-hover/card:text-[#E64266] transition-colors"
                                             style={{ fontFamily: "var(--font-heading)" }}
                                         >
                                             {isBn ? (tour.titleBn || tour.title) : tour.title}
                                         </h3>
 
                                         {/* Details */}
-                                        <div className="flex flex-col gap-2 mb-6" style={{ fontFamily: "var(--font-primary)" }}>
-                                            <p className="text-gray-500 text-[13px] font-medium">
+                                        <div className="flex flex-col gap-1.5 mb-5" style={{ fontFamily: "var(--font-primary)" }}>
+                                            <p className="text-gray-500 text-[12.5px] font-medium flex items-center gap-2">
+                                                <span className="w-1 h-1 rounded-full bg-gray-300"></span>
                                                 {isBn ? (tour.durationBn || tour.duration) : tour.duration}
                                             </p>
-                                            <p className="text-gray-500 text-[13px] font-medium">
+                                            <p className="text-gray-500 text-[12.5px] font-medium flex items-center gap-2">
+                                                <span className="w-1 h-1 rounded-full bg-gray-300"></span>
                                                 {isBn ? (tour.destinationBn || tour.destination) : tour.destination}
                                             </p>
                                         </div>
 
                                         {/* Price & Button Container */}
-                                        <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between gap-4">
+                                        <div className="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
                                             <div className="flex flex-col">
-                                                <span className="text-gray-400 text-xs font-medium mb-1">{isBn ? "শুরু" : "From"}</span>
-                                                <div className="flex items-center gap-2">
+                                                <span className="text-gray-400 text-[10px] uppercase font-bold tracking-wider mb-0.5">{isBn ? "শুরু" : "Starts From"}</span>
+                                                <div className="flex items-center gap-1.5">
                                                     {tour.oldPrice && (
-                                                        <span className="text-gray-400 text-sm line-through">
+                                                        <span className="text-gray-400 text-[13px] line-through decoration-gray-300">
                                                             ৳{tour.oldPrice.toLocaleString()}
                                                         </span>
                                                     )}
-                                                    <span className="text-[#E64266] font-bold text-lg">
+                                                    <span className="text-[#E64266] font-black text-[17px]">
                                                         ৳{tour.price?.toLocaleString()}
                                                     </span>
                                                 </div>
@@ -146,7 +149,7 @@ export default function PopularTours() {
                                             
                                             <Link 
                                                 href={`/tour/${tour.slug}`}
-                                                className="px-5 py-2.5 rounded-full bg-gray-900 text-white font-semibold text-[13px] hover:bg-[#E64266] transition-colors shadow-sm"
+                                                className="px-4 py-2 rounded-full bg-[#0F172A] text-white font-semibold text-[12px] hover:bg-[#E64266] transition-colors shadow-sm whitespace-nowrap"
                                             >
                                                 {isBn ? "বিস্তারিত দেখুন" : "View Details"}
                                             </Link>

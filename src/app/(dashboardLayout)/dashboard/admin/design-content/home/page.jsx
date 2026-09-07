@@ -8,8 +8,8 @@ import { selectToken } from "@/redux/features/authSlice";
 import ImageInput from "@/components/shared/ImageInput";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-const SECTIONS = ["hero", "noticeBoard", "whyChooseUs", "services", "consultation"];
-const TAB_LABELS = { hero: "Hero", noticeBoard: "Notice Board", whyChooseUs: "Why Choose Us", services: "Services", consultation: "Consultation" };
+const SECTIONS = ["hero", "noticeBoard", "whyChooseUs", "services", "about"];
+const TAB_LABELS = { hero: "Hero", noticeBoard: "Notice Board", whyChooseUs: "Why Choose Us", services: "Services", about: "About Us" };
 
 // ─── Reusable Field Components ───────────────────────────────────────
 function Field({ label, value, onChange, placeholder, wide, textarea, help }) {
@@ -234,17 +234,6 @@ function ServicesEditor({ data, setData }) {
         copy[idx] = { ...copy[idx], [k]: v };
         set("items", copy);
     };
-    const addItem = () => {
-        set("items", [...items, { title: { en: "", bn: "" }, subtitle: { en: "", bn: "" }, description: { en: "", bn: "" }, icon: "LuTicket", image: "", color: "#0F3C53", stats: { en: "", bn: "" }, href: "/", order: items.length + 1, isActive: true }]);
-    };
-    const removeItem = (idx) => set("items", items.filter((_, i) => i !== idx));
-    const moveItem = (idx, dir) => {
-        const copy = [...items];
-        const target = idx + dir;
-        if (target < 0 || target >= copy.length) return;
-        [copy[idx], copy[target]] = [copy[target], copy[idx]];
-        set("items", copy);
-    };
 
     return (
         <>
@@ -258,34 +247,20 @@ function ServicesEditor({ data, setData }) {
             <section className="bg-white rounded-xl border border-gray-100 p-6 mb-5">
                 <div className="flex items-center justify-between mb-5">
                     <div>
-                        <h2 className="text-lg font-bold text-gray-900">Service Items</h2>
-                        <p className="text-xs text-gray-500">{items.length} services configured</p>
+                        <h2 className="text-lg font-bold text-gray-900">Service Cards</h2>
+                        <p className="text-xs text-gray-500">Edit the 4 primary service cards (Image & Title)</p>
                     </div>
-                    <button type="button" onClick={addItem} className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-[#0F3C53] bg-[#0F3C53]/10 rounded-lg hover:bg-[#0F3C53]/20 cursor-pointer">
-                        <FiPlus size={14} /> Add Service
-                    </button>
                 </div>
 
                 <div className="space-y-4">
                     {items.map((item, idx) => (
                         <div key={idx} className="border border-gray-100 rounded-xl p-5 relative">
                             <div className="flex items-center justify-between mb-4">
-                                <span className="text-sm font-bold text-gray-700">#{idx + 1} — {item.title?.en || "New Service"}</span>
-                                <div className="flex items-center gap-1">
-                                    <button type="button" onClick={() => moveItem(idx, -1)} className="p-1.5 hover:bg-gray-100 rounded cursor-pointer"><FiChevronUp size={14} /></button>
-                                    <button type="button" onClick={() => moveItem(idx, 1)} className="p-1.5 hover:bg-gray-100 rounded cursor-pointer"><FiChevronDown size={14} /></button>
-                                    <button type="button" onClick={() => removeItem(idx)} className="p-1.5 hover:bg-red-50 text-red-400 rounded cursor-pointer"><FiTrash2 size={14} /></button>
-                                </div>
+                                <span className="text-sm font-bold text-gray-700">#{idx + 1} — {item.id ? item.id.toUpperCase() : "Service"}</span>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                 <BilingualField label="Title" data={item.title} onChange={(v) => setItem(idx, "title", v)} placeholder="Tour Packages" />
-                                <BilingualField label="Subtitle" data={item.subtitle} onChange={(v) => setItem(idx, "subtitle", v)} placeholder="Immigration" />
-                                <BilingualField label="Description" data={item.description} onChange={(v) => setItem(idx, "description", v)} textarea />
-                                <BilingualField label="Stats Text" data={item.stats} onChange={(v) => setItem(idx, "stats", v)} placeholder="10K+ Processed" />
-                                <Field label="Icon Name" value={item.icon} onChange={(v) => setItem(idx, "icon", v)} placeholder="LuTicket" help="React icon name: LuTicket, LuPlane, LuBed, LuMapPin, LuMoon, LuGraduationCap" />
-                                <Field label="Color" value={item.color} onChange={(v) => setItem(idx, "color", v)} placeholder="#0F3C53" />
                                 <ImageField label="Image" value={item.image} onChange={(v) => setItem(idx, "image", v)} wide />
-                                <Field label="Link" value={item.href} onChange={(v) => setItem(idx, "href", v)} placeholder="/tour" />
                             </div>
                         </div>
                     ))}
@@ -300,32 +275,45 @@ function ServicesEditor({ data, setData }) {
     );
 }
 
-// ─── Consultation Editor ─────────────────────────────────────────────
-function ConsultationEditor({ data, setData }) {
+// ─── About Editor ────────────────────────────────────────────────
+function AboutEditor({ data, setData }) {
     const d = data || {};
+    const features = d.features || [];
     const set = (k, v) => setData({ ...d, [k]: v });
+    const setFeature = (idx, k, v) => { const f = [...features]; f[idx] = { ...f[idx], [k]: v }; set("features", f); };
+
     return (
         <>
-            <SectionCard title="Section Header" desc="Tag, heading, and description">
-                <BilingualField label="Tag Text" data={d.tagText} onChange={(v) => set("tagText", v)} placeholder="IMMIGRATION CONSULTING" />
-                <BilingualField label="Heading" data={d.heading} onChange={(v) => set("heading", v)} placeholder="EXPERT IMMIGRATION" />
-                <BilingualField label="Heading Highlight" data={d.headingHighlight} onChange={(v) => set("headingHighlight", v)} placeholder="CONSULTING" />
-                <BilingualField label="Heading End" data={d.headingEnd} onChange={(v) => set("headingEnd", v)} placeholder="SERVICE" />
+            <SectionCard title="Heading & Text" desc="Main text shown on the right side">
+                <BilingualField label="Main Heading" data={d.heading} onChange={(v) => set("heading", v)} />
                 <BilingualField label="Description" data={d.description} onChange={(v) => set("description", v)} textarea />
             </SectionCard>
-            <SectionCard title="Experience Block" desc="Experience highlight section">
-                <BilingualField label="Title" data={d.experienceTitle} onChange={(v) => set("experienceTitle", v)} placeholder="10+ Years Of Experience" />
-                <BilingualField label="Description" data={d.experienceDesc} onChange={(v) => set("experienceDesc", v)} textarea />
-                <ImageField label="Experience Image" value={d.experienceImage} onChange={(v) => set("experienceImage", v)} wide />
+            
+            <SectionCard title="Images" desc="The two overlapping images on the left side">
+                <ImageField label="Main Image (Bottom)" value={d.image1} onChange={(v) => set("image1", v)} help="Recommended: Portrait or large landscape image" />
+                <ImageField label="Square Image (Top Left)" value={d.image2} onChange={(v) => set("image2", v)} help="Recommended: Square format (e.g., 600x600)" />
             </SectionCard>
-            <SectionCard title="Images & CTA" desc="Main images and call to action">
-                <ImageField label="Main Image 1 (Background)" value={d.mainImage1} onChange={(v) => set("mainImage1", v)} placeholder="/images/img01.png" />
-                <ImageField label="Main Image 2 (Person)" value={d.mainImage2} onChange={(v) => set("mainImage2", v)} placeholder="/images/img02.png" />
-                <BilingualField label="CTA Text" data={d.ctaText} onChange={(v) => set("ctaText", v)} placeholder="Explore More" />
-                <Field label="CTA Link" value={d.ctaLink} onChange={(v) => set("ctaLink", v)} placeholder="/contact" />
-                <Field label="Agent Count" value={d.agentCount} onChange={(v) => set("agentCount", v)} placeholder="200+" />
-                <BilingualField label="Agent Label" data={d.agentLabel} onChange={(v) => set("agentLabel", v)} placeholder="Real Agents" />
-            </SectionCard>
+            
+            <section className="bg-white rounded-xl border border-gray-100 p-6 mb-5">
+                <div className="flex items-center justify-between mb-5">
+                    <div><h2 className="text-lg font-bold text-gray-900">Features</h2><p className="text-xs text-gray-500">The 2 highlights below the description (e.g. 2018, 50+)</p></div>
+                </div>
+                <div className="space-y-4">
+                    {features.map((feature, idx) => (
+                        <div key={idx} className="border border-gray-100 rounded-xl p-4">
+                            <div className="flex items-center justify-between mb-3">
+                                <span className="text-sm font-bold text-gray-700">Feature #{idx + 1}</span>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <Field label="Large Value" value={feature.value} onChange={(v) => setFeature(idx, "value", v)} placeholder="e.g. 2018 or 50+" />
+                                <Field label="Icon Name (e.g. LuGlobe)" value={feature.icon} onChange={(v) => setFeature(idx, "icon", v)} placeholder="LuGlobe" help="Valid Lucide React icon name" />
+                                <BilingualField label="Title" data={feature.title} onChange={(v) => setFeature(idx, "title", v)} placeholder="The First Trip We Operated" />
+                                <BilingualField label="Subtitle / Description" data={feature.subtitle} onChange={(v) => setFeature(idx, "subtitle", v)} textarea />
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
         </>
     );
 }
@@ -475,8 +463,7 @@ export default function HomeContentPage() {
 
     useEffect(() => { fetchAll(); }, []);
 
-    const currentData = allData[activeTab] || {};
-    const setCurrentData = (newData) => setAllData((prev) => ({ ...prev, [activeTab]: newData }));
+    const updateData = (section, newData) => setAllData((prev) => ({ ...prev, [section]: newData }));
 
     const handleSave = async () => {
         setSaving(true);
@@ -484,7 +471,7 @@ export default function HomeContentPage() {
             const res = await fetch(`${API_BASE}/api/home-content/${activeTab}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-                body: JSON.stringify(currentData),
+                body: JSON.stringify(allData[activeTab]),
             });
             const json = await res.json();
             if (!res.ok || !json.success) throw new Error(json.message || "Save failed");
@@ -538,11 +525,11 @@ export default function HomeContentPage() {
             </div>
 
             {/* Editor */}
-            {activeTab === "hero" && <HeroEditor data={currentData} setData={setCurrentData} />}
-            {activeTab === "noticeBoard" && <NoticeBoardEditor data={currentData} setData={setCurrentData} />}
-            {activeTab === "services" && <ServicesEditor data={currentData} setData={setCurrentData} />}
-            {activeTab === "consultation" && <ConsultationEditor data={currentData} setData={setCurrentData} />}
-            {activeTab === "whyChooseUs" && <WhyChooseEditor data={currentData} setData={setCurrentData} />}
+            {activeTab === "hero" && <HeroEditor data={allData.hero} setData={(d) => updateData("hero", d)} />}
+            {activeTab === "noticeBoard" && <NoticeBoardEditor data={allData.noticeBoard} setData={(d) => updateData("noticeBoard", d)} />}
+            {activeTab === "services" && <ServicesEditor data={allData.services} setData={(d) => updateData("services", d)} />}
+            {activeTab === "about" && <AboutEditor data={allData.about} setData={(d) => updateData("about", d)} />}
+            {activeTab === "whyChooseUs" && <WhyChooseEditor data={allData.whyChooseUs} setData={(d) => updateData("whyChooseUs", d)} />}
 
             {/* Bottom Save */}
             <div className="flex justify-end mt-6">

@@ -134,7 +134,7 @@ export default function Navbar() {
                                             ? "text-[#E64266]"
                                             : "text-gray-700 hover:text-[#0F3C53]"
                                             }`}
-                                        style={{ fontFamily: 'Poppins, sans-serif' }}
+                                        style={{ fontFamily: 'var(--next-font-poppins)' }}
                                     >
                                         {link.name}
                                         {link.hasDropdown && (
@@ -170,7 +170,7 @@ export default function Navbar() {
                                                                 <span className="text-lg">{item.icon}</span>
                                                                 <span
                                                                     className="font-medium text-gray-700 text-[15px] group-hover:text-[#0F3C53] transition-colors"
-                                                                    style={{ fontFamily: 'Poppins, sans-serif' }}
+                                                                    style={{ fontFamily: 'var(--next-font-poppins)' }}
                                                                 >
                                                                     {item.name}
                                                                 </span>
@@ -211,7 +211,7 @@ export default function Navbar() {
                                                 onClick={() => { setLanguage('en'); setIsLangOpen(false); }}
                                                 className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors ${language === 'en' ? 'text-[#0F3C53] bg-[#0F3C53]/5' : 'text-gray-700 hover:bg-gray-50'
                                                     }`}
-                                                style={{ fontFamily: 'Poppins, sans-serif' }}
+                                                style={{ fontFamily: 'var(--next-font-poppins)' }}
                                             >
                                                 <span className="text-lg">🇬🇧</span>
                                                 English
@@ -248,7 +248,7 @@ export default function Navbar() {
                                                 user.firstName?.[0] || "U"
                                             )}
                                         </div>
-                                        <span className="hidden md:block text-sm font-semibold text-white" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                        <span className="hidden md:block text-sm font-semibold text-white" style={{ fontFamily: 'var(--next-font-poppins)' }}>
                                             {user.firstName}
                                         </span>
                                         <FiChevronDown className={`w-3.5 h-3.5 text-white/70 transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
@@ -349,7 +349,7 @@ export default function Navbar() {
                                                                 ? "text-[#E64266] bg-[#E64266]/5"
                                                                 : "text-gray-700 hover:bg-gray-50"
                                                                 }`}
-                                                            style={{ fontFamily: 'Poppins, sans-serif' }}
+                                                            style={{ fontFamily: 'var(--next-font-poppins)' }}
                                                             onClick={() => setIsMobileOpen(false)}
                                                         >
                                                             {link.name}
@@ -379,7 +379,7 @@ export default function Navbar() {
                                                                             key={item.href}
                                                                             href={item.href}
                                                                             className="block px-3 py-2 text-[15px] text-gray-500 hover:text-[#0F3C53] rounded-lg transition-colors"
-                                                                            style={{ fontFamily: 'Poppins, sans-serif' }}
+                                                                            style={{ fontFamily: 'var(--next-font-poppins)' }}
                                                                             onClick={() => setIsMobileOpen(false)}
                                                                         >
                                                                             {item.icon} {item.name}
@@ -397,7 +397,7 @@ export default function Navbar() {
                                                         ? "text-[#E64266] bg-[#E64266]/5"
                                                         : "text-gray-700 hover:bg-gray-50"
                                                         }`}
-                                                    style={{ fontFamily: 'Poppins, sans-serif' }}
+                                                    style={{ fontFamily: 'var(--next-font-poppins)' }}
                                                     onClick={() => setIsMobileOpen(false)}
                                                 >
                                                     {link.name}
@@ -417,7 +417,7 @@ export default function Navbar() {
                                                 ? 'bg-[#0F3C53] text-white shadow-md'
                                                 : 'bg-white text-gray-700 border border-gray-200'
                                                 }`}
-                                            style={{ fontFamily: 'Poppins, sans-serif' }}
+                                            style={{ fontFamily: 'var(--next-font-poppins)' }}
                                         >
                                             <span>🇬🇧</span> English
                                         </button>
@@ -459,7 +459,7 @@ function DropdownLink({ href, icon: Icon, label, fontFamily }) {
         <Link
             href={href}
             className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-[#0F3C53] transition-all"
-            style={{ fontFamily: fontFamily || 'Poppins, sans-serif' }}
+            style={{ fontFamily: fontFamily || 'var(--next-font-poppins)' }}
         >
             <Icon className="w-4 h-4" />
             {label}

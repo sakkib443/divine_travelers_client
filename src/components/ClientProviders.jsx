@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { SiteSettingsProvider } from "@/context/SiteSettingsContext";
 import { Toaster } from "react-hot-toast";
 import ReduxProvider from "@/redux/ReduxProvider";
+import DynamicFavicon from "@/components/shared/DynamicFavicon";
 
 export default function ClientProviders({ children }) {
     return (
@@ -14,6 +15,7 @@ export default function ClientProviders({ children }) {
                 <ModuleProvider>
                     <LanguageProvider>
                         <SiteSettingsProvider>
+                        <DynamicFavicon />
                         <Toaster
                             position="top-center"
                             toastOptions={{

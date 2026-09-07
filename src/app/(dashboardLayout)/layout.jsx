@@ -129,6 +129,7 @@ const menuItems = [
         icon: FiLayout,
         children: [
             { name: "Home Page", href: "/dashboard/admin/design-content/home", icon: FiHome },
+            { name: "Logo & Favicon", href: "/dashboard/admin/design-content/branding", icon: FiImage },
             { name: "Contact Page", href: "/dashboard/admin/design-content/contact", icon: FiPhone },
             { name: "Social Links", href: "/dashboard/admin/design-content/social", icon: FiGlobe },
             { name: "Legal Pages", href: "/dashboard/admin/design-content/legal", icon: FiFileText },
@@ -277,6 +278,7 @@ export default function DashboardLayout({ children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [mounted, setMounted] = useState(false);
     const user = useSelector(selectCurrentUser);
     const token = useSelector(selectToken);
     const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -297,6 +299,7 @@ export default function DashboardLayout({ children }) {
     };
 
     useEffect(() => {
+        setMounted(true);
         // Initial check
         if (!token || !isAuthenticated || isTokenExpired(token)) {
             dispatch(logout());
@@ -426,12 +429,12 @@ export default function DashboardLayout({ children }) {
         setIsMobileOpen(false);
     }, [pathname]);
 
-    if (isLoading && (!token || !isAuthenticated)) {
+    if (!mounted || (isLoading && (!token || !isAuthenticated))) {
         return (
             <div className="min-h-screen bg-[#F8FAFC] dark:bg-gray-900 flex items-center justify-center">
                 <div className="text-center">
                     <div className="w-14 h-14 border-3 border-[#021E14] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-gray-500 text-sm">Authenticating...</p>
+                    <p className="text-gray-500 text-sm">{!mounted ? "Loading..." : "Authenticating..."}</p>
                 </div>
             </div>
         );

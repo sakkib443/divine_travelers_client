@@ -545,21 +545,7 @@ export default function Hero({ heroData }) {
         <div className="relative w-full flex flex-col">
             <section className="relative min-h-[240px] aspect-[4/3] sm:aspect-[16/9] lg:aspect-auto lg:min-h-[75vh] flex flex-col bg-[#0a1a14] pb-6 lg:pb-[80px]">
                 {/* Background */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        background:
-                            "linear-gradient(135deg, #0a1a14 0%, #0d2e1f 25%, #1a4a35 50%, #0f3d2a 75%, #0a1a14 100%)",
-                    }}
-                />
-                <div
-                    className="absolute inset-0 opacity-60"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at 30% 50%, rgba(53,144,207,0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(239,140,44,0.1) 0%, transparent 50%)",
-                    }}
-                />
+            <div className="absolute inset-0 z-0 overflow-hidden bg-black">
                 {/* Background slides */}
                 {slides.map((src, i) => (
                     <div
@@ -568,7 +554,9 @@ export default function Hero({ heroData }) {
                         style={{ backgroundImage: `url('${src}')`, opacity: activeSlide === i ? 1 : 0 }}
                     />
                 ))}
-                <div className="absolute inset-0 bg-black/40 lg:bg-black/25 z-10" />
+                {/* A very light black overlay is kept so white text remains somewhat readable, 
+                    but no color/blue tints are applied. */}
+                <div className="absolute inset-0 bg-black/20 z-10" />
             </div>
 
             {/* Navbar spacer */}
@@ -627,7 +615,7 @@ export default function Hero({ heroData }) {
                                             {parts.map((part, i) => {
                                                 if (part.toUpperCase() === "DIVINE TRAVELERS") {
                                                     return (
-                                                        <span key={i} className="inline-flex items-center justify-center bg-white/95 backdrop-blur-md px-5 lg:px-7 pt-3 pb-1 lg:pt-4 lg:pb-1 rounded-none shadow-lg mt-2 lg:mt-3 border border-white/40 leading-none">
+                                                        <span key={i} className="inline-flex items-center justify-center mt-2 lg:mt-4 leading-none font-black tracking-widest" style={{ textShadow: "0 0 2px rgba(255,255,255,0.9), 0 0 4px rgba(255,255,255,0.8)" }}>
                                                             <span style={{ color: "#0F3C53" }}>DIVINE</span>
                                                             <span style={{ color: "#E64266" }} className="ml-2 lg:ml-3">TRAVELERS</span>
                                                         </span>

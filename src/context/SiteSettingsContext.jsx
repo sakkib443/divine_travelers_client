@@ -31,6 +31,10 @@ const DEFAULTS = {
     countriesCount: "50+",
     happyClientsCount: "10K+",
 
+    // Branding
+    logoUrl: '',
+    faviconUrl: '',
+
     social: {
         facebook: "",
         instagram: "",

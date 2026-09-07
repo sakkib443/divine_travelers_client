@@ -1,15 +1,39 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { LuGlobe, LuMap } from "react-icons/lu";
+import * as Icons from "react-icons/lu";
 import { useLanguage } from "@/context/LanguageContext";
+
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 export default function AboutStory() {
     const { language } = useLanguage();
     const isBn = language === "bn";
     const font = isBn ? "Hind Siliguri, sans-serif" : "Poppins, sans-serif";
-    const heading = isBn ? "Hind Siliguri, sans-serif" : "var(--font-heading)";
+    const headingFont = isBn ? "Hind Siliguri, sans-serif" : "var(--font-heading)";
     const T = (en, bn) => (isBn ? bn : en);
+
+    const [content, setContent] = useState(null);
+
+    useEffect(() => {
+        fetch(`${API_BASE}/api/home-content/about`)
+            .then((r) => r.json())
+            .then((d) => setContent(d?.data?.data || null))
+            .catch(() => {});
+    }, []);
+
+    // Defaults (Fallback)
+    const titleText = content?.heading?.[isBn ? 'bn' : 'en'] || (isBn ? "ডিভাইন ট্রাভেলার্স হলো ট্যুর খুঁজে পাওয়ার সেরা উপায়। চলুন সবচেয়ে স্মরণীয় অ্যাডভেঞ্চার তৈরি করি।" : "Divine Travelers is the best way to find travel tours. Let's make the most memorable adventures.");
+    const descriptionText = content?.description?.[isBn ? 'bn' : 'en'] || (isBn ? "ডিভাইন ট্রাভেলার্স হলো বিশ্ববিখ্যাত গন্তব্যগুলোতে আরামদায়ক ভ্রমণ এবং সেরা আবাসনে নিশ্চিন্তে রাত্রিযাপন করার মাধ্যমে একটি রোমাঞ্চকর আউটডোর অভিজ্ঞতা অর্জনের অবিশ্বাস্য উপায়।" : "Divine Travelers is an incredible way to have an adventurous outdoor experience of world renowned destinations while traveling with comfort and sleeping soundly in the best accommodations.");
+    const img1 = content?.image1 || "/hero.jpg";
+    const img2 = content?.image2 || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80";
+
+    const defaultFeatures = [
+        { icon: "LuGlobe", value: "2018", title: { en: "The First Trip We Operated", bn: "প্রথম ট্রিপ যা আমরা পরিচালনা করেছি" }, subtitle: { en: "We are in this industry for more than 6 years!", bn: "আমরা ৬ বছরেরও বেশি সময় ধরে এই শিল্পে আছি!" } },
+        { icon: "LuMap", value: "50+", title: { en: "Locations Worldwide", bn: "বিশ্বব্যাপী গন্তব্য" }, subtitle: { en: "With more than 50 locations for your choices", bn: "আপনার পছন্দের জন্য ৫০টিরও বেশি গন্তব্য" } }
+    ];
+    const featuresList = content?.features?.length > 0 ? content.features : defaultFeatures;
 
     return (
         <section className="py-20 md:py-32 bg-white relative overflow-hidden">
@@ -36,11 +60,11 @@ export default function AboutStory() {
                 >
                     {/* Main Bottom Image */}
                     <div className="absolute bottom-0 right-0 w-[85%] h-[75%] shadow-xl z-10 overflow-hidden">
-                        <img src="/hero.jpg" alt="Travel" className="w-full h-full object-cover" />
+                        <img src={img1} alt="Travel" className="w-full h-full object-cover" />
                     </div>
                     {/* Top Left Square Image */}
                     <div className="absolute top-0 left-0 w-[55%] h-[55%] shadow-2xl z-20 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80" alt="Adventure" className="w-full h-full object-cover" />
+                        <img src={img2} alt="Adventure" className="w-full h-full object-cover" />
                     </div>
                 </motion.div>
 
@@ -50,58 +74,34 @@ export default function AboutStory() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="font-extrabold text-[#222222] leading-[1.2] mb-6" style={{ fontFamily: heading, fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>
-                        {T(
-                            "Divine Travelers is the best way to find travel tours. Let's make the most memorable adventures.",
-                            "ডিভাইন ট্রাভেলার্স হলো ট্যুর খুঁজে পাওয়ার সেরা উপায়। চলুন সবচেয়ে স্মরণীয় অ্যাডভেঞ্চার তৈরি করি।"
-                        )}
+                    <h2 className="font-extrabold text-[#222222] leading-[1.2] mb-6" style={{ fontFamily: headingFont, fontSize: "clamp(2rem, 4vw, 2.75rem)" }}>
+                        {titleText}
                     </h2>
                     
                     <p className="text-gray-600 leading-relaxed mb-12 text-[15px] md:text-[16px]" style={{ fontFamily: font }}>
-                        {T(
-                            "Divine Travelers is an incredible way to have an adventurous outdoor experience of world renowned destinations while traveling with comfort and sleeping soundly in the best accommodations.",
-                            "ডিভাইন ট্রাভেলার্স হলো বিশ্ববিখ্যাত গন্তব্যগুলোতে আরামদায়ক ভ্রমণ এবং সেরা আবাসনে নিশ্চিন্তে রাত্রিযাপন করার মাধ্যমে একটি রোমাঞ্চকর আউটডোর অভিজ্ঞতা অর্জনের অবিশ্বাস্য উপায়।"
-                        )}
+                        {descriptionText}
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-                        {/* Feature 1 */}
-                        <div>
-                            <div className="mb-4 text-[#222222]">
-                                <LuGlobe className="w-10 h-10" strokeWidth={1.5} />
-                            </div>
-                            <h3 className="font-black text-[#F9A826] text-[40px] leading-none mb-3" style={{ fontFamily: heading }}>
-                                2018
-                            </h3>
-                            <h4 className="font-bold text-[#222222] text-[17px] mb-2" style={{ fontFamily: heading }}>
-                                {T("The First Trip We Operated", "প্রথম ট্রিপ যা আমরা পরিচালনা করেছি")}
-                            </h4>
-                            <p className="text-gray-500 text-[14px] leading-relaxed" style={{ fontFamily: font }}>
-                                {T(
-                                    "We are in this industry for more than 6 years!",
-                                    "আমরা ৬ বছরেরও বেশি সময় ধরে এই শিল্পে আছি!"
-                                )}
-                            </p>
-                        </div>
-
-                        {/* Feature 2 */}
-                        <div>
-                            <div className="mb-4 text-[#222222]">
-                                <LuMap className="w-10 h-10" strokeWidth={1.5} />
-                            </div>
-                            <h3 className="font-black text-[#F9A826] text-[40px] leading-none mb-3" style={{ fontFamily: heading }}>
-                                50+
-                            </h3>
-                            <h4 className="font-bold text-[#222222] text-[17px] mb-2" style={{ fontFamily: heading }}>
-                                {T("Locations Worldwide", "বিশ্বব্যাপী গন্তব্য")}
-                            </h4>
-                            <p className="text-gray-500 text-[14px] leading-relaxed" style={{ fontFamily: font }}>
-                                {T(
-                                    "With more than 50 locations for your choices",
-                                    "আপনার পছন্দের জন্য ৫০টিরও বেশি গন্তব্য"
-                                )}
-                            </p>
-                        </div>
+                        {featuresList.slice(0, 2).map((feat, idx) => {
+                            const IconComponent = Icons[feat.icon] || Icons.LuGlobe;
+                            return (
+                                <div key={idx}>
+                                    <div className="mb-4 text-[#222222]">
+                                        <IconComponent className="w-10 h-10" strokeWidth={1.5} />
+                                    </div>
+                                    <h3 className="font-black text-[#F9A826] text-[40px] leading-none mb-3" style={{ fontFamily: headingFont }}>
+                                        {feat.value}
+                                    </h3>
+                                    <h4 className="font-bold text-[#222222] text-[17px] mb-2" style={{ fontFamily: headingFont }}>
+                                        {isBn ? feat.title.bn : feat.title.en}
+                                    </h4>
+                                    <p className="text-gray-500 text-[14px] leading-relaxed" style={{ fontFamily: font }}>
+                                        {isBn ? feat.subtitle.bn : feat.subtitle.en}
+                                    </p>
+                                </div>
+                            );
+                        })}
                     </div>
                 </motion.div>
             </div>
