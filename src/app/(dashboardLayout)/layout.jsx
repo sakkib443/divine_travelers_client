@@ -139,11 +139,6 @@ const menuItems = [
         section: "SETTINGS",
     },
     {
-        name: "Settings",
-        href: "/dashboard/admin/settings",
-        icon: FiSettings,
-    },
-    {
         name: "Profile",
         href: "/dashboard/admin/profile",
         icon: FiUsers,

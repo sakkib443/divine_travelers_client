@@ -7,8 +7,8 @@ import {
     FiUser, FiMail, FiPhone, FiLock, FiSave, FiLoader,
     FiShield, FiCheck
 } from "react-icons/fi";
-import { useSelector } from "react-redux";
-import { selectCurrentUser, selectToken } from "@/redux/features/authSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { selectCurrentUser, selectToken, updateUser } from "@/redux/features/authSlice";
 import ImageInput from "@/components/shared/ImageInput";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
@@ -16,6 +16,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 export default function ProfilePage() {
     const currentUser = useSelector(selectCurrentUser);
     const token = useSelector(selectToken);
+    const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [activeTab, setActiveTab] = useState("profile");
 
@@ -57,8 +58,12 @@ export default function ProfilePage() {
                 body: JSON.stringify(formData),
             });
             const data = await res.json().catch(() => ({}));
-            if (res.ok) toast.success("Profile updated!");
-            else toast.error(data.message || "Update failed");
+            if (res.ok) {
+                toast.success("Profile updated!");
+                if (data.data) {
+                    dispatch(updateUser(data.data));
+                }
+            } else toast.error(data.message || "Update failed");
         } catch { toast.error("Error updating profile"); }
         finally { setLoading(false); }
     };
@@ -90,7 +95,7 @@ export default function ProfilePage() {
     };
 
     return (
-        <div className="p-6 lg:p-8 space-y-6">
+        <div className="p-6 lg:p-8 space-y-6 max-w-4xl mx-auto">
             <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg">
                     <FiUser className="text-white text-xl" />
