@@ -21,7 +21,7 @@ function CreateUserContent() {
 
     const [f, setF] = useState({
         firstName: "", lastName: "", email: "", phone: "", password: "",
-        status: "active",
+        status: "active", role: "admin",
     });
     const set = (k, v) => setF((p) => ({ ...p, [k]: v }));
 
@@ -39,7 +39,7 @@ function CreateUserContent() {
             phone: f.phone.trim(),
             password: f.password,
             status: f.status,
-            role: "admin",
+            role: f.role,
         };
 
         setLoading(true);
@@ -112,14 +112,23 @@ function CreateUserContent() {
                         </div>
                     </div>
 
-                    {/* Password */}
-                    <div>
-                        <label className={label}>Password *</label>
-                        <div className="relative">
-                            <input type={showPassword ? "text" : "password"} name="account-new-password" autoComplete="new-password" value={f.password} onChange={(e) => set("password", e.target.value)} className="input pr-12" placeholder="Min 6 characters" required />
-                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                                {showPassword ? <FiEyeOff /> : <FiEye />}
-                            </button>
+                    {/* Password & Role */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label className={label}>Password *</label>
+                            <div className="relative">
+                                <input type={showPassword ? "text" : "password"} name="account-new-password" autoComplete="new-password" value={f.password} onChange={(e) => set("password", e.target.value)} className="input pr-12" placeholder="Min 6 characters" required />
+                                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                    {showPassword ? <FiEyeOff /> : <FiEye />}
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label className={label}>Role *</label>
+                            <select value={f.role} onChange={(e) => set("role", e.target.value)} className="input appearance-none bg-white">
+                                <option value="admin">Admin (Full Access)</option>
+                                <option value="manager">Manager (Restricted Access)</option>
+                            </select>
                         </div>
                     </div>
 

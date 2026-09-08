@@ -21,6 +21,9 @@ import {
 import { LuPlane, LuGraduationCap } from "react-icons/lu";
 import { FaKaaba } from "react-icons/fa6";
 import { analyticsService } from "@/services/api";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@/redux/features/authSlice";
+import { useRouter } from "next/navigation";
 
 // ==================== ANIMATED COUNTER ====================
 const AnimatedCounter = ({ value, duration = 2000, prefix = "", suffix = "" }) => {
@@ -78,6 +81,15 @@ const MiniChart = ({ data, color = "#E64266" }) => {
 
 // ==================== MAIN DASHBOARD ====================
 export default function AdminDashboard() {
+    const user = useSelector(selectCurrentUser);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (user?.role === "manager") {
+            router.replace("/dashboard/admin/tours");
+        }
+    }, [user, router]);
+
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
 

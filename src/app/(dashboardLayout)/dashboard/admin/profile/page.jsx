@@ -10,6 +10,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser, selectToken, updateUser } from "@/redux/features/authSlice";
 import ImageInput from "@/components/shared/ImageInput";
+import { useRouter } from "next/navigation";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -17,8 +18,15 @@ export default function ProfilePage() {
     const currentUser = useSelector(selectCurrentUser);
     const token = useSelector(selectToken);
     const dispatch = useDispatch();
+    const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [activeTab, setActiveTab] = useState("profile");
+
+    useEffect(() => {
+        if (currentUser?.role === "manager") {
+            router.replace("/dashboard/admin/tours");
+        }
+    }, [currentUser, router]);
 
     const [formData, setFormData] = useState({
         firstName: "",

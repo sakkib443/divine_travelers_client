@@ -134,6 +134,7 @@ function UsersContent() {
     const getRoleBadge = (role) => {
         const styles = {
             admin: "bg-gradient-to-r from-rose-500 to-pink-500 text-white",
+            manager: "bg-gradient-to-r from-blue-500 to-cyan-500 text-white",
         };
         return styles[role] || "bg-gray-200 text-gray-600";
     };
@@ -147,7 +148,7 @@ function UsersContent() {
         return styles[status] || "bg-gray-100 text-gray-600";
     };
 
-    const getRoleLabel = (role) => (role === "admin" ? "Admin" : role);
+    const getRoleLabel = (role) => (role === "admin" ? "Admin" : role === "manager" ? "Manager" : role);
 
     // View User Modal
     const ViewUserModal = ({ user, onClose }) => {
@@ -421,6 +422,7 @@ function UsersContent() {
                                                     className="px-3 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 text-sm focus:border-primary outline-none"
                                                 >
                                                     <option value="admin">Admin</option>
+                                                    <option value="manager">Manager</option>
                                                 </select>
                                             ) : (
                                                 <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${getRoleBadge(user.role)}`}>

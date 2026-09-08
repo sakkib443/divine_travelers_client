@@ -404,11 +404,11 @@ export default function DashboardLayout({ children }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token, pathname]);
 
-    // Access gate — the dashboard is admin-only now.
+    // Access gate
     useEffect(() => {
         const role = user?.role;
         if (!role) return;
-        if (role !== "admin") {
+        if (role !== "admin" && role !== "manager") {
             dispatch(logout());
             router.replace("/login");
         }
@@ -440,7 +440,13 @@ export default function DashboardLayout({ children }) {
 
     const renderSidebarContent = (isCollapsedMode = false) => (
         <>
-            {menuItems.filter(item => !item.hidden && user?.role === 'admin').map((item, index) => {
+            {menuItems.filter(item => {
+                if (item.hidden) return false;
+                if (user?.role === 'manager') {
+                    if (item.name === "Dashboard" || item.name === "Admins" || item.name === "Profile") return false;
+                }
+                return true;
+            }).map((item, index) => {
                 if (item.section) {
                     if (isCollapsedMode) return <div key={index} className="my-3 border-t border-gray-100 dark:border-gray-700/50" />;
                     return (
