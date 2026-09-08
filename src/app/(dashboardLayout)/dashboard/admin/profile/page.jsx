@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import {
     FiUser, FiMail, FiPhone, FiLock, FiSave, FiLoader,
-    FiShield, FiCheck
+    FiShield, FiCheck, FiEye, FiEyeOff
 } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser, selectToken, updateUser } from "@/redux/features/authSlice";
@@ -41,6 +41,10 @@ export default function ProfilePage() {
         newPassword: "",
         confirmPassword: "",
     });
+
+    const [showCurrent, setShowCurrent] = useState(false);
+    const [showNew, setShowNew] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     useEffect(() => {
         if (currentUser) {
@@ -192,24 +196,33 @@ export default function ProfilePage() {
                     <div>
                         <label className="text-xs font-bold text-gray-500 uppercase block mb-2">Current Password</label>
                         <div className="relative">
-                            <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                            <input type="password" value={passwordData.currentPassword} onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })} className="input pl-11" required />
+                            {!passwordData.currentPassword && <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />}
+                            <input type={showCurrent ? "text" : "password"} value={passwordData.currentPassword} onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })} className={`input pr-12 ${passwordData.currentPassword ? 'pl-4' : 'pl-11'}`} required />
+                            <button type="button" onClick={() => setShowCurrent(!showCurrent)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                {showCurrent ? <FiEyeOff size={16} /> : <FiEye size={16} />}
+                            </button>
                         </div>
                     </div>
 
                     <div>
                         <label className="text-xs font-bold text-gray-500 uppercase block mb-2">New Password</label>
                         <div className="relative">
-                            <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                            <input type="password" value={passwordData.newPassword} onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })} className="input pl-11" required minLength={6} />
+                            {!passwordData.newPassword && <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />}
+                            <input type={showNew ? "text" : "password"} value={passwordData.newPassword} onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })} className={`input pr-12 ${passwordData.newPassword ? 'pl-4' : 'pl-11'}`} required minLength={6} />
+                            <button type="button" onClick={() => setShowNew(!showNew)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                {showNew ? <FiEyeOff size={16} /> : <FiEye size={16} />}
+                            </button>
                         </div>
                     </div>
 
                     <div>
                         <label className="text-xs font-bold text-gray-500 uppercase block mb-2">Confirm New Password</label>
                         <div className="relative">
-                            <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                            <input type="password" value={passwordData.confirmPassword} onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })} className="input pl-11" required />
+                            {!passwordData.confirmPassword && <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />}
+                            <input type={showConfirm ? "text" : "password"} value={passwordData.confirmPassword} onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })} className={`input pr-12 ${passwordData.confirmPassword ? 'pl-4' : 'pl-11'}`} required />
+                            <button type="button" onClick={() => setShowConfirm(!showConfirm)} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                {showConfirm ? <FiEyeOff size={16} /> : <FiEye size={16} />}
+                            </button>
                         </div>
                     </div>
 
