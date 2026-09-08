@@ -20,7 +20,6 @@ export default function ProfilePage() {
     const dispatch = useDispatch();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [activeTab, setActiveTab] = useState("profile");
 
     useEffect(() => {
         if (currentUser?.role === "manager") {
@@ -114,17 +113,15 @@ export default function ProfilePage() {
                 </div>
             </div>
 
-            {/* Tabs */}
-            <div className="flex gap-2">
-                {["profile", "security"].map(tab => (
-                    <button key={tab} onClick={() => setActiveTab(tab)} className={`px-6 py-3 rounded-xl font-bold text-sm capitalize ${activeTab === tab ? "bg-primary text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-600"}`}>
-                        {tab}
-                    </button>
-                ))}
-            </div>
-
-            {activeTab === "profile" && (
+            <div className="space-y-10">
                 <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} onSubmit={handleProfileUpdate} className="card p-6 space-y-6 max-w-2xl">
+                    <div className="flex items-center gap-3 p-4 bg-primary/10 rounded-xl mb-6">
+                        <FiUser className="text-primary" size={24} />
+                        <div>
+                            <p className="font-bold text-gray-900 dark:text-white">Profile Information</p>
+                            <p className="text-sm text-gray-500">Update your personal details</p>
+                        </div>
+                    </div>
                     {/* Avatar */}
                     <div className="flex items-center gap-6">
                         <div className="relative">
@@ -182,9 +179,7 @@ export default function ProfilePage() {
                         {loading ? <FiLoader className="animate-spin" /> : <FiSave />} Update Profile
                     </button>
                 </motion.form>
-            )}
 
-            {activeTab === "security" && (
                 <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} onSubmit={handlePasswordChange} className="card p-6 space-y-6 max-w-2xl">
                     <div className="flex items-center gap-3 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl">
                         <FiShield className="text-amber-600" size={24} />
@@ -222,7 +217,7 @@ export default function ProfilePage() {
                         {loading ? <FiLoader className="animate-spin" /> : <FiCheck />} Change Password
                     </button>
                 </motion.form>
-            )}
+            </div>
         </div>
     );
 }
