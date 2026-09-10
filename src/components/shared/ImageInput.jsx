@@ -36,7 +36,7 @@ const isAcceptable = (file) =>
  * একটি ফাইল সার্ভারে পাঠায় এবং সেভ হওয়া relative URL ফেরত দেয়।
  * ভুল টাইপ / বড় ফাইল এখানেই ধরা পড়ে, তাই কলার শুধু URL নিয়ে ভাবে।
  */
-export async function uploadImageFile(file, token) {
+export async function uploadImageFile(file, token, trim = false) {
     if (!isAcceptable(file)) {
         throw new Error("শুধু JPG, PNG, GIF, WEBP, AVIF বা HEIC ছবি দেওয়া যাবে");
     }
@@ -47,7 +47,7 @@ export async function uploadImageFile(file, token) {
     const fd = new FormData();
     fd.append("image", file);
 
-    const res = await fetch(`${API_BASE}/api/upload/single`, {
+    const res = await fetch(`${API_BASE}/api/upload/single${trim ? "?trim=true" : ""}`, {
         method: "POST",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: fd,
@@ -125,6 +125,7 @@ export default function ImageInput({
     labelClass,
     thumbSize = 44,
     disabled = false,
+    trim = false,
 }) {
     const token = useSelector(selectToken);
     const [uploading, setUploading] = useState(false);
@@ -135,7 +136,7 @@ export default function ImageInput({
         setUploading(true);
         const t = toast.loading("ছবি আপলোড হচ্ছে...");
         try {
-            const url = await uploadImageFile(file, token);
+            const url = await uploadImageFile(file, token, trim);
             onChange(url);
             toast.success("ছবি আপলোড হয়েছে", { id: t });
         } catch (err) {

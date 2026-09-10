@@ -94,8 +94,9 @@ export default function BrandingPage() {
                             label="Logo Image URL"
                             value={logoUrl}
                             onChange={setLogoUrl}
+                            trim
                             placeholder="https://... or /images/logo.png"
-                            hint="Upload or paste a direct image URL"
+                            hint="Upload or paste a direct image URL — empty border is auto-trimmed"
                             labelClass="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5"
                             inputClass="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg outline-none focus:border-[#0F3C53] focus:ring-2 focus:ring-[#0F3C53]/10 bg-transparent text-gray-800 placeholder-gray-400"
                         />
