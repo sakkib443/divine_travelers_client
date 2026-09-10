@@ -123,7 +123,7 @@ export default function Footer() {
                     {/* Brand & Social */}
                     <div className="space-y-6">
                         <Link href="/" className="flex items-center group">
-                            <Logo className="h-28 sm:h-32 w-auto" badgeClassName="transition-transform group-hover:scale-105" />
+                            <Logo className="h-16 sm:h-[68px] w-auto" badgeClassName="transition-transform group-hover:scale-105" />
                         </Link>
 
                         <p className="text-gray-600 text-sm leading-relaxed max-w-sm" style={{ fontFamily: bnFont }}>

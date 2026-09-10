@@ -476,9 +476,9 @@ export default function DashboardLayout({ children }) {
                     } bg-white dark:bg-gray-800 border-r border-gray-100 dark:border-gray-700/50 hidden lg:flex flex-col`}
             >
                 {/* Logo */}
-                <div className="h-[88px] flex items-center justify-between px-4 border-b border-gray-100 dark:border-gray-700/50 flex-shrink-0">
+                <div className="h-[72px] flex items-center justify-between px-4 border-b border-gray-100 dark:border-gray-700/50 flex-shrink-0">
                     <Link href="/" className="flex items-center gap-2.5">
-                        <Logo className={`transition-all duration-300 ${isSidebarOpen ? "h-[76px]" : "h-9"} w-auto`} />
+                        <Logo className={`transition-all duration-300 ${isSidebarOpen ? "h-12" : "h-8"} w-auto`} />
                     </Link>
                 </div>
 
@@ -541,9 +541,9 @@ export default function DashboardLayout({ children }) {
                             transition={{ type: "spring", damping: 25 }}
                             className="fixed top-0 left-0 z-50 w-[260px] h-screen bg-white dark:bg-gray-800 lg:hidden flex flex-col"
                         >
-                            <div className="h-[88px] flex items-center justify-between px-4 border-b border-gray-100 dark:border-gray-700/50">
+                            <div className="h-[72px] flex items-center justify-between px-4 border-b border-gray-100 dark:border-gray-700/50">
                                 <Link href="/" className="flex items-center gap-2.5">
-                                    <Logo className="h-[76px] w-auto" />
+                                    <Logo className="h-12 w-auto" />
                                 </Link>
                                 <button onClick={() => setIsMobileOpen(false)} className="p-1.5 rounded-md hover:bg-gray-100">
                                     <FiX className="w-5 h-5 text-gray-400" />
@@ -560,7 +560,7 @@ export default function DashboardLayout({ children }) {
             {/* Main Content */}
             <div className={`${isSidebarOpen ? "lg:ml-[260px]" : "lg:ml-[70px]"} transition-all duration-300`}>
                 {/* Top Header */}
-                <header className="sticky top-0 z-30 h-[88px] bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-b border-gray-100 dark:border-gray-700/50 px-4 lg:px-6 flex items-center justify-between">
+                <header className="sticky top-0 z-30 h-[72px] bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-b border-gray-100 dark:border-gray-700/50 px-4 lg:px-6 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => setIsMobileOpen(true)}
