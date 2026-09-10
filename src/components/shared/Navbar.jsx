@@ -112,11 +112,11 @@ export default function Navbar() {
                     }`}
             >
                 <div className="max-w-[1400px] mx-auto px-4 lg:px-6">
-                    <div className="flex items-center justify-between h-16 lg:h-[72px]">
+                    <div className="flex items-center justify-between h-20 lg:h-[88px]">
 
                         {/* Logo */}
                         <Link href="/" className="flex items-center group flex-shrink-0">
-                            <Logo className="h-[65px] lg:h-[78px] w-auto transition-transform group-hover:scale-105" />
+                            <Logo className="h-[78px] lg:h-[94px] w-auto transition-transform group-hover:scale-105" />
                         </Link>
 
                         {/* Center Navigation - Desktop */}
