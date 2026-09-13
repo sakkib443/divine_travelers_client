@@ -588,10 +588,11 @@ export default function Hero({ heroData }) {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="font-bold text-white mb-5 lg:mb-4 tracking-tight uppercase"
+                        className="text-white mb-5 lg:mb-4 tracking-tight uppercase"
                         style={{
                             fontFamily: "var(--font-heading)",
                             color: "#FFFFFF",
+                            fontWeight: 400,
                             textShadow: "0 8px 30px rgba(0,0,0,0.5)",
                             fontSize: "clamp(1.25rem, 5vw, 3.5rem)",
                             lineHeight: "1.1",
@@ -615,7 +616,7 @@ export default function Hero({ heroData }) {
                                             {parts.map((part, i) => {
                                                 if (part.toUpperCase() === "DIVINE TRAVELERS") {
                                                     return (
-                                                        <span key={i} className="inline-flex items-center justify-center mt-2 lg:mt-4 leading-none font-black tracking-widest" style={{ textShadow: "0 0 2px rgba(255,255,255,0.9), 0 0 4px rgba(255,255,255,0.8)" }}>
+                                                        <span key={i} className="inline-flex items-center justify-center mt-2 lg:mt-4 leading-none font-black tracking-widest" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.55)" }}>
                                                             <span style={{ color: "#0F3C53" }}>DIVINE</span>
                                                             <span style={{ color: "#E64266" }} className="ml-2 lg:ml-3">TRAVELERS</span>
                                                         </span>
