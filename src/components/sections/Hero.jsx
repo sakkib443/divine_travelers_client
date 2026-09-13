@@ -599,41 +599,38 @@ export default function Hero({ heroData }) {
                         }}
                     >
                         {(() => {
-                            let text = hd.heading ? bt(hd.heading) : t("heroTitle");
-                            if (text.toUpperCase() === "YOUR JOURNEY STARTS WITH DIVINE TRAVELERS") {
-                                text = "YOUR JOURNEY STARTS WITH\nDIVINE TRAVELERS";
-                            } else if (text === "আপনার যাত্রা শুরু হোক Divine Travelers দিয়ে") {
-                                text = "আপনার যাত্রা শুরু হোক\nDivine Travelers -এর সাথে";
-                            }
-                            
-                            return text.split('\n').map((line, idx) => {
-                                const isDivineLine = line.toUpperCase().includes("DIVINE TRAVELERS");
-                                
-                                if (isDivineLine) {
-                                    const parts = line.split(/(DIVINE TRAVELERS)/i);
-                                    return (
-                                        <span key={idx} className={idx > 0 ? "block mt-4 lg:mt-6" : "block"}>
-                                            {parts.map((part, i) => {
-                                                if (part.toUpperCase() === "DIVINE TRAVELERS") {
-                                                    return (
-                                                        <span key={i} className="inline-flex items-center justify-center mt-2 lg:mt-4 leading-none font-black tracking-widest" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.55)" }}>
-                                                            <span style={{ color: "#0F3C53" }}>DIVINE</span>
-                                                            <span style={{ color: "#E64266" }} className="ml-2 lg:ml-3">TRAVELERS</span>
-                                                        </span>
-                                                    );
-                                                }
-                                                return <span key={i}>{part}</span>;
-                                            })}
-                                        </span>
-                                    );
-                                }
+                            // Heading is free-text from the DB (admin editable), so we do NOT
+                            // match an exact brand spelling. We anchor on the word "DIVINE":
+                            // everything before it is the thin tagline, and "DIVINE" + the rest
+                            // becomes the bold brand wordmark on its own line below — DIVINE in
+                            // teal, the following word(s) in pink. Works for TRAVELERS/TRAVELLERS
+                            // and keeps the SSR fallback + DB value rendering identically (no flash).
+                            const raw = (hd.heading ? bt(hd.heading) : t("heroTitle")).replace(/\s*\n\s*/g, " ").trim();
+                            const m = raw.match(/divine/i);
 
-                                return (
-                                    <span key={idx} className={idx > 0 ? "block mt-4 lg:mt-6" : "block"}>
-                                        {line}
+                            if (!m) {
+                                return <span className="block">{raw}</span>;
+                            }
+
+                            const tagline = raw.slice(0, m.index).trim();
+                            const brandWords = raw.slice(m.index).trim().split(/\s+/);
+                            const brandFirst = brandWords[0];
+                            const brandRest = brandWords.slice(1).join(" ");
+
+                            return (
+                                <>
+                                    {tagline && <span className="block">{tagline}</span>}
+                                    <span
+                                        className="block mt-2 lg:mt-4 leading-none tracking-widest"
+                                        style={{ fontWeight: 900, textShadow: "0 2px 12px rgba(0,0,0,0.55)" }}
+                                    >
+                                        <span style={{ color: "#0F3C53" }}>{brandFirst}</span>
+                                        {brandRest && (
+                                            <span style={{ color: "#E64266" }} className="ml-2 lg:ml-3">{brandRest}</span>
+                                        )}
                                     </span>
-                                );
-                            });
+                                </>
+                            );
                         })()}
                     </motion.h1>
 
