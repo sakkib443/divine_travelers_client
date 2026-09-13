@@ -246,18 +246,28 @@ html[lang="bn"] body {
   line-height: 1.8;
 }
 
-html[lang="bn"] h1,
-html[lang="bn"] h2,
-html[lang="bn"] h3,
-html[lang="bn"] h4,
-html[lang="bn"] h5,
-html[lang="bn"] h6,
-html[lang="bn"] .font-heading {
+html[lang="bn"] :where(h1, h2, h3, h4, h5, h6, .font-heading) {
+  /* :where() keeps specificity at zero so Tailwind size utilities
+     (text-5xl, md:text-6xl...) always win: Bangla headings render at the
+     SAME size as English. NEVER set font-size here - a previous 0.92em
+     override was replacing the utility size and collapsing headings. */
   line-height: 1.4;
   letter-spacing: 0;
   text-transform: none;
-  font-size: 0.92em; /* Base size 8% বাড়ায় হেডিংগুলো যাতে অতিরিক্ত বড় না হয় তাই কম্পেনসেশন */
 }
+
+/* =====================================================
+   BANGLA READABILITY - muted text contrast
+   Hind Siliguri strokes are thinner than the Latin fonts, so
+   low-contrast gray/translucent text becomes hard to read in Bangla.
+   Each muted tone steps one shade darker in Bangla mode only.
+   :where() = zero specificity, so hover:/dark: variants still win.
+   ===================================================== */
+html[lang="bn"] :where(.text-gray-300) { color: #9ca3af; } /* -> gray-400 */
+html[lang="bn"] :where(.text-gray-400) { color: #6b7280; } /* -> gray-500 */
+html[lang="bn"] :where(.text-gray-500) { color: #4b5563; } /* -> gray-600 */
+html[lang="bn"] :where(.text-white\/50, .text-white\/60) { color: rgba(255, 255, 255, 0.82); }
+html[lang="bn"] :where(.text-white\/70, .text-white\/80) { color: rgba(255, 255, 255, 0.9); }
 
 /* Font utility classes */
 .font-heading {
@@ -1058,4 +1068,5 @@ html {
     100% { transform: translateX(-50%); }
   }
 }
+
 
