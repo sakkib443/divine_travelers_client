@@ -68,11 +68,11 @@ export function AirportField({ label, value, onChange, options, placeholder, ico
     return (
         <div ref={wrapRef} className="relative">
             <div
-                className={`${compact ? "h-[48px]" : "h-[52px]"} flex items-center gap-2.5 px-3.5 rounded-xl border border-gray-200 bg-white transition-all cursor-pointer focus-within:border-[#1D4ED8]`}
+                className={`${compact ? "min-h-[48px] py-1.5" : "min-h-[52px] py-2"} flex items-center gap-2.5 px-3.5 rounded-xl border border-gray-200 bg-white transition-all cursor-pointer focus-within:border-[#1D4ED8]`}
                 onClick={() => setOpen(true)}
             >
                 <div className="flex-1 min-w-0">
-                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1 }}>
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1.25 }}>
                         {label}
                     </p>
                     <input
@@ -81,7 +81,7 @@ export function AirportField({ label, value, onChange, options, placeholder, ico
                         onFocus={() => { setOpen(true); setQuery(""); }}
                         placeholder={value || placeholder}
                         className="w-full text-[13px] font-semibold text-gray-900 bg-transparent outline-none placeholder-gray-400"
-                        style={{ fontFamily: bnFont, boxShadow: "none", lineHeight: 1.2 }}
+                        style={{ fontFamily: bnFont, boxShadow: "none", lineHeight: 1.3 }}
                     />
                 </div>
                 {value && !open ? (
@@ -148,12 +148,12 @@ export function SwapButton({ onClick }) {
 export function PassengerStepper({ value, onChange, isBn, bnFont, compact = false }) {
     const n = Math.max(1, Math.min(9, Number(value) || 1));
     return (
-        <div className={`${compact ? "h-[48px]" : "h-[52px]"} flex items-center gap-2.5 px-3.5 rounded-xl border border-gray-200 bg-white focus-within:border-[#1D4ED8]`}>
+        <div className={`${compact ? "min-h-[48px] py-1.5" : "min-h-[52px] py-2"} flex items-center gap-2.5 px-3.5 rounded-xl border border-gray-200 bg-white focus-within:border-[#1D4ED8]`}>
             <div className="flex-1 min-w-0">
-                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1 }}>
+                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1.25 }}>
                     {isBn ? "যাত্রী" : "Passengers"}
                 </p>
-                <p className="text-[13px] font-semibold text-gray-900" style={{ lineHeight: 1.2 }}>{n}</p>
+                <p className="text-[13px] font-semibold text-gray-900" style={{ lineHeight: 1.3 }}>{n}</p>
             </div>
             <div className="flex items-center gap-1 flex-shrink-0">
                 <button type="button" onClick={() => onChange(Math.max(1, n - 1))} disabled={n <= 1}
@@ -192,14 +192,14 @@ export function CabinSelect({ value, onChange, isBn, bnFont, compact = false }) 
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className={`${compact ? "h-[48px]" : "h-[52px]"} w-full flex items-center justify-between px-3.5 rounded-xl border ${isOpen ? "border-[#1D4ED8]" : "border-gray-200 hover:border-gray-300"} bg-white cursor-pointer transition-all`}
+                className={`${compact ? "min-h-[48px] py-1.5" : "min-h-[52px] py-2"} w-full flex items-center justify-between px-3.5 rounded-xl border ${isOpen ? "border-[#1D4ED8]" : "border-gray-200 hover:border-gray-300"} bg-white cursor-pointer transition-all`}
             >
                 <div className="flex items-center gap-2.5 min-w-0">
                     <div className="flex-1 min-w-0 text-left">
-                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1 }}>
+                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1.25 }}>
                             {isBn ? "ক্লাস" : "Cabin class"}
                         </p>
-                        <p className="text-[13px] font-semibold text-gray-900 truncate" style={{ fontFamily: bnFont, lineHeight: 1.2 }}>
+                        <p className="text-[13px] font-semibold text-gray-900 truncate" style={{ fontFamily: bnFont, lineHeight: 1.3 }}>
                             {isBn ? selectedCabin.labelBn : selectedCabin.label}
                         </p>
                     </div>
@@ -237,9 +237,9 @@ export function CabinSelect({ value, onChange, isBn, bnFont, compact = false }) 
 export function FlightDateField({ label, value, onChange, isBn, bnFont, compact = false }) {
     const today = new Date().toISOString().split("T")[0];
     return (
-        <label className={`${compact ? "h-[48px]" : "h-[52px]"} flex items-center gap-2.5 px-3.5 rounded-xl border border-gray-200 bg-white cursor-pointer focus-within:border-[#1D4ED8]`}>
+        <label className={`${compact ? "min-h-[48px] py-1.5" : "min-h-[52px] py-2"} flex items-center gap-2.5 px-3.5 rounded-xl border border-gray-200 bg-white cursor-pointer focus-within:border-[#1D4ED8]`}>
             <div className="flex-1 min-w-0">
-                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1 }}>
+                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1.25 }}>
                     {label}
                 </p>
                 <input
@@ -248,7 +248,7 @@ export function FlightDateField({ label, value, onChange, isBn, bnFont, compact 
                     min={today}
                     onChange={(e) => onChange(e.target.value)}
                     className="w-full text-[13px] font-semibold text-gray-900 bg-transparent outline-none border-0 focus:outline-none focus:ring-0 focus:border-transparent p-0 cursor-pointer"
-                    style={{ colorScheme: "light", boxShadow: "none", lineHeight: 1.2 }}
+                    style={{ colorScheme: "light", boxShadow: "none", lineHeight: 1.3 }}
                 />
             </div>
         </label>

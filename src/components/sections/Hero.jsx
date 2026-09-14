@@ -50,7 +50,7 @@ const BRAND = {
 const FieldLabel = ({ children, bnFont }) => (
     <p
         className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1"
-        style={{ fontFamily: bnFont, lineHeight: 1 }}
+        style={{ fontFamily: bnFont, lineHeight: 1.25 }}
     >
         {children}
     </p>
@@ -127,13 +127,13 @@ function Dropdown({ icon, label, value, placeholder, options, onSelect, onClear,
                 ref={triggerRef}
                 type="button"
                 onClick={() => setOpen((v) => !v)}
-                className="w-full h-[52px] flex items-center gap-3 pl-4 pr-12 rounded-xl border border-gray-200 bg-white hover:border-[#0F3C53]/60 text-left cursor-pointer"
+                className="w-full min-h-[52px] py-2 flex items-center gap-3 pl-4 pr-12 rounded-xl border border-gray-200 bg-white hover:border-[#0F3C53]/60 text-left cursor-pointer"
             >
                 <div className="flex-1 min-w-0">
                     <FieldLabel bnFont={bnFont}>{label}</FieldLabel>
                     <p
                         className={`text-[13px] font-semibold truncate ${displayValue ? "text-gray-900" : "text-gray-400"}`}
-                        style={{ fontFamily: bnFont, lineHeight: 1.2 }}
+                        style={{ fontFamily: bnFont, lineHeight: 1.3 }}
                     >
                         {displayValue || placeholder}
                     </p>
@@ -262,7 +262,7 @@ function Dropdown({ icon, label, value, placeholder, options, onSelect, onClear,
 function DateField({ icon, label, value, onChange, bnFont }) {
     const today = new Date().toISOString().split("T")[0];
     return (
-        <label className="group h-[52px] flex items-center gap-3 px-4 rounded-xl border border-gray-200 bg-white hover:border-[#0F3C53]/60 hover:shadow-sm focus-within:border-[#0F3C53] transition-all cursor-pointer">
+        <label className="group min-h-[52px] py-2 flex items-center gap-3 px-4 rounded-xl border border-gray-200 bg-white hover:border-[#0F3C53]/60 hover:shadow-sm focus-within:border-[#0F3C53] transition-all cursor-pointer">
             <div className="flex-1 min-w-0">
                 <FieldLabel bnFont={bnFont}>{label}</FieldLabel>
                 <input
@@ -271,7 +271,7 @@ function DateField({ icon, label, value, onChange, bnFont }) {
                     onChange={(e) => onChange(e.target.value)}
                     min={today}
                     className="w-full text-[13px] font-semibold text-gray-900 bg-transparent outline-none border-0 focus:outline-none focus:ring-0 focus:border-transparent p-0 cursor-pointer"
-                    style={{ colorScheme: "light", boxShadow: "none", lineHeight: 1.2 }}
+                    style={{ colorScheme: "light", boxShadow: "none", lineHeight: 1.3 }}
                 />
             </div>
         </label>
