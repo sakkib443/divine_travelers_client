@@ -1,7 +1,7 @@
 "use client";
 
 // ===================================================================
-// Divine Travelers — Flight form building blocks
+// Divine Travellers — Flight form building blocks
 // Shared by the home-hero Flight tab and the /flight inquiry page so
 // both surfaces behave identically (autocomplete, pills, legs…).
 // ===================================================================

@@ -23,7 +23,7 @@ const INIT = {
     passengers: [mkP()], flights: [mkF()], fares: [mkFare()], grandTotal: "",
     classInfo: "Economy (T)", refund: "Non-Refundable", route: "One-way", duration: "",
     personalItem: "Laptop Bag", selfTransfer: "No", terminalChange: "No", codeshare: "No", ssrRemarks: "No",
-    agencyWebsite: "www.divinetravelers.com", agencyPhone: "XXXXXXX",
+    agencyWebsite: "www.divinetravellers.com", agencyPhone: "XXXXXXX",
     agencyEmail: "XXXXXXX", agencyOffice: "XXXXXXX",
     // যে ফাইল স্ক্যান করে টিকিটটা বানানো হয়েছে (save করার সময় জমা হয়)।
     sourceFile: "",
@@ -636,7 +636,7 @@ export default function TicketGeneratorPage() {
             // Add image covering the full page exactly — no offset, no shift
             pdf.addImage(canvas.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, imgW, imgH);
 
-            pdf.save(`eTicket_${form.bookingRef || "DivineTravelers"}.pdf`);
+            pdf.save(`eTicket_${form.bookingRef || "DivineTravellers"}.pdf`);
             toast.success("PDF downloaded!");
         } catch (e) { console.error(e); toast.error("PDF generation failed"); }
         finally { setGenerating(false); }
@@ -649,7 +649,7 @@ export default function TicketGeneratorPage() {
             const el = document.getElementById("ticket-print");
             const canvas = await html2canvas(el, { scale: 2, useCORS: true, backgroundColor: "#ffffff" });
             const a = document.createElement("a");
-            a.download = `eTicket_${form.bookingRef || "DivineTravelers"}.png`;
+            a.download = `eTicket_${form.bookingRef || "DivineTravellers"}.png`;
             a.href = canvas.toDataURL("image/png"); a.click();
             toast.success("Image downloaded!");
         } catch { toast.error("Image download failed"); }
@@ -916,7 +916,7 @@ export default function TicketGeneratorPage() {
                                     <span className="text-[9px] text-gray-400">(DB only — baked into GIF template)</span>
                                 </div>
                                 <div className="p-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                    <F label="Website" value={form.agencyWebsite} onChange={e => setForm(p => ({ ...p, agencyWebsite: e.target.value }))} placeholder="www.divinetravelers.com" />
+                                    <F label="Website" value={form.agencyWebsite} onChange={e => setForm(p => ({ ...p, agencyWebsite: e.target.value }))} placeholder="www.divinetravellers.com" />
                                     <F label="Phone" value={form.agencyPhone} onChange={e => setForm(p => ({ ...p, agencyPhone: e.target.value }))} placeholder="XXXXXXX" />
                                     <F label="Email" value={form.agencyEmail} onChange={e => setForm(p => ({ ...p, agencyEmail: e.target.value }))} placeholder="XXXXXXX" />
                                     <F label="Office" value={form.agencyOffice} onChange={e => setForm(p => ({ ...p, agencyOffice: e.target.value }))} placeholder="XXXXXXX" />

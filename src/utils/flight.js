@@ -1,5 +1,5 @@
 // ===================================================================
-// Divine Travelers — Flight inquiry shared data & helpers
+// Divine Travellers — Flight inquiry shared data & helpers
 // Used by the home-hero Flight tab, the /flight inquiry page and the
 // admin Flight Inquiry queue so all three speak the same shapes.
 // ===================================================================

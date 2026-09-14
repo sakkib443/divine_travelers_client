@@ -99,8 +99,8 @@ export default function ServiceCards() {
     const headingText = content?.heading?.[isBn ? 'bn' : 'en'] || (isBn ? "আপনার স্বপ্নের যাত্রার জন্য" : "Everything You Need for");
     const headingHighlightText = content?.headingHighlight?.[isBn ? 'bn' : 'en'] || (isBn ? "সেরা সেবা" : "Your Journey");
     const descriptionText = content?.description?.[isBn ? 'bn' : 'en'] || (isBn 
-        ? "ট্যুর প্যাকেজ থেকে শুরু করে হজ্জ, উমরাহ ও ফ্লাইট বুকিং — Divine Travelers-এ আপনার প্রতিটি ভ্রমণের প্রয়োজন পূরণ করা হয় বিশ্বস্ততার সাথে।" 
-        : "From curated tour packages to Hajj, Umrah, and flight bookings — Divine Travelers covers every step of your journey with trusted expertise.");
+        ? "ট্যুর প্যাকেজ থেকে শুরু করে হজ্জ, উমরাহ ও ফ্লাইট বুকিং — Divine Travellers-এ আপনার প্রতিটি ভ্রমণের প্রয়োজন পূরণ করা হয় বিশ্বস্ততার সাথে।" 
+        : "From curated tour packages to Hajj, Umrah, and flight bookings — Divine Travellers covers every step of your journey with trusted expertise.");
 
     const sectionLabel = isBn ? "আমাদের সেবাসমূহ" : "We Offers";
 

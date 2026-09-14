@@ -4,7 +4,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 
 const LanguageContext = createContext();
 
-// Comprehensive Translations for Divine Travelers home page sections
+// Comprehensive Translations for Divine Travellers home page sections
 const translations = {
     en: {
         // Top Info Bar
@@ -31,7 +31,7 @@ const translations = {
 
         // Hero Section
         openingHour: "Opening Hour: 9.30 AM To 8.30 PM",
-        heroTitle: "YOUR JOURNEY STARTS WITH\nDIVINE TRAVELERS",
+        heroTitle: "YOUR JOURNEY STARTS WITH\nDIVINE TRAVELLERS",
         bookAppointment: "Book Appointment",
         askQuestion: "Ask Question",
         hotline247: "Hotline 24/7",
@@ -81,10 +81,10 @@ const translations = {
         whyUs: "✦ Why Us",
         ourBenefits: "Our",
         benefitsHighlight: "Benefits",
-        benefitsDesc: "Why thousands of travelers choose Divine Travelers for their journey.",
+        benefitsDesc: "Why thousands of travelers choose Divine Travellers for their journey.",
 
         oneClickBooking: "ONE CLICK BOOKING.",
-        oneClickBookingDesc: "You can hassle-free and fast tour & travel package booking by Divine Travelers.",
+        oneClickBookingDesc: "You can hassle-free and fast tour & travel package booking by Divine Travellers.",
         learnMore: "Learn More",
 
         discountOffer: "DISCOUNT & OFFER.",
@@ -92,7 +92,7 @@ const translations = {
         viewOffers: "View Offers",
 
         localExpertise: "LOCAL EXPERTISE.",
-        localExpertiseDesc: "You can hassle-free and fast tour & travel package booking by Divine Travelers.",
+        localExpertiseDesc: "You can hassle-free and fast tour & travel package booking by Divine Travellers.",
         meetExperts: "Meet Experts",
 
         customizeNote: "You've Customize Your Travel Package by One Click.",
@@ -110,7 +110,7 @@ const translations = {
         realAgents: "Real Agents",
 
         // Why Choose Us Section
-        whyChooseUsTag: "✦ Why Divine Travelers",
+        whyChooseUsTag: "✦ Why Divine Travellers",
         whyChoose: "WHY CHOOSE",
         us: "US",
         whyChooseDesc: "With years of experience in travel services, we provide accurate guidance and expert support to make your dreams come true.",
@@ -142,11 +142,11 @@ const translations = {
         verifiedClient: "Verified Client",
 
         testimonial1Name: "Tanzina Rupa",
-        testimonial1Text: "Divine Travelers arranged my Singapore trip within a week. Their expert guidance made the entire process smooth and hassle-free!",
+        testimonial1Text: "Divine Travellers arranged my Singapore trip within a week. Their expert guidance made the entire process smooth and hassle-free!",
         testimonial2Name: "Mabia Rahman",
         testimonial2Text: "Amazing service! They handled my USA trip planning professionally. The team is very knowledgeable and responsive.",
         testimonial3Name: "Forkan Uddin",
-        testimonial3Text: "I planned my Canada study journey through Divine Travelers. They guided me through every step of the way.",
+        testimonial3Text: "I planned my Canada study journey through Divine Travellers. They guided me through every step of the way.",
 
         // Footer CTA
         readyToStart: "Ready to Start Your Journey?",
@@ -212,7 +212,7 @@ const translations = {
 
         // Hero Section
         openingHour: "কার্যকরী সময়: সকাল ৯.৩০ থেকে রাত ৮.৩০",
-        heroTitle: "আপনার যাত্রা শুরু হোক\nDivine Travelers -এর সাথে",
+        heroTitle: "আপনার যাত্রা শুরু হোক\nDivine Travellers -এর সাথে",
         bookAppointment: "অ্যাপয়েন্টমেন্ট বুক",
         askQuestion: "প্রশ্ন করুন",
         hotline247: "হটলাইন ২৪/৭",
@@ -262,10 +262,10 @@ const translations = {
         whyUs: "✦ কেন আমরা",
         ourBenefits: "আমাদের",
         benefitsHighlight: "সুবিধাসমূহ",
-        benefitsDesc: "কেন হাজার হাজার ভ্রমণকারী তাদের যাত্রার জন্য Divine Travelers বেছে নেন।",
+        benefitsDesc: "কেন হাজার হাজার ভ্রমণকারী তাদের যাত্রার জন্য Divine Travellers বেছে নেন।",
 
         oneClickBooking: "ওয়ান ক্লিক বুকিং।",
-        oneClickBookingDesc: "Divine Travelers-র মাধ্যমে ঝামেলামুক্ত ও দ্রুত ট্যুর ও ট্রাভেল প্যাকেজ বুকিং করুন।",
+        oneClickBookingDesc: "Divine Travellers-র মাধ্যমে ঝামেলামুক্ত ও দ্রুত ট্যুর ও ট্রাভেল প্যাকেজ বুকিং করুন।",
         learnMore: "আরো জানুন",
 
         discountOffer: "ডিসকাউন্ট ও অফার।",
@@ -273,7 +273,7 @@ const translations = {
         viewOffers: "অফার দেখুন",
 
         localExpertise: "স্থানীয় দক্ষতা।",
-        localExpertiseDesc: "Divine Travelers-র মাধ্যমে ঝামেলামুক্ত ও দ্রুত ট্যুর ও ট্রাভেল প্যাকেজ বুকিং করুন।",
+        localExpertiseDesc: "Divine Travellers-র মাধ্যমে ঝামেলামুক্ত ও দ্রুত ট্যুর ও ট্রাভেল প্যাকেজ বুকিং করুন।",
         meetExperts: "বিশেষজ্ঞদের সাথে দেখা করুন",
 
         customizeNote: "এক ক্লিকে আপনার ট্রাভেল প্যাকেজ কাস্টমাইজ করুন।",
@@ -291,7 +291,7 @@ const translations = {
         realAgents: "প্রকৃত এজেন্ট",
 
         // Why Choose Us Section
-        whyChooseUsTag: "✦ কেন Divine Travelers",
+        whyChooseUsTag: "✦ কেন Divine Travellers",
         whyChoose: "কেন বেছে নেবেন",
         us: "আমাদের",
         whyChooseDesc: "ভ্রমণ সেবায় বছরের পর বছরের অভিজ্ঞতা নিয়ে, আমরা আপনার স্বপ্ন পূরণে সঠিক নির্দেশনা ও বিশেষজ্ঞ সহায়তা প্রদান করি।",
@@ -323,11 +323,11 @@ const translations = {
         verifiedClient: "যাচাইকৃত ক্লায়েন্ট",
 
         testimonial1Name: "তানজিনা রুপা",
-        testimonial1Text: "Divine Travelers এক সপ্তাহের মধ্যে আমার সিঙ্গাপুর ট্রিপের ব্যবস্থা করেছে। তাদের বিশেষজ্ঞ গাইডেন্স পুরো প্রক্রিয়াটিকে সহজ ও ঝামেলামুক্ত করেছে!",
+        testimonial1Text: "Divine Travellers এক সপ্তাহের মধ্যে আমার সিঙ্গাপুর ট্রিপের ব্যবস্থা করেছে। তাদের বিশেষজ্ঞ গাইডেন্স পুরো প্রক্রিয়াটিকে সহজ ও ঝামেলামুক্ত করেছে!",
         testimonial2Name: "মাবিয়া রহমান",
         testimonial2Text: "অসাধারণ সেবা! তারা আমার USA ট্রিপ পরিকল্পনা পেশাদারভাবে পরিচালনা করেছে। টিমটি অত্যন্ত জ্ঞানী ও সহায়ক।",
         testimonial3Name: "ফোরকান উদ্দিন",
-        testimonial3Text: "আমি Divine Travelers-র মাধ্যমে কানাডায় পড়াশোনার যাত্রা পরিকল্পনা করেছি। তারা প্রতিটি ধাপে আমাকে গাইড করেছে।",
+        testimonial3Text: "আমি Divine Travellers-র মাধ্যমে কানাডায় পড়াশোনার যাত্রা পরিকল্পনা করেছি। তারা প্রতিটি ধাপে আমাকে গাইড করেছে।",
 
         // Footer CTA
         readyToStart: "আপনার যাত্রা শুরু করতে প্রস্তুত?",

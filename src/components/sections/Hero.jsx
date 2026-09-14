@@ -607,7 +607,7 @@ export default function Hero({ heroData }) {
                             // match an exact brand spelling. We anchor on the word "DIVINE":
                             // everything before it is the thin tagline, and "DIVINE" + the rest
                             // becomes the bold brand wordmark on its own line below — DIVINE in
-                            // teal, the following word(s) in pink. Works for TRAVELERS/TRAVELLERS
+                            // teal, the following word(s) in pink. Works for TRAVELLERS/TRAVELLERS
                             // and keeps the SSR fallback + DB value rendering identically (no flash).
                             const raw = (hd.heading ? bt(hd.heading) : t("heroTitle")).replace(/\s*\n\s*/g, " ").trim();
                             const m = raw.match(/divine/i);

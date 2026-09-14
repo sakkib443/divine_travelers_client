@@ -2,7 +2,7 @@
   "name": "divine-travelers-frontend",
   "version": "1.0.0",
   "private": true,
-  "description": "Divine Travelers - Travel & Visa Consultancy Website",
+  "description": "Divine Travellers - Travel & Visa Consultancy Website",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",

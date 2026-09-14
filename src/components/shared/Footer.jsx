@@ -86,8 +86,8 @@ export default function Footer() {
                 <div className="relative max-w-[1400px] mx-auto px-6 py-14 flex flex-col md:flex-row items-center justify-between gap-8">
                     <div>
                         <h3
-                            className="text-3xl md:text-4xl font-bold text-white mb-2"
-                            style={{ fontFamily: headingFont, textTransform: 'uppercase', letterSpacing: '0.02em' }}
+                            className="text-3xl md:text-4xl font-bold mb-2"
+                            style={{ fontFamily: headingFont, textTransform: 'uppercase', letterSpacing: '0.02em', color: '#E64266' }}
                         >
                             {t('readyToStart')}
                         </h3>
@@ -237,7 +237,7 @@ export default function Footer() {
                 {/* Bottom Bar */}
                 <div className="pt-6 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-xs text-gray-500" style={{ fontFamily: bnFont }}>
-                        © {currentYear} Divine Travelers. {t('allRightsReserved')}
+                        © {currentYear} Divine Travellers. {t('allRightsReserved')}
                     </p>
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-gray-500" style={{ fontFamily: bnFont }}>
                         <Link href="/about" className="hover:text-[#E64266] transition-colors">{t('aboutUs')}</Link>

@@ -412,7 +412,7 @@ export default function TourDetailsPage() {
                                 <div className="space-y-3">
                                     {[
                                         { icon: LuShieldCheck, text: isBn ? 'সম্পূর্ণ নিরাপদ ভ্রমণ' : '100% Safe Travel' },
-                                        { icon: LuUsers, text: isBn ? '১০,০০০+ খুশি ভ্রমণকারী' : '10,000+ Happy Travelers' },
+                                        { icon: LuUsers, text: isBn ? '১০,০০০+ খুশি ভ্রমণকারী' : '10,000+ Happy Travellers' },
                                         { icon: LuCamera, text: isBn ? 'পেশাদার গাইড' : 'Professional Guides' },
                                         { icon: LuStar, text: isBn ? '৫-তারা অভিজ্ঞতা' : '5-Star Experiences' },
                                     ].map((item, i) => (
@@ -547,7 +547,7 @@ export default function TourDetailsPage() {
                     <div className="flex flex-wrap justify-center gap-4">
                         <a
                             href={buildWhatsAppUrl(settings.whatsappNumber,
-                                `🌍 Tour Booking - Divine Travelers\n\n` +
+                                `🌍 Tour Booking - Divine Travellers\n\n` +
                                 `Tour: ${tour.title}\n` +
                                 `Destination: ${tour.destination}\n` +
                                 `Price: ${sym}${tour.price?.toLocaleString()} per person\n\n` +
@@ -580,7 +580,7 @@ export default function TourDetailsPage() {
                 serviceId={tour?._id || ""}
                 extraFields={[
                     { key: "travelDate", label: isBn ? "ভ্রমণের তারিখ" : "Travel Date", type: "date", required: true },
-                    { key: "persons", label: isBn ? "যাত্রীর সংখ্যা" : "Number of Travelers", type: "number", placeholder: "1", required: true },
+                    { key: "persons", label: isBn ? "যাত্রীর সংখ্যা" : "Number of Travellers", type: "number", placeholder: "1", required: true },
                 ]}
                 summary={{
                     image: tour?.image || tour?.gallery?.[0],

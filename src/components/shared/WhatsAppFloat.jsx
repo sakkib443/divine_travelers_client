@@ -67,7 +67,7 @@ export default function WhatsAppFloat() {
                                         <FaWhatsapp className="text-white w-5 h-5" />
                                     </div>
                                     <div>
-                                        <p className="text-[13px] font-bold text-gray-800 leading-tight">Divine Travelers Support</p>
+                                        <p className="text-[13px] font-bold text-gray-800 leading-tight">Divine Travellers Support</p>
                                         <p className="text-[11px] text-gray-500 mt-0.5 leading-snug">
                                             আমাদের সাথে WhatsApp এ যোগাযোগ করুন!
                                         </p>

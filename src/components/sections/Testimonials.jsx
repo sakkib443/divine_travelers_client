@@ -462,8 +462,8 @@ function ReviewModal({ onClose, onSuccess, token, user, isBn, bnFont }) {
                                 rows={4}
                                 placeholder={
                                     isBn
-                                        ? "Divine Travelers এর সাথে আপনার অভিজ্ঞতা লিখুন..."
-                                        : "Tell us about your experience with Divine Travelers..."
+                                        ? "Divine Travellers এর সাথে আপনার অভিজ্ঞতা লিখুন..."
+                                        : "Tell us about your experience with Divine Travellers..."
                                 }
                                 maxLength={1000}
                                 required

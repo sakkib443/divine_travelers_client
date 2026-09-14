@@ -1,5 +1,5 @@
 // ===================================================================
-// Divine Travelers - Shared Logo (Dynamic)
+// Divine Travellers - Shared Logo (Dynamic)
 // logoUrl is managed from Admin Dashboard → Design & Content → Branding
 // Falls back to /images/logo.png if no custom URL is set in DB.
 // ===================================================================
@@ -12,7 +12,7 @@ export default function Logo({
     className = "h-12 w-auto",
     dark = false,
     badgeClassName = "",
-    alt = "Divine Travelers",
+    alt = "Divine Travellers",
 }) {
     const { settings } = useSiteSettings();
     const src = settings?.logoUrl || "/images/logo.png";

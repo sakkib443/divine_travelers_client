@@ -15,13 +15,13 @@ html {
 }
 
 /* =====================================================
-   DIVINE TRAVELERS - DYNAMIC DESIGN SYSTEM
+   DIVINE TRAVELLERS - DYNAMIC DESIGN SYSTEM
    Colors: Orange (#E64266) + Blue (#0F3C53)
    Fonts: Cabinet Grotesk (Heading) + Syne (Eyebrow) + Rubik (Body)
    ===================================================== */
 
 /* =====================================================
-   CSS VARIABLES - Divine Travelers Brand Theme
+   CSS VARIABLES - Divine Travellers Brand Theme
    ===================================================== */
 :root {
   /* Fonts */
@@ -34,7 +34,7 @@ html {
 
   --font-primary: var(--font-primary-en);
   --font-heading: var(--font-heading-en);
-  /* Primary Colors (Divine Travelers Orange -> Now Pink-Red) */
+  /* Primary Colors (Divine Travellers Orange -> Now Pink-Red) */
   --color-primary: #E64266;
   --color-primary-dark: #C43454;
   --color-primary-light: #F26785;
@@ -42,7 +42,7 @@ html {
   --color-primary-20: rgba(230, 66, 102, 0.2);
   --color-primary-30: rgba(230, 66, 102, 0.3);
 
-  /* Secondary Colors (Divine Travelers Blue -> Now Deep Teal) */
+  /* Secondary Colors (Divine Travellers Blue -> Now Deep Teal) */
   --color-secondary: #0F3C53;
   --color-secondary-dark: #0A2B3C;
   --color-secondary-light: #175B7C;
@@ -199,11 +199,19 @@ textarea,
 :where(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-heading);
   font-weight: 700;
-  color: var(--color-gray-900);
   line-height: 1.2;
   letter-spacing: -0.01em;
   text-transform: none;
   cursor: text;
+}
+
+/* Default heading colour sits in the base layer so colour utilities
+   (text-white, text-[#E64266]...) always win over it. Unlayered, it was
+   forcing dark headings even on dark backgrounds. */
+@layer base {
+  :where(h1, h2, h3, h4, h5, h6) {
+    color: var(--color-gray-900);
+  }
 }
 
 /* Heading sizes removed — controlled by Tailwind utility classes per component */
@@ -263,9 +271,6 @@ html[lang="bn"] :where(h1, h2, h3, h4, h5, h6, .font-heading) {
    Each muted tone steps one shade darker in Bangla mode only.
    :where() = zero specificity, so hover:/dark: variants still win.
    ===================================================== */
-html[lang="bn"] :where(.text-gray-300) { color: #9ca3af; } /* -> gray-400 */
-html[lang="bn"] :where(.text-gray-400) { color: #6b7280; } /* -> gray-500 */
-html[lang="bn"] :where(.text-gray-500) { color: #4b5563; } /* -> gray-600 */
 html[lang="bn"] :where(.text-white\/50, .text-white\/60) { color: rgba(255, 255, 255, 0.82); }
 html[lang="bn"] :where(.text-white\/70, .text-white\/80) { color: rgba(255, 255, 255, 0.9); }
 
@@ -593,7 +598,7 @@ select:focus {
 }
 
 .input::placeholder {
-  color: var(--color-gray-400);
+  color: #6b7280;
 }
 
 /* Remove the browser autofill blue/yellow wash (keeps autofill working) */
@@ -995,7 +1000,7 @@ html {
 }
 
 /* =====================================================
-   DIVINE TRAVELERS SPECIFIC UTILITIES
+   DIVINE TRAVELLERS SPECIFIC UTILITIES
    ===================================================== */
 
 /* Visa Card Accent Bar */
@@ -1083,10 +1088,10 @@ html {
       are deliberately left alone - those are titles.
    ===================================================== */
 :root {
-  --text-xs: 0.875rem;              /* 12px -> 14px */
-  --text-xs--line-height: 1.25rem;
-  --text-sm: 1rem;                  /* 14px -> 16px */
-  --text-sm--line-height: 1.5rem;
+  --text-xs: 1rem;                  /* 12px -> 16px */
+  --text-xs--line-height: 1.5rem;
+  --text-sm: 1.125rem;              /* 14px -> 18px */
+  --text-sm--line-height: 1.625rem;
   --text-base: 1.125rem;            /* 16px -> 18px */
   --text-base--line-height: 1.625rem;
   --text-lg: 1.25rem;               /* 18px -> 20px */
@@ -1094,14 +1099,14 @@ html {
 }
 
 /* Arbitrary px text utilities: each one +2px */
-.text-\[8px\]    { font-size: 10px; }
-.text-\[9px\]    { font-size: 11px; }
-.text-\[9\.5px\]  { font-size: 11.5px; }
-.text-\[10px\]   { font-size: 12px; }
-.text-\[11px\]   { font-size: 13px; }
-.text-\[12px\]   { font-size: 14px; }
-.text-\[12\.5px\] { font-size: 14.5px; }
-.text-\[13px\]   { font-size: 15px; }
+.text-\[8px\]    { font-size: 12px; }
+.text-\[9px\]    { font-size: 13px; }
+.text-\[9\.5px\]  { font-size: 13.5px; }
+.text-\[10px\]   { font-size: 14px; }
+.text-\[11px\]   { font-size: 15px; }
+.text-\[12px\]   { font-size: 16px; }
+.text-\[12\.5px\] { font-size: 16.5px; }
+.text-\[13px\]   { font-size: 17px; }
 .text-\[14px\]   { font-size: 16px; }
 .text-\[15px\]   { font-size: 17px; }
 .text-\[16px\]   { font-size: 18px; }
@@ -1111,7 +1116,7 @@ html {
 /* The handful of responsive arbitrary variants in the code,
    re-declared so the bump respects their breakpoints too. */
 @media (min-width: 640px) {
-  .sm\:text-\[12px\] { font-size: 14px; }
+  .sm\:text-\[12px\] { font-size: 16px; }
 }
 @media (min-width: 768px) {
   .md\:text-\[14px\] { font-size: 16px; }
@@ -1119,6 +1124,31 @@ html {
   .md\:text-\[16px\] { font-size: 18px; }
 }
 @media (min-width: 1024px) {
-  .lg\:text-\[10px\] { font-size: 12px; }
-  .lg\:text-\[11px\] { font-size: 13px; }
+  .lg\:text-\[10px\] { font-size: 14px; }
+  .lg\:text-\[11px\] { font-size: 15px; }
+}
+
+/* =====================================================
+   GLOBAL GRAY TEXT DARKENING
+   Client request: every gray text reads as near-black
+   charcoal - dark, but clearly not pure black.
+   ===================================================== */
+@layer utilities {
+  .text-gray-300 { color: #6b7280; } /* -> gray-500 */
+  .text-gray-400 { color: #4b5563; } /* -> gray-600 */
+  .text-gray-500 { color: #374151; } /* -> gray-700 */
+  .text-gray-600 { color: #1f2937; } /* -> gray-800 */
+
+  /* Placeholders: darker too, but kept clearly lighter than typed text */
+  .placeholder-gray-400::placeholder,
+  .placeholder\:text-gray-400::placeholder { color: #6b7280; }
+}
+
+/* Default placeholder (inputs without a placeholder utility): follows the
+   input's own text colour at 70% so it darkens on light fields yet stays
+   light on dark fields. Base layer, so utilities still override it. */
+@layer base {
+  ::placeholder {
+    color: color-mix(in oklab, currentcolor 70%, transparent);
+  }
 }

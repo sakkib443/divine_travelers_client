@@ -1,7 +1,7 @@
 "use client";
 
 // ===================================================================
-// Divine Travelers - Dynamic Favicon Injector
+// Divine Travellers - Dynamic Favicon Injector
 // Reads faviconUrl from SiteSettingsContext and injects a <link> tag
 // into the document head, overriding the static favicon from layout.js.
 // Falls back to /favicon.png if no custom URL is set in DB.

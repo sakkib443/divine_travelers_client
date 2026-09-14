@@ -22,7 +22,7 @@ const defaultTheme = {
     bodyFont: "Poppins",
 
     // Logo
-    logoText: "Divine Travelers",
+    logoText: "Divine Travellers",
     logoImage: "",
 
     // Dark Mode

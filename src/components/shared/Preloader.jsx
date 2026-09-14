@@ -1,7 +1,7 @@
 "use client";
 
 // ===================================================================
-// Divine Travelers — Preloader
+// Divine Travellers — Preloader
 // Clean, modern brand loader: deep-navy backdrop, soft aura, a rotating
 // gradient ring around the logo, and a refined progress bar.
 // Brand colors: Orange (#E64266) + Blue (#0F3C53).

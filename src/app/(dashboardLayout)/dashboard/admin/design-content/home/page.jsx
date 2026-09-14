@@ -215,7 +215,7 @@ function HeroEditor({ data, setData }) {
 
             <SectionCard title="Hero Text" desc="The badge pill and the big heading over the pictures">
                 <BilingualField label="Badge Text" data={d.badgeText} onChange={(v) => set("badgeText", v)} placeholder="Open: Sat–Thu | 9:30am–8:30pm" />
-                <BilingualField label="Heading" data={d.heading} onChange={(v) => set("heading", v)} placeholder="YOUR JOURNEY STARTS WITH DIVINE TRAVELERS" />
+                <BilingualField label="Heading" data={d.heading} onChange={(v) => set("heading", v)} placeholder="YOUR JOURNEY STARTS WITH DIVINE TRAVELLERS" />
             </SectionCard>
 
 

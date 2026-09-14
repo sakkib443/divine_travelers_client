@@ -61,7 +61,7 @@ export default function BlogPostPage() {
 
     const authorName = blog.author?.firstName
         ? `${blog.author.firstName} ${blog.author.lastName || ''}`
-        : 'Divine Travelers Team';
+        : 'Divine Travellers Team';
 
     const authorInitials = authorName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
 

@@ -234,7 +234,7 @@ function BlogCard({ blog, index, isBn }) {
                 <div className="flex items-center gap-3 text-[15px] text-gray-900 mb-3" style={{ fontFamily: 'var(--font-primary)' }}>
                     <span>{new Date(blog.publishedAt || blog.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                     <span className="w-1 h-1 rounded-full bg-gray-900 inline-block" />
-                    <span>{blog.author?.firstName ? `${blog.author.firstName} ${blog.author.lastName || ''}` : 'Divine Travelers'}</span>
+                    <span>{blog.author?.firstName ? `${blog.author.firstName} ${blog.author.lastName || ''}` : 'Divine Travellers'}</span>
                 </div>
 
                 {/* Title + ↗ arrow */}

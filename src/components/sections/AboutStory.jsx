@@ -24,8 +24,8 @@ export default function AboutStory() {
     }, []);
 
     // Defaults (Fallback)
-    const titleText = content?.heading?.[isBn ? 'bn' : 'en'] || (isBn ? "ডিভাইন ট্রাভেলার্স হলো ট্যুর খুঁজে পাওয়ার সেরা উপায়। চলুন সবচেয়ে স্মরণীয় অ্যাডভেঞ্চার তৈরি করি।" : "Divine Travelers is the best way to find travel tours. Let's make the most memorable adventures.");
-    const descriptionText = content?.description?.[isBn ? 'bn' : 'en'] || (isBn ? "ডিভাইন ট্রাভেলার্স হলো বিশ্ববিখ্যাত গন্তব্যগুলোতে আরামদায়ক ভ্রমণ এবং সেরা আবাসনে নিশ্চিন্তে রাত্রিযাপন করার মাধ্যমে একটি রোমাঞ্চকর আউটডোর অভিজ্ঞতা অর্জনের অবিশ্বাস্য উপায়।" : "Divine Travelers is an incredible way to have an adventurous outdoor experience of world renowned destinations while traveling with comfort and sleeping soundly in the best accommodations.");
+    const titleText = content?.heading?.[isBn ? 'bn' : 'en'] || (isBn ? "ডিভাইন ট্রাভেলার্স হলো ট্যুর খুঁজে পাওয়ার সেরা উপায়। চলুন সবচেয়ে স্মরণীয় অ্যাডভেঞ্চার তৈরি করি।" : "Divine Travellers is the best way to find travel tours. Let's make the most memorable adventures.");
+    const descriptionText = content?.description?.[isBn ? 'bn' : 'en'] || (isBn ? "ডিভাইন ট্রাভেলার্স হলো বিশ্ববিখ্যাত গন্তব্যগুলোতে আরামদায়ক ভ্রমণ এবং সেরা আবাসনে নিশ্চিন্তে রাত্রিযাপন করার মাধ্যমে একটি রোমাঞ্চকর আউটডোর অভিজ্ঞতা অর্জনের অবিশ্বাস্য উপায়।" : "Divine Travellers is an incredible way to have an adventurous outdoor experience of world renowned destinations while traveling with comfort and sleeping soundly in the best accommodations.");
     const img1 = content?.image1 || "/hero.jpg";
     const img2 = content?.image2 || "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&q=80";
 

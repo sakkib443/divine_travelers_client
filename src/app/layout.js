@@ -42,24 +42,24 @@ const bungee = Bungee_Hairline({
 
 export const metadata = {
   title: {
-    template: "%s | Divine Travelers",
-    default: "Divine Travelers | Journey Beyond Borders",
+    template: "%s | Divine Travellers",
+    default: "Divine Travellers | Journey Beyond Borders",
   },
   description:
-    "Divine Travelers - Your trusted partner for flight booking, Hajj & Umrah packages, and tour planning.",
+    "Divine Travellers - Your trusted partner for flight booking, Hajj & Umrah packages, and tour planning.",
   keywords: [
     "flight booking",
     "hajj umrah",
     "tour packages",
     "Bangladesh travel",
-    "Divine Travelers",
+    "Divine Travellers",
   ],
-  authors: [{ name: "Divine Travelers" }],
-  creator: "Divine Travelers",
+  authors: [{ name: "Divine Travellers" }],
+  creator: "Divine Travellers",
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Divine Travelers",
+    siteName: "Divine Travellers",
   },
   twitter: {
     card: "summary_large_image",

@@ -30,7 +30,7 @@ const OWNER = {
     titleBn: "প্রতিষ্ঠাতা ও ব্যবস্থাপনা পরিচালক",
     photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80",
     message:
-        "When I founded Divine Travelers, the vision was simple — to make international travel and migration honest, transparent, and accessible for every Bangladeshi. Thousands of successful journeys later, that same promise still drives everything we do. Your dream destination is our mission.",
+        "When I founded Divine Travellers, the vision was simple — to make international travel and migration honest, transparent, and accessible for every Bangladeshi. Thousands of successful journeys later, that same promise still drives everything we do. Your dream destination is our mission.",
     messageBn:
         "ডিভাইন ট্রাভেলার্স প্রতিষ্ঠার সময় আমার স্বপ্ন ছিল সহজ — প্রতিটি বাংলাদেশির জন্য আন্তর্জাতিক ভ্রমণ ও মাইগ্রেশনকে সৎ, স্বচ্ছ ও সহজলভ্য করা। আজ হাজারো সফল যাত্রার পরও সেই প্রতিশ্রুতিই আমাদের প্রতিটি কাজের চালিকাশক্তি। আপনার স্বপ্নের গন্তব্যই আমাদের লক্ষ্য।",
 };
@@ -184,7 +184,7 @@ export default function AboutPage() {
                             {T("Our Team", "আমাদের টিম")}
                         </span>
                         <h2 className="font-black uppercase tracking-tight mt-3 mb-4" style={{ fontFamily: heading, color: "#021E14", fontSize: "clamp(1.9rem, 4vw, 3rem)" }}>
-                            {T("Meet the People Behind Divine Travelers", "ডিভাইন ট্রাভেলার্সের পেছনের মানুষগুলো")}
+                            {T("Meet the People Behind Divine Travellers", "ডিভাইন ট্রাভেলার্সের পেছনের মানুষগুলো")}
                         </h2>
                         <p className="text-gray-500">
                             {T("A dedicated team working every day to make your journey effortless.", "প্রতিদিন আপনার যাত্রাকে সহজ করতে নিবেদিত একটি টিম।")}
@@ -239,7 +239,7 @@ export default function AboutPage() {
                             {T("Built on Trust & Results", "বিশ্বাস ও ফলাফলের উপর গড়া")}
                         </h2>
                         <p className="text-gray-500">
-                            {T("What makes thousands of clients choose Divine Travelers again and again.", "যে কারণে হাজারো ক্লায়েন্ট বারবার ডিভাইন ট্রাভেলার্সকে বেছে নেন।")}
+                            {T("What makes thousands of clients choose Divine Travellers again and again.", "যে কারণে হাজারো ক্লায়েন্ট বারবার ডিভাইন ট্রাভেলার্সকে বেছে নেন।")}
                         </p>
                     </motion.div>
 
