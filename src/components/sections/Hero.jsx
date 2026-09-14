@@ -49,8 +49,8 @@ const BRAND = {
 // ─── Field Label ─────────────────────────────────────────────────────────────
 const FieldLabel = ({ children, bnFont }) => (
     <p
-        className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] leading-none mb-1.5"
-        style={{ fontFamily: bnFont }}
+        className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1"
+        style={{ fontFamily: bnFont, lineHeight: 1 }}
     >
         {children}
     </p>
@@ -132,8 +132,8 @@ function Dropdown({ icon, label, value, placeholder, options, onSelect, onClear,
                 <div className="flex-1 min-w-0">
                     <FieldLabel bnFont={bnFont}>{label}</FieldLabel>
                     <p
-                        className={`text-[13px] font-semibold leading-snug truncate ${displayValue ? "text-gray-900" : "text-gray-400"}`}
-                        style={{ fontFamily: bnFont }}
+                        className={`text-[13px] font-semibold truncate ${displayValue ? "text-gray-900" : "text-gray-400"}`}
+                        style={{ fontFamily: bnFont, lineHeight: 1.2 }}
                     >
                         {displayValue || placeholder}
                     </p>
@@ -270,8 +270,8 @@ function DateField({ icon, label, value, onChange, bnFont }) {
                     value={value}
                     onChange={(e) => onChange(e.target.value)}
                     min={today}
-                    className="w-full text-[13px] font-semibold text-gray-900 bg-transparent outline-none border-0 focus:outline-none focus:ring-0 focus:border-transparent p-0 cursor-pointer leading-snug"
-                    style={{ colorScheme: "light", boxShadow: "none" }}
+                    className="w-full text-[13px] font-semibold text-gray-900 bg-transparent outline-none border-0 focus:outline-none focus:ring-0 focus:border-transparent p-0 cursor-pointer"
+                    style={{ colorScheme: "light", boxShadow: "none", lineHeight: 1.2 }}
                 />
             </div>
         </label>

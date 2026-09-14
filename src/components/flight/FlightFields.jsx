@@ -72,7 +72,7 @@ export function AirportField({ label, value, onChange, options, placeholder, ico
                 onClick={() => setOpen(true)}
             >
                 <div className="flex-1 min-w-0">
-                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] leading-none mb-1" style={{ fontFamily: bnFont }}>
+                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1 }}>
                         {label}
                     </p>
                     <input
@@ -80,8 +80,8 @@ export function AirportField({ label, value, onChange, options, placeholder, ico
                         onChange={(e) => { setQuery(e.target.value); if (!open) setOpen(true); }}
                         onFocus={() => { setOpen(true); setQuery(""); }}
                         placeholder={value || placeholder}
-                        className="w-full text-[13px] font-semibold text-gray-900 bg-transparent outline-none placeholder-gray-400 leading-snug"
-                        style={{ fontFamily: bnFont, boxShadow: "none" }}
+                        className="w-full text-[13px] font-semibold text-gray-900 bg-transparent outline-none placeholder-gray-400"
+                        style={{ fontFamily: bnFont, boxShadow: "none", lineHeight: 1.2 }}
                     />
                 </div>
                 {value && !open ? (
@@ -150,10 +150,10 @@ export function PassengerStepper({ value, onChange, isBn, bnFont, compact = fals
     return (
         <div className={`${compact ? "h-[48px]" : "h-[52px]"} flex items-center gap-2.5 px-3.5 rounded-xl border border-gray-200 bg-white focus-within:border-[#1D4ED8]`}>
             <div className="flex-1 min-w-0">
-                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] leading-none mb-1" style={{ fontFamily: bnFont }}>
+                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1 }}>
                     {isBn ? "যাত্রী" : "Passengers"}
                 </p>
-                <p className="text-[13px] font-semibold text-gray-900 leading-snug">{n}</p>
+                <p className="text-[13px] font-semibold text-gray-900" style={{ lineHeight: 1.2 }}>{n}</p>
             </div>
             <div className="flex items-center gap-1 flex-shrink-0">
                 <button type="button" onClick={() => onChange(Math.max(1, n - 1))} disabled={n <= 1}
@@ -196,10 +196,10 @@ export function CabinSelect({ value, onChange, isBn, bnFont, compact = false }) 
             >
                 <div className="flex items-center gap-2.5 min-w-0">
                     <div className="flex-1 min-w-0 text-left">
-                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] leading-none mb-1" style={{ fontFamily: bnFont }}>
+                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1 }}>
                             {isBn ? "ক্লাস" : "Cabin class"}
                         </p>
-                        <p className="text-[13px] font-semibold text-gray-900 leading-snug truncate" style={{ fontFamily: bnFont }}>
+                        <p className="text-[13px] font-semibold text-gray-900 truncate" style={{ fontFamily: bnFont, lineHeight: 1.2 }}>
                             {isBn ? selectedCabin.labelBn : selectedCabin.label}
                         </p>
                     </div>
@@ -239,7 +239,7 @@ export function FlightDateField({ label, value, onChange, isBn, bnFont, compact 
     return (
         <label className={`${compact ? "h-[48px]" : "h-[52px]"} flex items-center gap-2.5 px-3.5 rounded-xl border border-gray-200 bg-white cursor-pointer focus-within:border-[#1D4ED8]`}>
             <div className="flex-1 min-w-0">
-                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] leading-none mb-1" style={{ fontFamily: bnFont }}>
+                <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.08em] mb-1" style={{ fontFamily: bnFont, lineHeight: 1 }}>
                     {label}
                 </p>
                 <input
@@ -247,8 +247,8 @@ export function FlightDateField({ label, value, onChange, isBn, bnFont, compact 
                     value={value}
                     min={today}
                     onChange={(e) => onChange(e.target.value)}
-                    className="w-full text-[13px] font-semibold text-gray-900 bg-transparent outline-none border-0 focus:outline-none focus:ring-0 focus:border-transparent p-0 cursor-pointer leading-snug"
-                    style={{ colorScheme: "light", boxShadow: "none" }}
+                    className="w-full text-[13px] font-semibold text-gray-900 bg-transparent outline-none border-0 focus:outline-none focus:ring-0 focus:border-transparent p-0 cursor-pointer"
+                    style={{ colorScheme: "light", boxShadow: "none", lineHeight: 1.2 }}
                 />
             </div>
         </label>
