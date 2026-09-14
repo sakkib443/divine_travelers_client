@@ -573,16 +573,16 @@ export default function Hero({ heroData }) {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-black/35 backdrop-blur-xl border border-white/25 ring-1 ring-white/10 shadow-lg shadow-black/30 mb-5"
+                        className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-black/45 backdrop-blur-xl border border-white/25 ring-1 ring-white/10 shadow-lg shadow-black/30 mb-5"
                     >
-                        <span className="relative flex h-2 w-2">
+                        <span className="relative flex h-2.5 w-2.5">
                             <span className="absolute inline-flex h-full w-full rounded-full bg-[#E64266] opacity-75 animate-ping" />
-                            <span className="relative inline-flex h-2 w-2 rounded-full bg-[#E64266]" />
+                            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#E64266]" />
                         </span>
-                        <LuClock className="w-3.5 h-3.5" style={{ color: "#E64266" }} />
+                        <LuClock className="w-4 h-4" style={{ color: "#E64266" }} />
                         <span
-                            className="text-white text-[10px] lg:text-[11px] font-semibold tracking-wider uppercase"
-                            style={{ fontFamily: "var(--next-font-poppins), 'Poppins', sans-serif" }}
+                            className="text-white text-[13px] lg:text-[15px] font-semibold tracking-wide uppercase whitespace-nowrap"
+                            style={{ fontFamily: "var(--next-font-poppins), 'Poppins', sans-serif", textShadow: "0 1px 6px rgba(0,0,0,0.6)" }}
                         >
                             {hd.badgeText ? bt(hd.badgeText) : t("openingHour")}
                         </span>
