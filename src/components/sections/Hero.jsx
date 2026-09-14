@@ -573,7 +573,7 @@ export default function Hero({ heroData }) {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/15 backdrop-blur-xl border border-white/40 ring-1 ring-white/10 shadow-lg shadow-black/25 mb-5"
+                        className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-black/35 backdrop-blur-xl border border-white/25 ring-1 ring-white/10 shadow-lg shadow-black/30 mb-5"
                     >
                         <span className="relative flex h-2 w-2">
                             <span className="absolute inline-flex h-full w-full rounded-full bg-[#E64266] opacity-75 animate-ping" />
