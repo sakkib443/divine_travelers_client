@@ -129,6 +129,7 @@ const menuItems = [
         icon: FiLayout,
         children: [
             { name: "Home Page", href: "/dashboard/admin/design-content/home", icon: FiHome },
+            { name: "About Page", href: "/dashboard/admin/design-content/about", icon: FiUsers },
             { name: "Logo & Favicon", href: "/dashboard/admin/design-content/branding", icon: FiImage },
             { name: "Contact Page", href: "/dashboard/admin/design-content/contact", icon: FiPhone },
             { name: "Social Links", href: "/dashboard/admin/design-content/social", icon: FiGlobe },

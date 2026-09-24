@@ -7,21 +7,27 @@ import { useLanguage } from "@/context/LanguageContext";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-export default function AboutStory() {
+// `content` is passed in by the About page, which already loads every
+// section in one request. The Home page renders this without a prop, so we
+// fetch the section ourselves in that case.
+export default function AboutStory({ content: contentProp = null }) {
     const { language } = useLanguage();
     const isBn = language === "bn";
     const font = isBn ? "Hind Siliguri, sans-serif" : "Poppins, sans-serif";
     const headingFont = isBn ? "Hind Siliguri, sans-serif" : "var(--font-heading)";
     const T = (en, bn) => (isBn ? bn : en);
 
-    const [content, setContent] = useState(null);
+    const [fetched, setFetched] = useState(null);
 
     useEffect(() => {
+        if (contentProp) return; // the parent page already loaded it
         fetch(`${API_BASE}/api/home-content/about`)
             .then((r) => r.json())
-            .then((d) => setContent(d?.data?.data || null))
+            .then((d) => setFetched(d?.data?.data || null))
             .catch(() => {});
-    }, []);
+    }, [contentProp]);
+
+    const content = contentProp || fetched;
 
     // Defaults (Fallback)
     const titleText = content?.heading?.[isBn ? 'bn' : 'en'] || (isBn ? "ডিভাইন ট্রাভেলার্স হলো ট্যুর খুঁজে পাওয়ার সেরা উপায়। চলুন সবচেয়ে স্মরণীয় অ্যাডভেঞ্চার তৈরি করি।" : "Divine Travellers is the best way to find travel tours. Let's make the most memorable adventures.");
