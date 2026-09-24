@@ -17,13 +17,16 @@ import ImageInput from "@/components/shared/ImageInput";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-const SECTIONS = ["about", "aboutFounder", "aboutTeam", "aboutWhy", "aboutCta"];
+// The top "Story" block is the shared `about` section, edited under
+// Home Page → About Us (it appears on both pages). It is deliberately NOT a
+// tab here to avoid two places editing the same content — only the
+// About-page-only sections live below.
+const SECTIONS = ["aboutFounder", "aboutTeam", "aboutWhy", "aboutCta"];
 const TAB_LABELS = {
-    about: "1. Story",
-    aboutFounder: "2. Founder",
-    aboutTeam: "3. Team",
-    aboutWhy: "4. Why Choose Us",
-    aboutCta: "5. Call to Action",
+    aboutFounder: "1. Founder",
+    aboutTeam: "2. Team",
+    aboutWhy: "3. Why Choose Us",
+    aboutCta: "4. Call to Action",
 };
 
 // ─── Reusable field components (same look as the Home Page editor) ───
@@ -138,55 +141,8 @@ const move = (arr, from, to) => {
     return next;
 };
 
-// ─── 1. Story (shared with the Home page) ────────────────────────────
-function StoryEditor({ data, setData }) {
-    const d = data || {};
-    const features = d.features || [];
-    const set = (k, v) => setData({ ...d, [k]: v });
-    const setFeature = (idx, k, v) => { const f = [...features]; f[idx] = { ...f[idx], [k]: v }; set("features", f); };
-
-    return (
-        <>
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-5">
-                <p className="text-[13px] text-amber-800">
-                    <strong>Note:</strong> this block also appears on the Home page, so editing it changes both pages.
-                </p>
-            </div>
-
-            <VisibilityToggle value={d.isActive} onChange={(v) => set("isActive", v)} />
-
-            <SectionCard title="Heading & Text" desc="Main text shown on the right side">
-                <BilingualField label="Main Heading" data={d.heading} onChange={(v) => set("heading", v)} />
-                <BilingualField label="Description" data={d.description} onChange={(v) => set("description", v)} textarea />
-            </SectionCard>
-
-            <SectionCard title="Images" desc="The two overlapping images on the left side">
-                <ImageField label="Main Image (Bottom)" value={d.image1} onChange={(v) => set("image1", v)} help="Portrait or large landscape" />
-                <ImageField label="Square Image (Top Left)" value={d.image2} onChange={(v) => set("image2", v)} help="Square format (e.g. 600x600)" />
-            </SectionCard>
-
-            <section className="bg-white rounded-xl border border-gray-100 p-6 mb-5">
-                <div className="mb-5">
-                    <h2 className="text-lg font-bold text-gray-900">Highlights</h2>
-                    <p className="text-xs text-gray-500">The two highlights under the description (e.g. 2018, 50+)</p>
-                </div>
-                <div className="space-y-4">
-                    {features.map((feature, idx) => (
-                        <div key={idx} className="border border-gray-100 rounded-xl p-4">
-                            <span className="text-sm font-bold text-gray-700 block mb-3">Highlight #{idx + 1}</span>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                <Field label="Large Value" value={feature.value} onChange={(v) => setFeature(idx, "value", v)} placeholder="e.g. 2018 or 50+" />
-                                <Field label="Icon Name" value={feature.icon} onChange={(v) => setFeature(idx, "icon", v)} placeholder="LuGlobe" help="Any Lucide icon name, e.g. LuGlobe, LuMap" />
-                                <BilingualField label="Title" data={feature.title} onChange={(v) => setFeature(idx, "title", v)} />
-                                <BilingualField label="Subtitle" data={feature.subtitle} onChange={(v) => setFeature(idx, "subtitle", v)} textarea />
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
-        </>
-    );
-}
+// The Story block (the shared `about` section) is edited under
+// Home Page → About Us, so it is intentionally not duplicated here.
 
 // ─── 2. Founder message ──────────────────────────────────────────────
 function FounderEditor({ data, setData }) {
@@ -355,7 +311,7 @@ function CtaEditor({ data, setData }) {
 // ─── Main page ───────────────────────────────────────────────────────
 export default function AboutContentPage() {
     const token = useSelector(selectToken);
-    const [activeTab, setActiveTab] = useState("about");
+    const [activeTab, setActiveTab] = useState("aboutFounder");
     const [allData, setAllData] = useState({});
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
@@ -459,8 +415,17 @@ export default function AboutContentPage() {
                 ))}
             </div>
 
+            {/* The first (Story) section of this page is the shared About block,
+                managed from Home Page → About Us. */}
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5">
+                <p className="text-[13px] text-blue-800">
+                    <strong>Note:</strong> the top “Story” section of the About page is shared with the Home page.
+                    Edit it under <a href="/dashboard/admin/design-content/home" className="font-semibold underline">Home Page → About Us</a>.
+                    The sections below appear only on the About page.
+                </p>
+            </div>
+
             {/* Editor */}
-            {activeTab === "about" && <StoryEditor data={allData.about} setData={(d) => updateData("about", d)} />}
             {activeTab === "aboutFounder" && <FounderEditor data={allData.aboutFounder} setData={(d) => updateData("aboutFounder", d)} />}
             {activeTab === "aboutTeam" && <TeamEditor data={allData.aboutTeam} setData={(d) => updateData("aboutTeam", d)} />}
             {activeTab === "aboutWhy" && <WhyEditor data={allData.aboutWhy} setData={(d) => updateData("aboutWhy", d)} />}
