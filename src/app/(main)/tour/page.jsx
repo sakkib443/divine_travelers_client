@@ -42,7 +42,6 @@ const tourCategories = [
     { en: "Nature", bn: "প্রকৃতি", key: "nature" },
     { en: "Culture", bn: "সংস্কৃতি", key: "culture" },
     { en: "Historical", bn: "ইতিহাস", key: "historical" },
-    { en: "International", bn: "আন্তর্জাতিক", key: "international" },
     { en: "Luxury", bn: "বিলাসবহুল", key: "luxury" },
     { en: "Hill Station", bn: "পাহাড়", key: "hill" },
     { en: "Religious", bn: "ধর্মীয়", key: "religious" },

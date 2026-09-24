@@ -23,7 +23,6 @@ const categories = [
     { value: "city", label: "City Tour" },
     { value: "culture", label: "Culture" },
     { value: "hill", label: "Hill Station" },
-    { value: "international", label: "International" },
     { value: "luxury", label: "Luxury" },
     { value: "religious", label: "Religious" },
     { value: "nature", label: "Nature" },
@@ -310,11 +309,12 @@ function TourForm() {
                             <input name="durationBn" value={formData.durationBn} onChange={handleChange} className={inputClass} placeholder="e.g. ০৭ দিন" />
                         </div>
                         <div>
-                            <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Location Type *</label>
+                            <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Location Type * <span className="text-[#E64266]">(Domestic / International)</span></label>
                             <select name="locationType" value={formData.locationType} onChange={handleChange} className={inputClass}>
-                                <option value="Domestic">Domestic</option>
-                                <option value="International">International</option>
+                                <option value="Domestic">Domestic (within Bangladesh)</option>
+                                <option value="International">International (outside Bangladesh)</option>
                             </select>
+                            <p className="text-[10px] text-gray-400 mt-1">Controls the Domestic / International filter on the Tours page.</p>
                         </div>
                         <div>
                             <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Category *</label>
