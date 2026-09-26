@@ -71,6 +71,9 @@ function TourForm() {
         price: "",
         oldPrice: "",
         currency: "BDT",
+        singleEnabled: true,
+        coupleEnabled: false,
+        couplePrice: "",
         groupSize: "20",
         description: "",
         descriptionBn: "",
@@ -126,6 +129,9 @@ function TourForm() {
                     price: t.price?.toString() || "",
                     oldPrice: t.oldPrice?.toString() || "",
                     currency: t.currency || "BDT",
+                    singleEnabled: t.singleEnabled !== false,
+                    coupleEnabled: t.coupleEnabled === true,
+                    couplePrice: t.couplePrice?.toString() || "",
                     groupSize: t.groupSize?.toString() || "20",
                     description: t.description || "",
                     descriptionBn: t.descriptionBn || "",
@@ -198,6 +204,14 @@ function TourForm() {
             toast.error("Please fill required fields (Title, Destination, Price, Duration)");
             return;
         }
+        if (!formData.singleEnabled && !formData.coupleEnabled) {
+            toast.error("Enable at least one package type (Single or Couple)");
+            return;
+        }
+        if (formData.coupleEnabled && (!formData.couplePrice || Number(formData.couplePrice) <= 0)) {
+            toast.error("Please set the Couple price (couple package is enabled)");
+            return;
+        }
 
         setLoading(true);
         try {
@@ -210,6 +224,9 @@ function TourForm() {
                 price: Number(formData.price) || 0,
                 tourType: formData.tourType || null,
                 oldPrice: formData.oldPrice === "" ? null : Number(formData.oldPrice),
+                singleEnabled: !!formData.singleEnabled,
+                coupleEnabled: !!formData.coupleEnabled,
+                couplePrice: formData.couplePrice === "" ? null : Number(formData.couplePrice),
                 groupSize: formData.groupSize === "" ? 20 : Number(formData.groupSize),
                 rating: Number(formData.rating) || 0,
                 order: Number(formData.order) || 0,
@@ -362,15 +379,39 @@ function TourForm() {
                         <FiDollarSign size={14} style={{ color: '#E64266' }} />
                         <h2 className="text-[13px] font-bold uppercase tracking-wider text-gray-500">Pricing & Group</h2>
                     </div>
+                    {/* Package pricing — Single / Couple. Enable one or both; each has its own price. */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                        {/* Single package */}
+                        <div className="rounded-lg border border-gray-200 dark:border-gray-700/50 p-4">
+                            <label className="flex items-center gap-2 mb-3 cursor-pointer select-none">
+                                <input type="checkbox" name="singleEnabled" checked={formData.singleEnabled} onChange={handleChange} className="w-4 h-4 accent-[#0F3C53]" />
+                                <span className="text-[13px] font-bold text-gray-700 dark:text-gray-200">👤 Single Package</span>
+                            </label>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Single Price *</label>
+                                    <input name="price" type="number" value={formData.price} onChange={handleChange} className={inputClass} placeholder="0" required />
+                                </div>
+                                <div>
+                                    <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Old Price</label>
+                                    <input name="oldPrice" type="number" value={formData.oldPrice} onChange={handleChange} className={inputClass} placeholder="0" />
+                                </div>
+                            </div>
+                        </div>
+                        {/* Couple package */}
+                        <div className="rounded-lg border border-gray-200 dark:border-gray-700/50 p-4">
+                            <label className="flex items-center gap-2 mb-3 cursor-pointer select-none">
+                                <input type="checkbox" name="coupleEnabled" checked={formData.coupleEnabled} onChange={handleChange} className="w-4 h-4 accent-[#E64266]" />
+                                <span className="text-[13px] font-bold text-gray-700 dark:text-gray-200">👫 Couple Package</span>
+                            </label>
+                            <div>
+                                <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Couple Price {formData.coupleEnabled && "*"}</label>
+                                <input name="couplePrice" type="number" value={formData.couplePrice} onChange={handleChange} disabled={!formData.coupleEnabled} className={`${inputClass} ${!formData.coupleEnabled ? "opacity-50 cursor-not-allowed" : ""}`} placeholder="0" />
+                                <p className="text-[10px] text-gray-400 mt-1">Enable the checkbox to offer a couple package with its own price.</p>
+                            </div>
+                        </div>
+                    </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div>
-                            <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Price *</label>
-                            <input name="price" type="number" value={formData.price} onChange={handleChange} className={inputClass} placeholder="0" required />
-                        </div>
-                        <div>
-                            <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Old Price (Strike-through)</label>
-                            <input name="oldPrice" type="number" value={formData.oldPrice} onChange={handleChange} className={inputClass} placeholder="0" />
-                        </div>
                         <div>
                             <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Currency</label>
                             <select name="currency" value={formData.currency} onChange={handleChange} className={inputClass}>

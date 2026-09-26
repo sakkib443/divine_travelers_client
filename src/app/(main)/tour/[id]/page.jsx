@@ -112,6 +112,14 @@ export default function TourDetailsPage() {
     const sym = getCurrencySymbol(tour.currency);
     const savings = (tour.oldPrice || 0) - (tour.price || 0);
 
+    // Single / Couple package options for the price display + booking selector.
+    const singleOn = tour.singleEnabled !== false && Number(tour.price) > 0;
+    const coupleOn = tour.coupleEnabled === true && Number(tour.couplePrice) > 0;
+    const packageOptions = [
+        ...(singleOn ? [{ key: 'single', label: isBn ? 'সিঙ্গেল প্যাকেজ' : 'Single Package', price: Number(tour.price) }] : []),
+        ...(coupleOn ? [{ key: 'couple', label: isBn ? 'কাপল প্যাকেজ' : 'Couple Package', price: Number(tour.couplePrice) }] : []),
+    ];
+
     return (
         <div className="bg-[#F9FAFB] min-h-screen">
             <div className="h-16" />
@@ -365,19 +373,29 @@ export default function TourDetailsPage() {
 
                             {/* Booking Card */}
                             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-white rounded-md border border-gray-100 p-6 shadow-sm">
-                                <div className="flex items-baseline gap-3 mb-1">
-                                    <span className="text-4xl font-black" style={{ color: '#0F3C53', fontFamily: headingFont }}>
-                                        {sym}{tour.price?.toLocaleString()}
-                                    </span>
-                                    {tour.oldPrice > 0 && (
-                                        <span className="text-lg text-gray-300 line-through font-medium">{sym}{tour.oldPrice?.toLocaleString()}</span>
+                                {/* Package prices — Single &/or Couple */}
+                                <div className="space-y-2.5 mb-6">
+                                    {singleOn && (
+                                        <div className="flex items-center justify-between rounded-lg bg-gray-50 px-3.5 py-2.5">
+                                            <span className="text-[12px] font-bold text-gray-600" style={{ fontFamily }}>👤 {isBn ? 'সিঙ্গেল' : 'Single'}</span>
+                                            <span className="flex items-baseline gap-2">
+                                                <span className="text-2xl font-black" style={{ color: '#0F3C53', fontFamily: headingFont }}>{sym}{Number(tour.price).toLocaleString()}</span>
+                                                {tour.oldPrice > 0 && <span className="text-sm text-gray-300 line-through">{sym}{tour.oldPrice?.toLocaleString()}</span>}
+                                            </span>
+                                        </div>
+                                    )}
+                                    {coupleOn && (
+                                        <div className="flex items-center justify-between rounded-lg bg-[#E64266]/5 px-3.5 py-2.5">
+                                            <span className="text-[12px] font-bold text-gray-600" style={{ fontFamily }}>👫 {isBn ? 'কাপল' : 'Couple'}</span>
+                                            <span className="text-2xl font-black" style={{ color: '#E64266', fontFamily: headingFont }}>{sym}{Number(tour.couplePrice).toLocaleString()}</span>
+                                        </div>
+                                    )}
+                                    {singleOn && savings > 0 && (
+                                        <p className="text-[11px] text-green-600 font-bold" style={{ fontFamily }}>
+                                            {isBn ? `সিঙ্গেলে ${sym}${savings.toLocaleString()} সাশ্রয়` : `Save ${sym}${savings.toLocaleString()} on single`}
+                                        </p>
                                     )}
                                 </div>
-                                {savings > 0 && (
-                                    <p className="text-[11px] text-green-600 font-bold mb-6" style={{ fontFamily }}>
-                                        {isBn ? `${sym}${savings.toLocaleString()} সাশ্রয়` : `Save ${sym}${savings.toLocaleString()}`} · {isBn ? 'প্রতি জন' : 'per person'}
-                                    </p>
-                                )}
 
                                 <div className="space-y-3 mb-6">
                                     {[
@@ -582,14 +600,15 @@ export default function TourDetailsPage() {
                     { key: "travelDate", label: isBn ? "ভ্রমণের তারিখ" : "Travel Date", type: "date", required: true },
                     { key: "persons", label: isBn ? "যাত্রীর সংখ্যা" : "Number of Travellers", type: "number", placeholder: "1", required: true },
                 ]}
+                packageOptions={packageOptions.length ? packageOptions : null}
                 summary={{
                     image: tour?.image || tour?.gallery?.[0],
                     icon: '🌍',
                     title: tour?.title || (isBn ? 'ট্যুর' : 'Tour'),
                     subtitle: tour?.destination || (isBn ? 'ট্যুর প্যাকেজ' : 'Tour Package'),
-                    lineItems: tour?.price > 0 ? [{ label: isBn ? 'প্যাকেজ · জনপ্রতি' : 'Package · per person', value: tour.price }] : [],
+                    lineItems: tour?.price > 0 ? [{ label: isBn ? 'প্যাকেজ' : 'Package', value: tour.price }] : [],
                     total: tour?.price || 0,
-                    totalLabel: isBn ? 'জনপ্রতি' : 'Per person',
+                    totalLabel: isBn ? 'মোট' : 'Total',
                     currency: sym,
                 }}
             />

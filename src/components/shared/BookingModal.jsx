@@ -23,7 +23,10 @@ const labelClass = "block text-[13px] font-medium text-gray-700 mb-1.5";
 
 // hiddenFields: values the page knows but the customer shouldn't type — e.g. the
 //   country slug, which the server needs to build the right document checklist.
-export default function BookingModal({ isOpen, onClose, type, serviceName, serviceId = "", extraFields = [], hiddenFields = {}, summary = null }) {
+// packageOptions: optional [{ key, label, price }] — when given, the customer must
+// first pick a package (e.g. Single / Couple); the summary total and the submitted
+// `packageType` follow the selection so the admin request carries the right choice.
+export default function BookingModal({ isOpen, onClose, type, serviceName, serviceId = "", extraFields = [], hiddenFields = {}, summary = null, packageOptions = null }) {
     const token = useSelector(selectToken);
     const user = useSelector(selectCurrentUser);
     const { settings } = useSiteSettings();
@@ -32,6 +35,11 @@ export default function BookingModal({ isOpen, onClose, type, serviceName, servi
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
     const [trackingId, setTrackingId] = useState("");
+    // Selected package (Single / Couple) — defaults to the first enabled option.
+    const opts = Array.isArray(packageOptions) ? packageOptions.filter(o => o && o.key) : [];
+    const [selectedPackage, setSelectedPackage] = useState(opts[0]?.key || "");
+    useEffect(() => { if (opts.length && !opts.some(o => o.key === selectedPackage)) setSelectedPackage(opts[0].key); }, [packageOptions]); // eslint-disable-line
+    const activePkg = opts.find(o => o.key === selectedPackage) || null;
 
     const typeLabels = { tour: "Tour Booking", hajj: "Hajj/Umrah Booking" };
 
@@ -83,7 +91,11 @@ export default function BookingModal({ isOpen, onClose, type, serviceName, servi
             const { name, email, phone, message, paymentMethod, trxId, ...rest } = form;
             const body = {
                 type, serviceName, serviceId, name, email, phone,
-                details: { ...rest, ...hiddenFields, message, paymentMethod, trxId },
+                details: {
+                    ...rest, ...hiddenFields,
+                    ...(activePkg ? { packageType: activePkg.key, packageLabel: activePkg.label } : {}),
+                    message, paymentMethod, trxId,
+                },
             };
             const headers = { "Content-Type": "application/json" };
             if (token) headers["Authorization"] = `Bearer ${token}`;
@@ -103,7 +115,12 @@ export default function BookingModal({ isOpen, onClose, type, serviceName, servi
     const currency = summary?.currency || "৳";
     const fmt = (n) => `${currency}${Number(n || 0).toLocaleString()}`;
     const hasSummary = !!summary;
-    const hasTotal = hasSummary && Number(summary.total) > 0;
+    // When a package is selected, its price drives the summary total + line item.
+    const effTotal = activePkg ? Number(activePkg.price) : Number(summary?.total);
+    const effLineItems = activePkg
+        ? [{ label: activePkg.label, value: Number(activePkg.price) }]
+        : (summary?.lineItems || []);
+    const hasTotal = hasSummary && Number(effTotal) > 0;
 
     const payNumbers = {
         bkash: settings?.bkashNumber || settings?.whatsappNumber || settings?.contactPhone || "",
@@ -205,6 +222,30 @@ export default function BookingModal({ isOpen, onClose, type, serviceName, servi
                                     </div>
 
                                     <form onSubmit={handleSubmit} className="space-y-5">
+                                        {opts.length > 0 && (
+                                            <div className="space-y-2.5">
+                                                <p className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Choose Package *</p>
+                                                <div className="grid grid-cols-2 gap-2.5">
+                                                    {opts.map(o => {
+                                                        const active = selectedPackage === o.key;
+                                                        return (
+                                                            <button
+                                                                type="button"
+                                                                key={o.key}
+                                                                onClick={() => setSelectedPackage(o.key)}
+                                                                className={`rounded-xl border-2 px-3 py-2.5 text-left transition-all ${active ? "border-[#0F3C53] bg-[#0F3C53]/5" : "border-gray-200 hover:border-gray-300"}`}
+                                                            >
+                                                                <span className="flex items-center justify-between">
+                                                                    <span className="text-sm font-bold text-gray-800">{o.label}</span>
+                                                                    <span className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${active ? "border-[#0F3C53] bg-[#0F3C53]" : "border-gray-300"}`} />
+                                                                </span>
+                                                                <span className="block text-[15px] font-black mt-0.5" style={{ color: "#E64266" }}>{fmt(o.price)}</span>
+                                                            </button>
+                                                        );
+                                                    })}
+                                                </div>
+                                            </div>
+                                        )}
                                         <div className="space-y-4">
                                             <p className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Your Details</p>
                                             <div>
@@ -262,7 +303,7 @@ export default function BookingModal({ isOpen, onClose, type, serviceName, servi
                                             {isMobilePay && (
                                                 <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-3.5 space-y-3">
                                                     <p className="text-[13px] leading-relaxed text-gray-600">
-                                                        <span className="font-semibold text-gray-800">Send Money</span> via {selectedMethod.label}{hasTotal ? ` (${fmt(summary.total)})` : ""} to the number below, then paste your TrxID.
+                                                        <span className="font-semibold text-gray-800">Send Money</span> via {selectedMethod.label}{hasTotal ? ` (${fmt(effTotal)})` : ""} to the number below, then paste your TrxID.
                                                     </p>
                                                     {payNumber ? (
                                                         <button type="button" onClick={() => navigator?.clipboard?.writeText(payNumber)}
@@ -290,7 +331,7 @@ export default function BookingModal({ isOpen, onClose, type, serviceName, servi
                                             className="w-full py-3.5 rounded-xl text-white font-semibold flex items-center justify-center gap-2 transition disabled:opacity-60 shadow-lg shadow-orange-500/20"
                                             style={{ background: "linear-gradient(135deg, #E64266, #D97A1E)" }}>
                                             {loading ? <><LuLoader size={16} className="animate-spin" /> Submitting...</>
-                                                : <>Confirm Booking{hasTotal && ` · ${fmt(summary.total)}`} <LuArrowRight size={16} /></>}
+                                                : <>Confirm Booking{hasTotal && ` · ${fmt(effTotal)}`} <LuArrowRight size={16} /></>}
                                         </button>
 
                                         <p className="flex items-center justify-center gap-1.5 text-xs text-gray-400">
@@ -319,9 +360,9 @@ export default function BookingModal({ isOpen, onClose, type, serviceName, servi
                                             </div>
                                         </div>
 
-                                        {summary.lineItems?.length > 0 && (
+                                        {effLineItems?.length > 0 && (
                                             <div className="space-y-2.5 border-t border-white/10 pt-4">
-                                                {summary.lineItems.map((li, i) => (
+                                                {effLineItems.map((li, i) => (
                                                     <div key={i} className="flex justify-between text-sm">
                                                         <span className="text-white/60">{li.label}</span>
                                                         <span className="font-medium">{fmt(li.value)}</span>
@@ -333,7 +374,7 @@ export default function BookingModal({ isOpen, onClose, type, serviceName, servi
                                         <div className="mt-4 border-t border-white/10 pt-4 flex items-end justify-between">
                                             <span className="text-sm text-white/60">{summary.totalLabel || "Grand Total"}</span>
                                             <span className="text-2xl font-bold" style={{ color: "#F5A54D" }}>
-                                                {hasTotal ? fmt(summary.total) : "On confirmation"}
+                                                {hasTotal ? fmt(effTotal) : "On confirmation"}
                                             </span>
                                         </div>
 
