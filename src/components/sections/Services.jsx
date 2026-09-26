@@ -206,7 +206,7 @@ export default function Services({ servicesData }) {
                                         {service.title}
                                     </h3>
 
-                                    <p className="text-gray-400 text-[12px] leading-relaxed mb-4 flex-grow line-clamp-2" style={{ fontFamily: bnFont || '"Poppins", sans-serif' }}>
+                                    <p className="text-gray-400 text-[12px] leading-relaxed mb-4 flex-grow line-clamp-2 whitespace-pre-wrap" style={{ fontFamily: bnFont || '"Poppins", sans-serif' }}>
                                         {service.description}
                                     </p>
 

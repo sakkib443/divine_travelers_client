@@ -177,7 +177,7 @@ export default function TourDetailsPage() {
                                 {isBn ? (tour.titleBn || tour.title) : tour.title}
                             </h1>
 
-                            <p className="text-gray-400 text-sm leading-relaxed mb-5 max-w-lg" style={{ fontFamily }}>
+                            <p className="text-gray-400 text-sm leading-relaxed mb-5 max-w-lg whitespace-pre-wrap" style={{ fontFamily }}>
                                 {isBn ? (tour.descriptionBn || tour.description || '') : (tour.description || '')}
                             </p>
 
@@ -254,7 +254,7 @@ export default function TourDetailsPage() {
                                 <h2 className="text-2xl font-black text-gray-900 uppercase tracking-tight mb-4 leading-none" style={{ fontFamily: headingFont }}>
                                     {isBn ? 'বিস্তারিত তথ্য' : 'About This Tour'}
                                 </h2>
-                                <p className="text-gray-500 text-sm leading-relaxed mb-4" style={{ fontFamily }}>
+                                <p className="text-gray-500 text-sm leading-relaxed mb-4 whitespace-pre-wrap" style={{ fontFamily }}>
                                     {isBn ? (tour.longDescriptionBn || tour.longDescription) : tour.longDescription}
                                 </p>
                                 {tour.tags?.length > 0 && (
@@ -288,7 +288,7 @@ export default function TourDetailsPage() {
                                                 <p className="text-sm font-bold text-gray-800 mb-1" style={{ fontFamily }}>
                                                     {isBn ? (item.titleBn || item.title) : item.title}
                                                 </p>
-                                                <p className="text-[12px] text-gray-400" style={{ fontFamily }}>
+                                                <p className="text-[12px] text-gray-400 whitespace-pre-wrap" style={{ fontFamily }}>
                                                     {isBn ? (item.descriptionBn || item.description || '') : (item.description || '')}
                                                 </p>
                                             </div>
@@ -349,7 +349,7 @@ export default function TourDetailsPage() {
                                                 <LuCircleDot size={14} className="text-[#E64266] mt-0.5 flex-shrink-0" />
                                                 {isBn ? (faq.questionBn || faq.question) : faq.question}
                                             </h3>
-                                            <p className="text-[13px] text-gray-500 leading-relaxed pl-[22px]" style={{ fontFamily }}>
+                                            <p className="text-[13px] text-gray-500 leading-relaxed pl-[22px] whitespace-pre-wrap" style={{ fontFamily }}>
                                                 {isBn ? (faq.answerBn || faq.answer) : faq.answer}
                                             </p>
                                         </div>

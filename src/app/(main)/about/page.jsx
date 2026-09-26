@@ -109,7 +109,7 @@ export default function AboutPage() {
                             {/* Message */}
                             <div>
                                 <LuQuote className="w-12 h-12 mb-4" style={{ color: "rgba(239,140,44,0.35)" }} />
-                                <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8" style={{ fontFamily: font }}>
+                                <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 whitespace-pre-wrap" style={{ fontFamily: font }}>
                                     {t(founder.message)}
                                 </p>
                                 <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
@@ -146,7 +146,7 @@ export default function AboutPage() {
                             <h2 className="font-black uppercase tracking-tight mt-3 mb-4" style={{ fontFamily: heading, color: "#021E14", fontSize: "clamp(1.9rem, 4vw, 3rem)" }}>
                                 {t(team.heading)}
                             </h2>
-                            <p className="text-gray-500">{t(team.description)}</p>
+                            <p className="text-gray-500 whitespace-pre-wrap">{t(team.description)}</p>
                         </motion.div>
 
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
@@ -202,7 +202,7 @@ export default function AboutPage() {
                             <h2 className="font-black uppercase tracking-tight mt-3 mb-4" style={{ fontFamily: heading, color: "#021E14", fontSize: "clamp(1.9rem, 4vw, 3rem)" }}>
                                 {t(why.heading)}
                             </h2>
-                            <p className="text-gray-500">{t(why.description)}</p>
+                            <p className="text-gray-500 whitespace-pre-wrap">{t(why.description)}</p>
                         </motion.div>
 
                         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
@@ -225,7 +225,7 @@ export default function AboutPage() {
                                         <h3 className="font-bold text-gray-900 mb-2" style={{ fontFamily: font }}>
                                             {t(v.title)}
                                         </h3>
-                                        <p className="text-sm text-gray-500 leading-relaxed">
+                                        <p className="text-sm text-gray-500 leading-relaxed whitespace-pre-wrap">
                                             {t(v.description)}
                                         </p>
                                     </motion.div>
@@ -252,7 +252,7 @@ export default function AboutPage() {
                                 <h2 className="font-black uppercase tracking-tight mb-5" style={{ fontFamily: heading, color: "#021E14", fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
                                     {t(cta.heading)}
                                 </h2>
-                                <p className="text-base md:text-lg max-w-2xl mx-auto mb-9 text-gray-600">
+                                <p className="text-base md:text-lg max-w-2xl mx-auto mb-9 text-gray-600 whitespace-pre-wrap">
                                     {t(cta.description)}
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-3 justify-center">

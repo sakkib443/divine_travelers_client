@@ -152,7 +152,7 @@ export default function ServiceCards() {
 
                 {/* Short Description */}
                 <p
-                    className="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed"
+                    className="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed whitespace-pre-wrap"
                     style={{ fontFamily: "var(--font-primary)" }}
                 >
                     {descriptionText}

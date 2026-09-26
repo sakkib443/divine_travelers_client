@@ -84,7 +84,7 @@ export default function AboutStory({ content: contentProp = null }) {
                         {titleText}
                     </h2>
                     
-                    <p className="text-gray-600 leading-relaxed mb-12 text-[15px] md:text-[16px]" style={{ fontFamily: font }}>
+                    <p className="text-gray-600 leading-relaxed mb-12 text-[15px] md:text-[16px] whitespace-pre-wrap" style={{ fontFamily: font }}>
                         {descriptionText}
                     </p>
 
@@ -102,7 +102,7 @@ export default function AboutStory({ content: contentProp = null }) {
                                     <h4 className="font-bold text-[#222222] text-[17px] mb-2" style={{ fontFamily: headingFont }}>
                                         {isBn ? feat.title.bn : feat.title.en}
                                     </h4>
-                                    <p className="text-gray-500 text-[14px] leading-relaxed" style={{ fontFamily: font }}>
+                                    <p className="text-gray-500 text-[14px] leading-relaxed whitespace-pre-wrap" style={{ fontFamily: font }}>
                                         {isBn ? feat.subtitle.bn : feat.subtitle.en}
                                     </p>
                                 </div>

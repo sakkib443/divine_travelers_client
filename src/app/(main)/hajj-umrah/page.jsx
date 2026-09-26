@@ -226,7 +226,7 @@ export default function HajjUmrahPage() {
                                         <h3 className="text-2xl font-black uppercase tracking-wider mb-1" style={{ fontFamily: headingFont, color: '#021E14' }}>
                                             {isBn ? (pkg.nameBn || pkg.name) : pkg.name}
                                         </h3>
-                                        <p className="text-[11px] text-gray-400 font-normal mb-5">{isBn ? (pkg.descriptionBn || pkg.description || '') : (pkg.description || '')}</p>
+                                        <p className="text-[11px] text-gray-400 font-normal mb-5 whitespace-pre-wrap">{isBn ? (pkg.descriptionBn || pkg.description || '') : (pkg.description || '')}</p>
 
                                         <div className="mb-5">
                                             <div className="flex items-end gap-2">

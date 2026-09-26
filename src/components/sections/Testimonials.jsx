@@ -169,7 +169,7 @@ export default function Testimonials() {
 
                                         {/* Message */}
                                         <p
-                                            className="text-gray-600 text-sm mb-6 leading-relaxed flex-grow line-clamp-5"
+                                            className="text-gray-600 text-sm mb-6 leading-relaxed flex-grow line-clamp-5 whitespace-pre-wrap"
                                             style={{ fontFamily: bnFont }}
                                         >
                                             &quot;{review.message || review.text}&quot;

@@ -129,7 +129,7 @@ export default function HomePage() {
                       {IconComponent}
                     </div>
                     <h4 className="text-xl font-bold text-[#111827] mb-3" style={{ fontFamily: headingFont }}>{item.title}</h4>
-                    <p className="text-gray-600 text-sm leading-relaxed max-w-xs" style={{ fontFamily: bnFont || 'Poppins, sans-serif' }}>{item.desc}</p>
+                    <p className="text-gray-600 text-sm leading-relaxed max-w-xs whitespace-pre-wrap" style={{ fontFamily: bnFont || 'Poppins, sans-serif' }}>{item.desc}</p>
                   </motion.div>
                 );
               })}
