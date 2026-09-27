@@ -59,6 +59,10 @@ const tourTypes = [
     { en: "Group Tour", bn: "গ্রুপ ট্যুর", key: "Group Tour" },
     { en: "Family Tour", bn: "ফ্যামিলি ট্যুর", key: "Family Tour" },
     { en: "Couple Tour", bn: "কাপল ট্যুর", key: "Couple Tour" },
+    { en: "Corporate Tour", bn: "কর্পোরেট ট্যুর", key: "Corporate Tour" },
+    { en: "Relax", bn: "রিল্যাক্স", key: "Relax" },
+    { en: "Premium", bn: "প্রিমিয়াম", key: "Premium" },
+    { en: "Day Tour", bn: "ডে ট্যুর", key: "Day Tour" },
 ];
 
 function TourContent() {

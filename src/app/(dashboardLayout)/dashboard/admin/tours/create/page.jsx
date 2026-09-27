@@ -35,6 +35,9 @@ const tourTypes = [
     { value: "Family Tour", label: "Family Tour" },
     { value: "Couple Tour", label: "Couple Tour" },
     { value: "Corporate Tour", label: "Corporate Tour" },
+    { value: "Relax", label: "Relax" },
+    { value: "Premium", label: "Premium" },
+    { value: "Day Tour", label: "Day Tour" },
 ];
 
 const statuses = [
