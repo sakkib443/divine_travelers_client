@@ -632,11 +632,11 @@ export default function Hero({ heroData }) {
                                     )}
                                     <span
                                         className="block mt-2 lg:mt-4 leading-none tracking-normal"
-                                        style={{ fontWeight: 900 }}
+                                        style={{ fontWeight: 900, fontSize: "clamp(1.5rem, 6vw, 4.25rem)", textShadow: "0 3px 16px rgba(0,0,0,0.55)" }}
                                     >
-                                        <span style={{ color: "#0F3C53" }}>{brandFirst}</span>
+                                        <span style={{ color: "#FFFFFF" }}>{brandFirst}</span>
                                         {brandRest && (
-                                            <span style={{ color: "#E64266" }} className="ml-2 lg:ml-3">{brandRest}</span>
+                                            <span style={{ color: "#FFFFFF" }} className="ml-2 lg:ml-3">{brandRest}</span>
                                         )}
                                     </span>
                                 </>
