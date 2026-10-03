@@ -52,6 +52,28 @@ export default function HajjUmrahPage() {
     const [umrahPackages, setUmrahPackages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [bookingModal, setBookingModal] = useState({ open: false, pkg: null });
+    const [banner, setBanner] = useState(null);
+    const [heroSlide, setHeroSlide] = useState(0);
+
+    // Admin-managed banner (text + images). Falls back to the built-in values.
+    useEffect(() => {
+        fetch(`${API_BASE}/api/page-banners/hajj-umrah`)
+            .then((r) => r.json())
+            .then((d) => setBanner(d?.data || null))
+            .catch(() => {});
+    }, []);
+
+    const b = banner && banner.isActive !== false ? banner : null;
+    const bt = (field, fallback) => (field ? (isBn ? field.bn || field.en || fallback : field.en || field.bn || fallback) : fallback);
+    const DEFAULT_HAJJ_IMG = "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920&q=80";
+    const heroImages = b?.slides?.length ? b.slides : [DEFAULT_HAJJ_IMG];
+    const slideMs = (b?.slideSeconds || 4) * 1000;
+
+    useEffect(() => {
+        if (heroImages.length < 2) return;
+        const id = setInterval(() => setHeroSlide((s) => (s + 1) % heroImages.length), slideMs);
+        return () => clearInterval(id);
+    }, [heroImages.length, slideMs]);
 
     useEffect(() => {
         const fetchPackages = async () => {
@@ -93,7 +115,11 @@ export default function HajjUmrahPage() {
 
             {/* 1. HERO SECTION */}
             <section className="relative py-14 md:py-28 flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 z-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920&q=80')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <div className="absolute inset-0 z-0">
+                    {heroImages.map((src, i) => (
+                        <div key={i} className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+                            style={{ backgroundImage: `url('${src}')`, opacity: (heroSlide % heroImages.length) === i ? 1 : 0 }} />
+                    ))}
                     <div className="absolute inset-0" style={{ backgroundColor: 'rgba(2,30,20,0.75)' }} />
                 </div>
                 <div className="absolute inset-0 z-[1] opacity-5" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} />
@@ -101,13 +127,13 @@ export default function HajjUmrahPage() {
                 <div className="relative z-10 max-w-4xl w-full px-4 text-center flex flex-col items-center">
                     <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="mb-6"><FaKaaba size={48} style={{ color: '#E64266' }} /></motion.div>
                     <motion.p initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-[11px] font-bold uppercase tracking-[0.3em] mb-4 font-eyebrow" style={{ color: 'rgba(239,140,44,0.8)' }}>
-                        {isBn ? 'আপনার পবিত্র যাত্রা এখান থেকে শুরু' : 'Your Sacred Journey Begins Here'}
+                        {bt(b?.eyebrow, isBn ? 'আপনার পবিত্র যাত্রা এখান থেকে শুরু' : 'Your Sacred Journey Begins Here')}
                     </motion.p>
                     <motion.h1 initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-4xl sm:text-5xl md:text-7xl font-black uppercase tracking-tight mb-4" style={{ fontFamily: headingFont, color: '#FFFFFF' }}>
-                        {isBn ? 'হজ্জ ও ' : 'Hajj & '}<span style={{ color: '#E64266' }}>{isBn ? 'ওমরাহ' : 'Umrah'}</span>
+                        {bt(b?.heading, isBn ? 'হজ্জ ও' : 'Hajj &')}{' '}<span style={{ color: '#E64266' }}>{bt(b?.headingHighlight, isBn ? 'ওমরাহ' : 'Umrah')}</span>
                     </motion.h1>
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }} className="text-sm font-normal mb-10 max-w-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>
-                        {isBn ? 'আমাদের বিশেষজ্ঞদের দ্বারা তৈরি প্যাকেজের মাধ্যমে জীবন পরিবর্তনকারী তীর্থযাত্রায় বের হন।' : 'Embark on a life-changing pilgrimage with our expertly crafted packages.'}
+                        {bt(b?.subtitle, isBn ? 'আমাদের বিশেষজ্ঞদের দ্বারা তৈরি প্যাকেজের মাধ্যমে জীবন পরিবর্তনকারী তীর্থযাত্রায় বের হন।' : 'Embark on a life-changing pilgrimage with our expertly crafted packages.')}
                     </motion.p>
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="flex flex-wrap gap-4 justify-center">
                         <a href="#packages" className="px-8 py-3 rounded-lg text-[11px] font-bold uppercase tracking-widest transition-all hover:opacity-90 font-eyebrow" style={{ backgroundColor: '#E64266', color: '#FFFFFF' }}>{isBn ? 'প্যাকেজ দেখুন' : 'View Packages'}</a>

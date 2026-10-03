@@ -89,12 +89,27 @@ function TourContent() {
     const [sortBy, setSortBy] = useState("featured");
     const [showFilters, setShowFilters] = useState(false);
     const [heroSlide, setHeroSlide] = useState(0);
+    const [banner, setBanner] = useState(null);
 
-    // Auto-rotate hero slider
+    // Admin-managed banner (text + images). Falls back to the built-in values.
     useEffect(() => {
-        const id = setInterval(() => setHeroSlide((s) => (s + 1) % HERO_SLIDES.length), 4000);
-        return () => clearInterval(id);
+        fetch(`${API_BASE}/api/page-banners/tour`)
+            .then((r) => r.json())
+            .then((d) => setBanner(d?.data || null))
+            .catch(() => {});
     }, []);
+
+    const b = banner && banner.isActive !== false ? banner : null;
+    const bt = (field, fallback) => (field ? (isBn ? field.bn || field.en || fallback : field.en || field.bn || fallback) : fallback);
+    const heroImages = b?.slides?.length ? b.slides : HERO_SLIDES;
+    const slideMs = (b?.slideSeconds || 4) * 1000;
+
+    // Auto-rotate hero slider (uses the resolved image list + speed)
+    useEffect(() => {
+        if (heroImages.length < 2) return;
+        const id = setInterval(() => setHeroSlide((s) => (s + 1) % heroImages.length), slideMs);
+        return () => clearInterval(id);
+    }, [heroImages.length, slideMs]);
 
     // Fetch tours from API
     useEffect(() => {
@@ -168,11 +183,11 @@ function TourContent() {
             {/* 1. Hero Section */}
             <section className="relative py-10 md:py-14 flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    {HERO_SLIDES.map((src, i) => (
+                    {heroImages.map((src, i) => (
                         <div
                             key={i}
                             className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
-                            style={{ backgroundImage: `url('${src}')`, opacity: heroSlide === i ? 1 : 0 }}
+                            style={{ backgroundImage: `url('${src}')`, opacity: (heroSlide % heroImages.length) === i ? 1 : 0 }}
                         />
                     ))}
                     <div className="absolute inset-0 bg-[#021E14]/40" />
@@ -185,7 +200,7 @@ function TourContent() {
                         className="text-[11px] font-bold uppercase tracking-[0.3em] mb-4 font-eyebrow"
                         style={{ color: 'rgba(255,255,255,0.7)', fontFamily }}
                     >
-                        {isBn ? 'আশ্চর্যজনক জায়গা আবিষ্কার করুন' : 'Discover Amazing Places'}
+                        {bt(b?.eyebrow, isBn ? 'আশ্চর্যজনক জায়গা আবিষ্কার করুন' : 'Discover Amazing Places')}
                     </motion.p>
                     <motion.h1
                         initial={{ opacity: 0, y: -20 }}
@@ -194,7 +209,7 @@ function TourContent() {
                         className="text-5xl md:text-7xl font-black uppercase tracking-tight mb-4"
                         style={{ fontFamily: headingFont, color: '#FFFFFF' }}
                     >
-                        {isBn ? 'বিশ্ব ' : 'Explore The '}<span style={{ color: '#E64266' }}>{isBn ? 'ঘুরে দেখুন' : 'World'}</span>
+                        {bt(b?.heading, isBn ? 'বিশ্ব' : 'Explore The')}{' '}<span style={{ color: '#E64266' }}>{bt(b?.headingHighlight, isBn ? 'ঘুরে দেখুন' : 'World')}</span>
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0 }}
@@ -203,7 +218,7 @@ function TourContent() {
                         className="text-sm font-normal mb-8 max-w-md"
                         style={{ color: 'rgba(255,255,255,0.6)', fontFamily }}
                     >
-                        {isBn ? 'অবিস্মরণীয় অভিজ্ঞতার জন্য হস্তশিল্পে তৈরি ট্যুর প্যাকেজ।' : 'Handcrafted tour packages designed for unforgettable experiences.'}
+                        {bt(b?.subtitle, isBn ? 'অবিস্মরণীয় অভিজ্ঞতার জন্য হস্তশিল্পে তৈরি ট্যুর প্যাকেজ।' : 'Handcrafted tour packages designed for unforgettable experiences.')}
                     </motion.p>
 
                     <motion.div
