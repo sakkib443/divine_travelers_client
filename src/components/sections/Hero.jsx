@@ -554,9 +554,9 @@ export default function Hero({ heroData }) {
                         style={{ backgroundImage: `url('${src}')`, opacity: activeSlide === i ? 1 : 0 }}
                     />
                 ))}
-                {/* A very light black overlay is kept so white text remains somewhat readable, 
-                    but no color/blue tints are applied. */}
-                <div className="absolute inset-0 bg-black/20 z-10" />
+                {/* One black overlay covers the whole banner (every slide, edge to edge) and sits
+                    under the text. Plain black only, no color/blue tints. Strength = number after bg-black/. */}
+                <div className="absolute inset-0 bg-black/50 z-10" />
             </div>
 
             {/* Navbar spacer */}
@@ -582,7 +582,7 @@ export default function Hero({ heroData }) {
                         <LuClock className="w-4 h-4" style={{ color: "#E64266" }} />
                         <span
                             className="text-white text-[13px] lg:text-[15px] font-semibold tracking-wide uppercase whitespace-nowrap"
-                            style={{ fontFamily: "var(--next-font-poppins), 'Poppins', sans-serif", textShadow: "0 1px 6px rgba(0,0,0,0.6)" }}
+                            style={{ fontFamily: "var(--next-font-poppins), 'Poppins', sans-serif" }}
                         >
                             {hd.badgeText ? bt(hd.badgeText) : t("openingHour")}
                         </span>
@@ -597,7 +597,6 @@ export default function Hero({ heroData }) {
                             fontFamily: "var(--font-heading)",
                             color: "#FFFFFF",
                             fontWeight: 400,
-                            textShadow: "0 8px 30px rgba(0,0,0,0.5)",
                             fontSize: "clamp(1.25rem, 5vw, 3.5rem)",
                             lineHeight: "1.1",
                         }}
@@ -632,8 +631,8 @@ export default function Hero({ heroData }) {
                                         </span>
                                     )}
                                     <span
-                                        className="block mt-2 lg:mt-4 leading-none tracking-widest"
-                                        style={{ fontWeight: 900, textShadow: "0 2px 12px rgba(0,0,0,0.55)" }}
+                                        className="block mt-2 lg:mt-4 leading-none tracking-normal"
+                                        style={{ fontWeight: 900 }}
                                     >
                                         <span style={{ color: "#0F3C53" }}>{brandFirst}</span>
                                         {brandRest && (
