@@ -439,15 +439,25 @@ export default function DashboardLayout({ children }) {
     // Bell list = pending bookings the admin has not clicked yet
     const unseenNotifs = bookingNotif.items.filter((n) => !dismissedNotifs.includes(n._id));
 
-    const renderSidebarContent = (isCollapsedMode = false) => (
+    const renderSidebarContent = (isCollapsedMode = false) => {
+        // 1) Role-based visibility
+        const roleVisible = menuItems.filter(item => {
+            if (item.hidden) return false;
+            if (user?.role === 'manager') {
+                if (item.name === "Dashboard" || item.name === "Admins" || item.name === "Profile") return false;
+            }
+            return true;
+        });
+        // 2) Drop a section header left empty for this role (e.g. SETTINGS for a
+        // manager once Profile is hidden) — keep a header only if a real item follows it.
+        const visible = roleVisible.filter((item, i) => {
+            if (!item.section) return true;
+            const next = roleVisible[i + 1];
+            return !!next && !next.section;
+        });
+        return (
         <>
-            {menuItems.filter(item => {
-                if (item.hidden) return false;
-                if (user?.role === 'manager') {
-                    if (item.name === "Dashboard" || item.name === "Admins" || item.name === "Profile") return false;
-                }
-                return true;
-            }).map((item, index) => {
+            {visible.map((item, index) => {
                 if (item.section) {
                     if (isCollapsedMode) return <div key={index} className="my-3 border-t border-gray-100 dark:border-gray-700/50" />;
                     return (
@@ -467,7 +477,8 @@ export default function DashboardLayout({ children }) {
                 );
             })}
         </>
-    );
+        );
+    };
 
     return (
         <div className="min-h-screen bg-[#F5F6FA] dark:bg-gray-900">
