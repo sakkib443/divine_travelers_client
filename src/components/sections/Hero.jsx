@@ -623,7 +623,14 @@ export default function Hero({ heroData }) {
 
                             return (
                                 <>
-                                    {tagline && <span className="block">{tagline}</span>}
+                                    {tagline && (
+                                        <span
+                                            className="block"
+                                            style={{ fontSize: "clamp(0.8rem, 2vw, 1.35rem)", letterSpacing: "0.04em" }}
+                                        >
+                                            {tagline}
+                                        </span>
+                                    )}
                                     <span
                                         className="block mt-2 lg:mt-4 leading-none tracking-widest"
                                         style={{ fontWeight: 900, textShadow: "0 2px 12px rgba(0,0,0,0.55)" }}
