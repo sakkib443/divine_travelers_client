@@ -19,12 +19,14 @@ import {
     LuEye,
     LuCompass,
     LuCheck,
-    LuLoader
+    LuLoader,
+    LuSparkles
 } from "react-icons/lu";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { useSiteSettings, buildWhatsAppUrl } from "@/context/SiteSettingsContext";
+import CustomizeTourForm from "@/components/shared/CustomizeTourForm";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -88,6 +90,7 @@ function TourContent() {
     const [viewMode, setViewMode] = useState("grid");
     const [sortBy, setSortBy] = useState("featured");
     const [showFilters, setShowFilters] = useState(false);
+    const [showCustomizeTour, setShowCustomizeTour] = useState(false);
     const [heroSlide, setHeroSlide] = useState(0);
     const [banner, setBanner] = useState(null);
 
@@ -384,15 +387,17 @@ function TourContent() {
                                 <p className="text-[11px] font-normal leading-relaxed mb-4" style={{ color: 'rgba(255,255,255,0.5)', fontFamily }}>
                                     {isBn ? 'আমাদের ট্রাভেল বিশেষজ্ঞদের দ্বারা শুধুমাত্র আপনার জন্য তৈরি একটি অনন্য যাত্রা পরিকল্পনা করুন।' : 'Plan a unique journey tailored just for you by our travel experts.'}
                                 </p>
-                                <a
-                                    href={buildWhatsAppUrl(settings.whatsappNumber, "Hi, I'd like to get a quote for a custom tour package.")}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block w-full text-center py-2.5 rounded border text-[10px] font-bold uppercase tracking-widest transition-all hover:bg-white hover:text-[#021E14] font-eyebrow"
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setShowCustomizeTour(true);
+                                        window.scrollTo({ top: 400, behavior: "smooth" });
+                                    }}
+                                    className="block w-full text-center py-2.5 rounded border text-[10px] font-bold uppercase tracking-widest transition-all hover:bg-white hover:text-[#021E14] font-eyebrow cursor-pointer"
                                     style={{ borderColor: 'rgba(255,255,255,0.2)', color: 'white', fontFamily }}
                                 >
-                                    {isBn ? 'কোটেশন নিন' : 'Get a Quote'}
-                                </a>
+                                    {isBn ? 'কাস্টমাইজ ট্যুর ফর্ম' : 'Customize Tour Form'}
+                                </button>
                             </div>
                         </div>
                     </aside>
@@ -400,48 +405,81 @@ function TourContent() {
                     {/* RIGHT CONTENT AREA */}
                     <main className="flex-grow min-w-0">
                         {/* Control Header */}
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 md:mb-10 pb-4 md:pb-6 border-b border-gray-100">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 md:mb-10 pb-4 md:pb-6 border-b border-gray-100 gap-4">
                             <div>
                                 <h2 className="text-2xl md:text-3xl font-black text-[#021E14] uppercase leading-none mb-1.5" style={{ fontFamily: headingFont }}>
-                                    {isBn ? (tourCategories.find(c => c.key === selectedCategory)?.bn || 'সব ট্যুর') : (tourCategories.find(c => c.key === selectedCategory)?.en || 'All Tours')}
+                                    {showCustomizeTour
+                                        ? (isBn ? 'কাস্টমাইজ ট্যুর বুকিং' : 'Customize Tour Booking')
+                                        : (isBn ? (tourCategories.find(c => c.key === selectedCategory)?.bn || 'সব ট্যুর') : (tourCategories.find(c => c.key === selectedCategory)?.en || 'All Tours'))}
                                 </h2>
                                 <p className="text-[10px] text-gray-400 font-normal uppercase tracking-[0.2em] font-eyebrow" style={{ fontFamily }}>
-                                    {isBn ? `${filteredTours.length}টি ফলাফল পাওয়া গেছে` : `Found ${filteredTours.length} results`}
+                                    {showCustomizeTour
+                                        ? (isBn ? 'আপনার পছন্দ অনুযায়ী নিজস্ব ট্যুর বুকিং রিকোয়েস্ট পাঠান' : 'Submit a tailored tour booking request')
+                                        : (isBn ? `${filteredTours.length}টি ফলাফল পাওয়া গেছে` : `Found ${filteredTours.length} results`)}
                                 </p>
                             </div>
 
-                            <div className="flex items-center gap-3">
+                            <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
                                 <div className="hidden sm:flex bg-white rounded-md p-1 border border-gray-100">
                                     <button
-                                        onClick={() => setViewMode("grid")}
-                                        className={`p-2 rounded-md transition-all ${viewMode === "grid" ? "bg-gray-50 text-primary" : "text-gray-300 hover:text-gray-500"}`}
+                                        onClick={() => { setViewMode("grid"); setShowCustomizeTour(false); }}
+                                        className={`p-2 rounded-md transition-all ${viewMode === "grid" && !showCustomizeTour ? "bg-gray-50 text-primary" : "text-gray-300 hover:text-gray-500"}`}
+                                        title={isBn ? "গ্রিড ভিউ" : "Grid View"}
                                     >
                                         <LuLayoutGrid size={16} />
                                     </button>
                                     <button
-                                        onClick={() => setViewMode("list")}
-                                        className={`p-2 rounded-md transition-all ${viewMode === "list" ? "bg-gray-50 text-primary" : "text-gray-300 hover:text-gray-500"}`}
+                                        onClick={() => { setViewMode("list"); setShowCustomizeTour(false); }}
+                                        className={`p-2 rounded-md transition-all ${viewMode === "list" && !showCustomizeTour ? "bg-gray-50 text-primary" : "text-gray-300 hover:text-gray-500"}`}
+                                        title={isBn ? "লিস্ট ভিউ" : "List View"}
                                     >
                                         <LuList size={16} />
                                     </button>
                                 </div>
-                                <div className="relative">
-                                    <select
-                                        className="pl-4 pr-10 py-2.5 bg-white border border-gray-100 rounded-md text-[10px] font-bold uppercase tracking-widest text-gray-600 outline-none cursor-pointer appearance-none min-w-[140px] shadow-sm font-eyebrow"
-                                        style={{ fontFamily }}
-                                        value={sortBy}
-                                        onChange={(e) => setSortBy(e.target.value)}
-                                    >
-                                        <option value="featured">{isBn ? 'ফিচার্ড' : 'Featured'}</option>
-                                        <option value="price-asc">{isBn ? 'মূল্য: কম-বেশি' : 'Price: Low-High'}</option>
-                                        <option value="price-desc">{isBn ? 'মূল্য: বেশি-কম' : 'Price: High-Low'}</option>
-                                    </select>
-                                    <LuChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-300 pointer-events-none" size={14} />
-                                </div>
+
+                                {/* Website Purple Customize Tour Button */}
+                                <button
+                                    type="button"
+                                    onClick={() => setShowCustomizeTour((prev) => !prev)}
+                                    className={`flex items-center gap-1.5 px-3.5 py-2.5 rounded-md text-xs font-bold transition-all shadow-md active:scale-95 ${
+                                        showCustomizeTour
+                                            ? "bg-purple-700 text-white ring-2 ring-purple-300 shadow-purple-200"
+                                            : "hover:brightness-110 text-white shadow-purple-500/20"
+                                    }`}
+                                    style={{ backgroundColor: showCustomizeTour ? "#7C3AED" : "#8B5CF6", fontFamily }}
+                                >
+                                    <LuSparkles size={14} className={showCustomizeTour ? "text-yellow-300 animate-pulse" : "text-white"} />
+                                    <span>
+                                        {showCustomizeTour
+                                            ? (isBn ? "ট্যুর কার্ড দেখুন" : "View Tour Cards")
+                                            : (isBn ? "কাস্টমাইজ ট্যুর" : "Customize Tour")}
+                                    </span>
+                                </button>
+
+                                {!showCustomizeTour && (
+                                    <div className="relative">
+                                        <select
+                                            className="pl-4 pr-10 py-2.5 bg-white border border-gray-100 rounded-md text-[10px] font-bold uppercase tracking-widest text-gray-600 outline-none cursor-pointer appearance-none min-w-[140px] shadow-sm font-eyebrow"
+                                            style={{ fontFamily }}
+                                            value={sortBy}
+                                            onChange={(e) => setSortBy(e.target.value)}
+                                        >
+                                            <option value="featured">{isBn ? 'ফিচার্ড' : 'Featured'}</option>
+                                            <option value="price-asc">{isBn ? 'মূল্য: কম-বেশি' : 'Price: Low-High'}</option>
+                                            <option value="price-desc">{isBn ? 'মূল্য: বেশি-কম' : 'Price: High-Low'}</option>
+                                        </select>
+                                        <LuChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-300 pointer-events-none" size={14} />
+                                    </div>
+                                )}
                             </div>
                         </div>
 
-                        {loading ? (
+                        {showCustomizeTour ? (
+                            <CustomizeTourForm
+                                tours={tours}
+                                onCancel={() => setShowCustomizeTour(false)}
+                            />
+                        ) : loading ? (
                             <div className={viewMode === "grid" ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8" : "space-y-6 md:space-y-8"}>
                                 {Array.from({ length: 6 }).map((_, idx) => (
                                     <div key={idx} className={`bg-white rounded-md overflow-hidden border border-gray-100 shadow-sm flex flex-col ${viewMode === "list" ? "md:flex-row h-auto md:h-64" : ""}`}

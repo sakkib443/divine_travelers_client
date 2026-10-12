@@ -37,7 +37,7 @@ import {
     FiUpload,
     FiCheckCircle,
 } from "react-icons/fi";
-import { LuPlane, LuGraduationCap, LuShieldCheck } from "react-icons/lu";
+import { LuPlane, LuGraduationCap, LuShieldCheck, LuSparkles } from "react-icons/lu";
 import { FaKaaba } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser, selectIsAuthenticated, selectToken, logout, updateUser } from "@/redux/features/authSlice";
@@ -60,6 +60,7 @@ const menuItems = [
             { name: "Flight Bookings", href: "/dashboard/admin/flight-inquiries", icon: LuPlane },
             { name: "Tour Bookings", href: "/dashboard/admin/bookings?type=tour", icon: FiMapPin },
             { name: "Hajj Bookings", href: "/dashboard/admin/bookings?type=hajj", icon: FaKaaba },
+            { name: "Customized Bookings", href: "/dashboard/admin/bookings?type=custom", icon: LuSparkles },
         ],
     },
     {

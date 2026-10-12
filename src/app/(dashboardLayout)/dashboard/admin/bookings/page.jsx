@@ -11,9 +11,9 @@ import { downloadInvoice } from "@/utils/downloadInvoice";
 const BACKEND = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
 
 const STATUSES = ["pending", "processing", "confirmed", "cancelled", "rejected"];
-const TYPES = ["tour", "hajj"];
-const TYPE_LABEL = { tour: "Tour", hajj: "Hajj/Umrah" };
-const TYPE_COLOR = { tour: "#10b981", hajj: "#8b5cf6" };
+const TYPES = ["tour", "hajj", "custom"];
+const TYPE_LABEL = { tour: "Tour", hajj: "Hajj/Umrah", custom: "Customized Tour" };
+const TYPE_COLOR = { tour: "#10b981", hajj: "#8b5cf6", custom: "#d946ef" };
 
 const STATUS_STYLE = {
     pending:    "bg-yellow-100 text-yellow-800",
@@ -730,8 +730,9 @@ function RemarksSection({ booking, token, onUpdated }) {
 // Each type pulls its selectable list straight from the database so bookings
 // stay in sync with the real tours/packages.
 const TYPE_SOURCE = {
-    tour:  { url: "/api/tours/active",       selectLabel: "Tour Package",        name: (t) => t.title, price: (t) => t.price,        sub: (t) => t.destination },
-    hajj:  { url: "/api/hajj-umrah/active",  selectLabel: "Hajj / Umrah Package",name: (p) => p.name,  price: (p) => p.price,        sub: (p) => (p.type === "hajj" ? "Hajj" : "Umrah") },
+    tour:   { url: "/api/tours/active",       selectLabel: "Tour Package",            name: (t) => t.title, price: (t) => t.price, sub: (t) => t.destination },
+    hajj:   { url: "/api/hajj-umrah/active",  selectLabel: "Hajj / Umrah Package",    name: (p) => p.name,  price: (p) => p.price, sub: (p) => (p.type === "hajj" ? "Hajj" : "Umrah") },
+    custom: { url: "/api/tours/active",       selectLabel: "Tour Package (Optional)", name: (t) => t.title, price: (t) => t.price, sub: (t) => t.destination },
 };
 
 function CreateBookingModal({ token, defaultType, onClose, onCreated }) {
@@ -780,7 +781,8 @@ function CreateBookingModal({ token, defaultType, onClose, onCreated }) {
     };
 
     const submit = async () => {
-        if (!f.serviceName.trim()) return toast.error(`Please select a ${src.selectLabel.toLowerCase()}`);
+        const resolvedServiceName = f.serviceName.trim() || (f.type === "custom" ? (f.country.trim() ? `Custom Tour: ${f.country.trim()}` : "Customized Tour") : "");
+        if (!resolvedServiceName) return toast.error(`Please select a ${src.selectLabel.toLowerCase()}`);
         if (!f.name.trim()) return toast.error("Customer name is required");
         if (!/^\S+@\S+\.\S+$/.test(f.email)) return toast.error("A valid email is required");
         if (!f.phone.trim()) return toast.error("Phone is required");
@@ -796,7 +798,7 @@ function CreateBookingModal({ token, defaultType, onClose, onCreated }) {
             // customer's own guest booking, not the admin's.
             const body = {
                 type: f.type,
-                serviceName: f.serviceName.trim(),
+                serviceName: resolvedServiceName,
                 name: f.name.trim(),
                 email: f.email.trim().toLowerCase(),
                 phone: f.phone.trim(),
