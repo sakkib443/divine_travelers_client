@@ -125,11 +125,17 @@ const menuItems = [
         icon: FiStar,
     },
     {
+        name: "Photo Gallery",
+        href: "/dashboard/admin/gallery",
+        icon: FiImage,
+    },
+    {
         name: "Website Content",
         icon: FiLayout,
         children: [
             { name: "Home Page", href: "/dashboard/admin/design-content/home", icon: FiHome },
             { name: "About Page", href: "/dashboard/admin/design-content/about", icon: FiUsers },
+            { name: "Photo Gallery", href: "/dashboard/admin/gallery", icon: FiImage },
             { name: "Page Banners", href: "/dashboard/admin/design-content/banners", icon: FiImage },
             { name: "Logo & Favicon", href: "/dashboard/admin/design-content/branding", icon: FiImage },
             { name: "Contact Page", href: "/dashboard/admin/design-content/contact", icon: FiPhone },

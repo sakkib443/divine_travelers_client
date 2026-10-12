@@ -417,12 +417,25 @@ export default function AboutContentPage() {
 
             {/* The first (Story) section of this page is the shared About block,
                 managed from Home Page → About Us. */}
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5">
-                <p className="text-[13px] text-blue-800">
-                    <strong>Note:</strong> the top “Story” section of the About page is shared with the Home page.
-                    Edit it under <a href="/dashboard/admin/design-content/home" className="font-semibold underline">Home Page → About Us</a>.
-                    The sections below appear only on the About page.
-                </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                    <p className="text-[13px] text-blue-800">
+                        <strong>Note:</strong> The top “Story” section of the About page is shared with the Home page.
+                        Edit it under <a href="/dashboard/admin/design-content/home" className="font-semibold underline">Home Page → About Us</a>.
+                    </p>
+                </div>
+                <div className="bg-rose-50 border border-rose-200 rounded-xl p-4 flex items-center justify-between">
+                    <div>
+                        <p className="text-[13px] text-rose-900 font-bold">Photo & Video Gallery</p>
+                        <p className="text-[12px] text-rose-700">Appears right after the Story section on the About page.</p>
+                    </div>
+                    <a
+                        href="/dashboard/admin/gallery"
+                        className="px-3 py-1.5 bg-[#E64266] text-white rounded-lg text-xs font-bold hover:bg-[#d4375b] transition shrink-0"
+                    >
+                        Manage Gallery
+                    </a>
+                </div>
             </div>
 
             {/* Editor */}

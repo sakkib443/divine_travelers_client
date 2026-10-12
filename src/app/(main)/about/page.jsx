@@ -15,6 +15,7 @@ import * as Icons from "react-icons/lu";
 import { LuQuote, LuArrowRight, LuLoader } from "react-icons/lu";
 import { useLanguage } from "@/context/LanguageContext";
 import AboutStory from "@/components/sections/AboutStory";
+import AboutGallery from "@/components/sections/AboutGallery";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -56,6 +57,7 @@ export default function AboutPage() {
     }
 
     const story = sections.about;
+    const gallery = sections.gallery;
     const founder = sections.aboutFounder;
     const team = sections.aboutTeam;
     const why = sections.aboutWhy;
@@ -69,6 +71,9 @@ export default function AboutPage() {
 
             {/* ════════ 1. OUR STORY ════════ */}
             {on(story) && <AboutStory content={story} />}
+
+            {/* ════════ 2. PHOTO & VIDEO GALLERY ════════ */}
+            {on(gallery) && <AboutGallery content={gallery} />}
 
             {/* ════════ 2. FOUNDER / OWNER ════════ */}
             {on(founder) && (
