@@ -189,33 +189,33 @@ export default function AboutGallery({ content = null }) {
                     )}
                 </motion.div>
 
-                {/* ─── Desktop 3-Column Layout (Matching User Image) ─── */}
-                <div className="hidden lg:grid lg:grid-cols-3 gap-5 xl:gap-6 items-start">
+                {/* ─── Desktop 3-Column Layout (Matching User Image with 6px gap) ─── */}
+                <div className="hidden lg:grid lg:grid-cols-3 gap-[6px] items-start">
                     {/* Column 1 (Left - 3 items) */}
-                    <div className="flex flex-col gap-5 xl:gap-6">
+                    <div className="flex flex-col gap-[6px]">
                         {renderCard(colLeft[0], "h-[260px]")}
                         {renderCard(colLeft[1], "h-[260px]")}
                         {renderCard(colLeft[2], "h-[260px]")}
                     </div>
 
                     {/* Column 2 (Center - 2 tall items) */}
-                    <div className="flex flex-col gap-5 xl:gap-6">
-                        {renderCard(colCenter[0], "h-[402px]", true)}
-                        {renderCard(colCenter[1], "h-[402px]", true)}
+                    <div className="flex flex-col gap-[6px]">
+                        {renderCard(colCenter[0], "h-[393px]", true)}
+                        {renderCard(colCenter[1], "h-[393px]", true)}
                     </div>
 
                     {/* Column 3 (Right - 3 items) */}
-                    <div className="flex flex-col gap-5 xl:gap-6">
-                        {renderCard(colRight[0], "h-[240px]")}
-                        {renderCard(colRight[1], "h-[250px]")}
-                        {renderCard(colRight[2], "h-[290px]")}
+                    <div className="flex flex-col gap-[6px]">
+                        {renderCard(colRight[0], "h-[245px]")}
+                        {renderCard(colRight[1], "h-[255px]")}
+                        {renderCard(colRight[2], "h-[286px]")}
                     </div>
                 </div>
 
-                {/* ─── Mobile & Tablet Layout (Responsive & Touch Friendly) ─── */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4 sm:gap-5">
+                {/* ─── Mobile & Tablet Layout (Responsive & Touch Friendly with 6px gap) ─── */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-[6px]">
                     {/* Left Column for Mobile */}
-                    <div className="flex flex-col gap-4 sm:gap-5">
+                    <div className="flex flex-col gap-[6px]">
                         {renderCard(colLeft[0], "h-[220px] sm:h-[250px]")}
                         {renderCard(colCenter[0], "h-[300px] sm:h-[350px]", true)}
                         {renderCard(colLeft[1], "h-[220px] sm:h-[250px]")}
@@ -223,7 +223,7 @@ export default function AboutGallery({ content = null }) {
                     </div>
 
                     {/* Right Column for Mobile */}
-                    <div className="flex flex-col gap-4 sm:gap-5">
+                    <div className="flex flex-col gap-[6px]">
                         {renderCard(colRight[0], "h-[220px] sm:h-[250px]")}
                         {renderCard(colLeft[2], "h-[220px] sm:h-[250px]")}
                         {renderCard(colCenter[1], "h-[300px] sm:h-[350px]", true)}

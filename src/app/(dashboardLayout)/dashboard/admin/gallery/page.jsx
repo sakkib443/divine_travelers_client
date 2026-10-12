@@ -261,9 +261,9 @@ export default function GalleryAdminPage() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 bg-gray-50 p-4 rounded-xl border border-gray-200">
+                <div className="grid grid-cols-3 gap-[6px] bg-gray-50 p-3 rounded-xl border border-gray-200">
                     {/* Left Column (Slots 1, 2, 3) */}
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-[6px]">
                         {[1, 2, 3].map((sNum) => {
                             const it = galleryData.items.find((x) => x.slot === sNum) || { slot: sNum };
                             const isSel = selectedSlot === sNum;
@@ -285,7 +285,7 @@ export default function GalleryAdminPage() {
                                         <img src={img} alt="" className="w-full h-full object-cover" />
                                     ) : (
                                         <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400">
-                                            <FiImage size={16} />
+                                             <FiImage size={16} />
                                         </div>
                                     )}
                                     <div className="absolute inset-0 bg-black/40" />
@@ -308,7 +308,7 @@ export default function GalleryAdminPage() {
                     </div>
 
                     {/* Center Column (Slots 4, 5 — Tall) */}
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-[6px]">
                         {[4, 5].map((sNum) => {
                             const it = galleryData.items.find((x) => x.slot === sNum) || { slot: sNum };
                             const isSel = selectedSlot === sNum;
@@ -353,7 +353,7 @@ export default function GalleryAdminPage() {
                     </div>
 
                     {/* Right Column (Slots 6, 7, 8) */}
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-[6px]">
                         {[6, 7, 8].map((sNum) => {
                             const it = galleryData.items.find((x) => x.slot === sNum) || { slot: sNum };
                             const isSel = selectedSlot === sNum;
