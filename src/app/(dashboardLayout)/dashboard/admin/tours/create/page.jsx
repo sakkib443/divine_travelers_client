@@ -86,6 +86,7 @@ function TourForm() {
         isActive: true,
         isFeatured: false,
         rating: "0",
+        reviewsCount: "0",
         order: "0",
         metaTitle: "",
         metaDescription: "",
@@ -144,6 +145,7 @@ function TourForm() {
                     isActive: t.isActive !== false,
                     isFeatured: t.isFeatured || false,
                     rating: t.rating?.toString() || "0",
+                    reviewsCount: t.reviewsCount?.toString() || "0",
                     order: t.order?.toString() || "0",
                     metaTitle: t.metaTitle || "",
                     metaDescription: t.metaDescription || "",
@@ -232,6 +234,7 @@ function TourForm() {
                 couplePrice: formData.couplePrice === "" ? null : Number(formData.couplePrice),
                 groupSize: formData.groupSize === "" ? 20 : Number(formData.groupSize),
                 rating: Number(formData.rating) || 0,
+                reviewsCount: Number(formData.reviewsCount) || 0,
                 order: Number(formData.order) || 0,
                 itinerary: itinerary.filter(item => item.title),
                 includes: includes.split("\n").map(s => s.trim()).filter(Boolean),
@@ -429,6 +432,11 @@ function TourForm() {
                         <div>
                             <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Rating (0-5)</label>
                             <input name="rating" type="number" step="0.1" min="0" max="5" value={formData.rating} onChange={handleChange} className={inputClass} />
+                        </div>
+                        <div>
+                            <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Reviews Count</label>
+                            <input name="reviewsCount" type="number" min="0" value={formData.reviewsCount} onChange={handleChange} className={inputClass} placeholder="0" />
+                            <p className="text-[10px] text-gray-400 mt-1">The number shown next to the rating on the card, e.g. 156.</p>
                         </div>
                         <div>
                             <label className="text-[11px] font-bold uppercase text-gray-400 mb-1.5 block">Display Order</label>
