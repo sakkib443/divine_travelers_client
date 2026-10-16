@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 import { LuX } from "react-icons/lu";
 import { motion, AnimatePresence } from "framer-motion";
-import { useSiteSettings, buildWhatsAppUrl } from "@/context/SiteSettingsContext";
+import { useSiteSettings, buildWhatsAppUrl, buildTelUrl } from "@/context/SiteSettingsContext";
 
 const DEFAULT_MESSAGE = "Hello! I need help with tour/travel services.";
 
@@ -25,6 +25,11 @@ export default function WhatsAppFloat() {
         const timer = setTimeout(() => setIsPulsing(false), 10000);
         return () => clearTimeout(timer);
     }, []);
+
+    // Website phone number for the call button — ignore the unset placeholder.
+    const callPhone = settings.contactPhone && settings.contactPhone !== "XXXXXXX"
+        ? settings.contactPhone
+        : (settings.contactPhoneAlt || "");
 
     const handleClick = () => {
         if (!settings.whatsappNumber) return;
@@ -85,6 +90,24 @@ export default function WhatsAppFloat() {
                             </motion.div>
                         )}
                     </AnimatePresence>
+
+                    {/* Call Button — opens the device dialer with the site phone number */}
+                    {callPhone && (
+                        <motion.a
+                            href={buildTelUrl(callPhone)}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="relative w-[60px] h-[60px] rounded-full flex items-center justify-center shadow-2xl transition-shadow hover:shadow-[0_8px_30px_rgba(29,126,221,0.5)]"
+                            style={{ background: 'linear-gradient(135deg, #1D7EDD 0%, #0F3C53 100%)' }}
+                            aria-label="Call us"
+                            title="Call us"
+                        >
+                            <FaPhoneAlt className="text-white w-6 h-6 drop-shadow-sm" />
+                            {isPulsing && (
+                                <span className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ backgroundColor: '#1D7EDD' }} />
+                            )}
+                        </motion.a>
+                    )}
 
                     {/* Main WhatsApp Button */}
                     <motion.button
